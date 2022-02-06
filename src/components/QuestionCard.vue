@@ -87,12 +87,6 @@ export default {
     margin-bottom: 5px;
   }
 
-  .right{
-    color: #67C23A;
-  }
-  .wrong{
-    color: #F56C6C;
-  }
   span{
     white-space: normal;
   }

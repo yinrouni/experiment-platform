@@ -20,3 +20,10 @@
 .left{
   text-align: left;
 }
+
+.right{
+  color: #67C23A;
+}
+.wrong{
+  color: #F56C6C;
+}
