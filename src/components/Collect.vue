@@ -4,7 +4,7 @@
   <el-step v-for="title in titles" :title="title" :key="title"></el-step>
 </el-steps>
 <br>
-    <Chat v-if="subIndex === 0"/> 
+    <Chat v-if="subIndex === 0"/>
     <div v-if="subIndex === 1">
       <div class="left">
       <i class='el-icon-arrow-right' />请选择该患者需要做的检查项目（多选)：
@@ -26,7 +26,7 @@
   <div  class="tips" v-if="checked.indexOf('2') > -1">
         颌面部基本对称，皮肤无红肿破溃。
       </div>
-  
+
       </el-row>
 
 <el-row>
@@ -68,10 +68,18 @@
               <img src="./../assets/CBCT.jpg">
             </div>
 
-          
-
     </div>
-   
+
+      <el-dialog
+  title="诊断"
+  :visible.sync="dialogVisible"
+  width="30%">
+  <span>21牙折（根中1/3）</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="close">确 定</el-button>
+  </span>
+</el-dialog>
+
   </div>
 
 </template>
@@ -83,10 +91,15 @@ export default {
   name: 'Collect',
   components: {Chat, History},
   props: {subIndex: Number},
+  computed: {
+    dialogVisible: function () {
+      return this.$props.subIndex === 4
+    }
+  },
 
   data () {
     return {
-      radio: null, 
+      radio: null,
       checked: [],
       titles: ['问诊检查', '一般检查', '既往病史', '影像学检查']
     }
@@ -95,6 +108,9 @@ export default {
     enter: function () {
       console.log('to test')
       this.$router.push('/test')
+    },
+    close: function () {
+      this.$emit('next')
     }
 
   }

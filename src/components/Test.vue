@@ -108,7 +108,7 @@
     <el-main>
 
 <Profile v-if="index === '1'"/>
-<Collect :subIndex="subIndex" v-if="index === '2'"/>
+<Collect :subIndex="subIndex" v-if="index === '2'" @next="next"/>
 
       <!-- <el-table :data="tableData">
         <el-table-column prop="date" label="日期" width="140">
@@ -197,8 +197,9 @@ export default {
       
 
     },
+
     next () {
-      if (this.$data.index === '2' && this.$data.subIndex < 3) {
+      if (this.$data.index === '2' && this.$data.subIndex < 4) {
         this.$data.subIndex++
         return
       }
