@@ -110,6 +110,7 @@
 <Profile v-if="index === '1'"/>
 <Collect :subIndex="subIndex" v-if="index === '2'" @next="next"/>
 <Plan :subIndex="subIndex" v-if="index === '3'" @next="next"/>
+<Agreement v-if="index === '4'"/>
 
       <!-- <el-table :data="tableData">
         <el-table-column prop="date" label="日期" width="140">
@@ -143,10 +144,12 @@
 import Collect from './Collect'
 import Profile from './Profile'
 import Plan from './Plan'
+import Agreement from './Agreement'
+
 
 export default {
   name: 'Test',
-  components: {Profile, Collect, Plan},
+  components: {Profile, Collect, Plan, Agreement},
 
   data () {
     return {

@@ -37,10 +37,8 @@
   </el-row>
     </div>
 </div>
-  
 
 </template>
-
 
 <script>
 import BeautyAssessment from './BeautyAssessment'
@@ -49,12 +47,11 @@ export default {
   name: 'Plan',
   components: {BeautyAssessment, PlanChoice},
   props: {subIndex: Number},
-  data(){
+  data () {
     return {
-      titles:['美学评估','方案选择', '术前检查'], 
-      radio:[]
+      titles: ['美学评估', '方案选择', '术前检查'],
+      radio: []
     }
-
   },
   methods: {
     enter: function () {

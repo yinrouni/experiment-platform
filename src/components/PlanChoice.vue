@@ -13,11 +13,9 @@
        <div>
          <QuestionCard/>
        </div>
-      
+
     </el-col>
 
-    
-    
   </el-row>
 
 </template>
@@ -25,7 +23,7 @@
 <script>
 import QuestionCard from './QuestionCard'
 export default {
-  components:{QuestionCard},
+  components: {QuestionCard},
   name: 'PlanChoice',
   methods: {
     enter: function () {
@@ -45,6 +43,6 @@ video{
 
 h4{
   text-align: left;
-  
+
 }
 </style>
