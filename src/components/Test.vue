@@ -24,12 +24,12 @@
      </el-menu-item>
 
         <el-menu-item index="6">
-        <i class="el-icon-tickets"></i>
+        <i class="el-icon-monitor"></i>
         <span slot="title">牙拔除术</span>
      </el-menu-item>
 
         <el-menu-item index="7">
-        <i class="el-icon-tickets"></i>
+        <i class=" el-icon-coordinate"></i>
         <span slot="title">即刻种植手术</span>
      </el-menu-item>
 
@@ -109,6 +109,7 @@
 
 <Profile v-if="index === '1'"/>
 <Collect :subIndex="subIndex" v-if="index === '2'" @next="next"/>
+<Plan :subIndex="subIndex" v-if="index === '3'" @next="next"/>
 
       <!-- <el-table :data="tableData">
         <el-table-column prop="date" label="日期" width="140">
@@ -141,14 +142,15 @@
 <script>
 import Collect from './Collect'
 import Profile from './Profile'
+import Plan from './Plan'
 
 export default {
   name: 'Test',
-  components: {Profile, Collect},
+  components: {Profile, Collect, Plan},
 
   data () {
     return {
-      index: '2',
+      index: '3',
       subIndex: 0,
       data: [{
         label: '病例资料'
@@ -200,6 +202,10 @@ export default {
 
     next () {
       if (this.$data.index === '2' && this.$data.subIndex < 4) {
+        this.$data.subIndex++
+        return
+      }
+        if (this.$data.index === '3' && this.$data.subIndex < 3) {
         this.$data.subIndex++
         return
       }
