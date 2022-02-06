@@ -94,6 +94,7 @@ body {
 
 .messages .message.left .text {
   color: #c48843;
+  text-align: left;
 }
 
 .messages .message.right .avatar {
@@ -134,6 +135,7 @@ body {
   width: calc(100% - 85px);
   min-width: 100px;
   position: relative;
+  text-align: left;
 }
 
 .messages .message .text_wrapper::after, .messages .message .text_wrapper:before {

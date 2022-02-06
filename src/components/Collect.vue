@@ -5,7 +5,7 @@
 </el-steps>
 <br>
     <Chat v-if="subIndex === 0"/>
-    <History v-if="subIndex === 1"/>
+    <History v-if="subIndex === 2"/>
   </div>
 
 </template>
@@ -20,7 +20,7 @@ export default {
 
   data () {
     return {
-      titles: ['问诊检查', '既往病史', '影像学检查']
+      titles: ['问诊检查', '一般检查', '既往病史', '影像学检查']
     }
   },
   methods: {

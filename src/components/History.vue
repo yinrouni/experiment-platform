@@ -19,7 +19,7 @@
     <el-checkbox label="血液疾病"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="无"></el-checkbox>
+    <el-checkbox label="无"  v-model="filled"></el-checkbox>
          </el-col>
        
     </el-row>
@@ -38,7 +38,7 @@
     <el-checkbox label="血压（高、低）"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="血液疾病"></el-checkbox>
+    <el-checkbox label="血液疾病" v-model="filled"></el-checkbox>
       </el-col>
        
     </el-row>
@@ -61,7 +61,7 @@
     <el-checkbox label="血液疾病"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="无"></el-checkbox>
+    <el-checkbox label="无" v-model="filled"></el-checkbox>
          </el-col>
        
     </el-row>
@@ -83,7 +83,7 @@
     <el-checkbox label="血液疾病"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="无"></el-checkbox>
+    <el-checkbox label="无" v-model="filled"></el-checkbox>
          </el-col>
        
     </el-row>
@@ -96,7 +96,7 @@
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="心脏病"></el-checkbox>
+    <el-checkbox label="心脏病"  v-model="filled"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="血压（高、低）"></el-checkbox>
@@ -115,7 +115,7 @@
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="心脏病"></el-checkbox>
+    <el-checkbox label="心脏病"  v-model="filled"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="血压（高、低）"></el-checkbox>
@@ -134,7 +134,7 @@
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="心脏病"></el-checkbox>
+    <el-checkbox label="心脏病"  v-model="filled"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="血压（高、低）"></el-checkbox>
@@ -156,7 +156,7 @@
   <el-col :span="21">
     <el-row>
       <el-col :span="8">
-    <el-checkbox label="心脏病"></el-checkbox>
+    <el-checkbox label="心脏病"  v-model="filled"></el-checkbox>
       </el-col>
          <el-col :span="8">
     <el-checkbox label="血压（高、低）"></el-checkbox>
@@ -178,7 +178,7 @@
     <el-checkbox label="心脏病"></el-checkbox>
       </el-col>
          <el-col :span="12">
-    <el-checkbox label="血压（高、低）"></el-checkbox>
+    <el-checkbox label="血压（高、低）" ></el-checkbox>
          </el-col>
     </el-row>
     
@@ -201,7 +201,7 @@
     <el-checkbox label="血液疾病"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="无"></el-checkbox>
+    <el-checkbox label="无"  v-model="filled"></el-checkbox>
          </el-col>
        
     </el-row>
@@ -212,6 +212,13 @@
     <el-input/>
   </el-col>
 </el-row>
+<br>
+
+<el-row>
+  <el-col :span="24" style="text-align: center;">
+  <el-button type="primary" plain @click="fill">填写</el-button>
+  </el-col>
+</el-row>
 </div>
 
 </template>
@@ -219,12 +226,15 @@
 <script>
 export default {
   name: 'History',
-  methods: {
-    enter: function () {
-      console.log('to test')
-      this.$router.push('/test')
+  data(){
+    return {
+      filled: false
     }
-
+  },
+  methods: {
+    fill: function(){
+      this.$data.filled = true
+    }
   }
 }
 </script>
@@ -234,4 +244,5 @@ export default {
  .left{
    text-align: left;
  }
+
 </style>

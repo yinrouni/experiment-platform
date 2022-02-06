@@ -119,10 +119,19 @@
         </el-table-column>
       </el-table> -->
     </el-main>
-        <el-footer style="text-align: right;">
-          <el-button @click="next">
+        <el-footer>
+          <el-row>
+            <el-col :span="12" style="text-align: left;">
+               <el-button @click="back">
+            返回
+          </el-button>
+            </el-col>
+             <el-col :span="12" style="text-align: right;">
+                <el-button @click="next">
             下一步
           </el-button>
+            </el-col>
+          </el-row>
 
     </el-footer>
   </el-container>
@@ -183,6 +192,11 @@ export default {
     }
   },
   methods: {
+    back(){
+       this.$data.subIndex --;
+      
+
+    },
     next () {
       if (this.$data.index === '2' && this.$data.subIndex < 3) {
         this.$data.subIndex++
