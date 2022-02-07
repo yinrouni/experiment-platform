@@ -113,6 +113,7 @@
 <Agreement v-if="index === '4'"/>
 <Preparation v-if="index === '5'" />
 <Remove v-if="index === '6'" :subIndex="subIndex"/>
+<Plant v-if="index === '7'" :subIndex="subIndex" />
 
       <!-- <el-table :data="tableData">
         <el-table-column prop="date" label="日期" width="140">
@@ -149,14 +150,15 @@ import Plan from './Plan'
 import Agreement from './Agreement'
 import Preparation from './Preparation'
 import Remove from './Remove'
+import Plant from './Plant'
 
 
 export default {
   name: 'Test',
-  components: {Profile, Collect, Plan, Agreement, Preparation, Remove},
+  components: {Profile, Collect, Plan, Agreement, Preparation, Remove, Plant},
   data () {
     return {
-      index: '3',
+      index: '7',
       subIndex: 0,
       data: [{
         label: '病例资料'
@@ -216,6 +218,11 @@ export default {
         return
       }
         if (this.$data.index === '6' && this.$data.subIndex < 5) {
+        this.$data.subIndex++
+        return
+      }
+
+       if (this.$data.index === '7' && this.$data.subIndex < 11) {
         this.$data.subIndex++
         return
       }

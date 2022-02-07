@@ -72,7 +72,6 @@
 
 <script>
 export default {
-  submitted: false, 
   name: 'Remove',
   props: {subIndex: Number},
   computed:{
