@@ -135,9 +135,6 @@ export default {
 
 <style scoped>
   @import "../assets/style.css";
-  .type{
-    text-align: left;
-  }
   img{
     width: 500px;
   }
