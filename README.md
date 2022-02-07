@@ -2,7 +2,7 @@
 
 > A Vue.js project
 
-> https://yinrouni.github.io/portfolio/#/
+> https://yinrouni.github.io/experiment-platform/#/
 
 
 
