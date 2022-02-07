@@ -5,37 +5,37 @@
     <el-descriptions-item>
       <template slot="label">
         <i class="el-icon-user"></i>
-        用户名
+        姓名
       </template>
-      kooriookami
+      聂非
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">
         <i class="el-icon-mobile-phone"></i>
-        手机号
+        性别
       </template>
-      18100000000
+      男
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">
         <i class="el-icon-location-outline"></i>
-        居住地
+        年龄
       </template>
-      苏州市
+      28
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">
         <i class="el-icon-tickets"></i>
-        备注
+        职业
       </template>
-      <el-tag size="small">学校</el-tag>
+      <el-tag size="small">海洋摄影师</el-tag>
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">
         <i class="el-icon-office-building"></i>
         联系地址
       </template>
-      江苏省苏州市吴中区吴中大道 1188 号
+      四川省成都市武侯区一环路南段
     </el-descriptions-item>
   </el-descriptions>
 

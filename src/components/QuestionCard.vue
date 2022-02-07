@@ -5,14 +5,27 @@
     <br>
     <br>
     <div v-for="(option, index) in questions[currentIndex].a" class="options" :key="option">
-      <el-radio v-model="choice" :label="index" @change="clickOption">
+      <el-radio :disabled="submitted" v-model="choices[currentIndex]" :label="index" @change="clickOption">
         
         <span>
         {{option}}
-        <i  v-if="index === questions[currentIndex].k && choice === index" class="el-icon-circle-check right" />
-        <i  v-if="index !== questions[currentIndex].k && choice === index " class="el-icon-circle-close wrong" />
+        <i  v-if="index === questions[currentIndex].k && submitted" class="el-icon-circle-check right" />
+        <i  v-if="index !== questions[currentIndex].k && choices[currentIndex] === index && submitted" class="el-icon-circle-close wrong" />
         </span>
         </el-radio>
+    </div>
+
+    <br>
+  <div class="center">
+    <el-button v-if="currentIndex === questions.length -1" @click="submit"> 提交 </el-button>
+  </div>
+    <br>
+    <br>
+
+    <div class="pages center">
+      <i v-if="currentIndex !== 0" class="el-icon-arrow-left" @click="prevQuestion"/>
+      <span class="page">      {{currentIndex + 1}} / {{questions.length}}      </span>
+      <i v-if="currentIndex < questions.length -1" class="el-icon-arrow-right" @click="nextQuestion" />
     </div>
   </div>
 
@@ -25,8 +38,9 @@ export default {
   name: 'QuestionCard',
   data () {
     return {
+      submitted: false, 
       currentIndex: 0,
-      choice: undefined,
+      choices: [],
       questions: [
         {id: 0,
           q: '可摘局部义齿的缺点:',
@@ -62,12 +76,22 @@ export default {
     }
   },
   methods: {
+    nextQuestion(){
+      this.$data.currentIndex ++;
+    },
+    prevQuestion(){
+      this.$data.currentIndex --;
+    }, 
+    submit(){
+      this.$data.submitted = true
+
+    }, 
     clickOption: function(label){
 
-      setTimeout(()=>{
-        this.$data.choice = undefined
-        this.$data.currentIndex ++;
-      }, 2000)
+      // setTimeout(()=>{
+      //   this.$data.choice = undefined
+      //   this.$data.currentIndex ++;
+      // }, 2000)
 
     }
 
@@ -89,6 +113,10 @@ export default {
 
   span{
     white-space: normal;
+  }
+  
+  .page{
+    white-space: pre;
   }
 
 

@@ -51,6 +51,9 @@
       <div>
          <el-checkbox-group v-model="four">
         <el-checkbox  v-for="(item, index) in tools.split(' ')" :label="item" :key="index">
+          <span>
+            {{item}}
+          </span>
         </el-checkbox>
          </el-checkbox-group>
       </div>
