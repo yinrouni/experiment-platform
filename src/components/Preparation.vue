@@ -19,13 +19,13 @@
         {{index +1}}.{{question.q}}
       </div>
       <div>
-        <el-radio-group v-model="keys[question.id]">
+        <el-radio-group v-model="keys[question.id]" :disabled="submitted">
 
         <el-radio  v-for="(option, indexA) in question.a" :label="indexA" :key="option">
           <span>{{option}}
-            <i v-if="indexA === question.k && indexA === keys[question.id]"
+            <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
-            <i  v-if="indexA !== question.k && indexA === keys[question.id]" class="el-icon-circle-close wrong" />
+            <i  v-if="indexA !== question.k && indexA === keys[question.id] && submitted" class="el-icon-circle-close wrong" />
 
           </span>
         </el-radio>
@@ -47,22 +47,33 @@
      <div>
       <div>
         4.请选择本方案所需全部器械：
+          <i  v-if="selectToolsRes && submitted" class="el-icon-circle-check right" />
+        <i  v-if="!selectToolsRes && submitted"  class="el-icon-circle-close wrong" />
       </div>
       <div>
-         <el-checkbox-group v-model="four">
-        <el-checkbox  v-for="(item, index) in tools.split(' ')" :label="item" :key="index">
+         <el-checkbox-group v-model="four" :disabled="submitted">
+        <el-checkbox  v-for="(item, index) in tools.split(' ')" :label="item" :key="index" >
           <span>
             {{item}}
           </span>
         </el-checkbox>
          </el-checkbox-group>
+         <br>
+         <div>
+           <img src="./../assets/tools.jpg" /> 
+         </div>
       </div>
     </div>
     </div>
 
   </el-col>
 
+
 </el-row>
+
+<br>
+<br>
+<el-button @click="submit">提交</el-button>
 
 </div>
 
@@ -73,6 +84,7 @@ export default {
   name: 'Preparation',
   data () {
     return {
+      selectToolsRes: false, 
       oneChoice: [],
       tools: '一次性器械盒 金属注射器 牙龈分离器 牙钳 微创拔牙手术盒 种植体 种植工具盒 扫描杆 临时修复基台',
       keys: {
@@ -81,6 +93,7 @@ export default {
         three: undefined
       },
       four: [],
+      submitted: false, 
       questions: [
         {
           id: 'one',
@@ -105,6 +118,16 @@ export default {
     }
   },
   methods: {
+    submit: function(){
+      this.$data.submitted = true;
+      if (this.$data.four.length < this.$data.tools.split(" ").length){
+        this.$data.four = this.$data.tools.split(" ")
+        this.$data.selectToolsRes = false
+      }
+      else {
+        this.$data.selectToolsRes = true
+      }
+    }
 
   }
 }
@@ -114,6 +137,9 @@ export default {
   @import "../assets/style.css";
   .type{
     text-align: left;
+  }
+  img{
+    width: 500px;
   }
 
 </style>

@@ -8,12 +8,14 @@
     <div v-if="subIndex === 1">
       <div class="left">
       <i class='el-icon-arrow-right' />请选择该患者需要做的检查项目（多选)：
+          <i  v-if="normalCheckRes && submittedNormal" class="el-icon-circle-check right" />
+        <i  v-if="!normalCheckRes && submittedNormal" class="el-icon-circle-close wrong" />
       </div>
       <br>
       <div class="left options">
       <el-row>
         <div>
-      <el-checkbox v-model="checked" label="1">
+      <el-checkbox v-model="checked" label="1" :disabled="submittedNormal">
         口腔检查
       </el-checkbox>
       <div  class="tips" v-if="checked.indexOf('1') > -1">
@@ -22,7 +24,7 @@
         </div>
       </el-row>
       <el-row>
-  <el-checkbox v-model="checked" label="2">颌面部检查</el-checkbox>
+  <el-checkbox v-model="checked" label="2" :disabled="submittedNormal">颌面部检查</el-checkbox>
   <div  class="tips" v-if="checked.indexOf('2') > -1">
         颌面部基本对称，皮肤无红肿破溃。
       </div>
@@ -30,20 +32,26 @@
       </el-row>
 
 <el-row>
-    <el-checkbox v-model="checked" label="3">颞下颌检查</el-checkbox>
+    <el-checkbox v-model="checked" label="3" :disabled="submittedNormal">颞下颌检查</el-checkbox>
       <div  class="tips" v-if="checked.indexOf('3') > -1">
        无弹响，无压痛。开口度36mm，开口型“↓”。
       </div>
 </el-row>
       </div>
+      <br>
+      <br>
+
+      <el-button @click="submitNormal" v-if="!submittedNormal"> 提交</el-button>
     </div>
     <History v-if="subIndex === 2"/>
     <div v-if="subIndex === 3">
       <div class="left">
       <i class='el-icon-arrow-right' />为进一步了解进一步了解术区可用骨高度和宽度、唇侧骨板有无缺损及骨质情况等最好选用(单选):
+      <i  v-if="radio === '6' && submittedFilm" class="el-icon-circle-check right" />
+        <i  v-if="radio !== '6' && submittedFilm" class="el-icon-circle-close wrong" />
       </div>
       <br>
-      <div class="left" v-if="radio !=='6'">
+      <div class="left" v-if="!submittedFilm">
       <el-row>
         <el-radio v-model="radio" label="1">根尖片</el-radio>
       </el-row>
@@ -62,11 +70,15 @@
       <el-row>
              <el-radio v-model="radio" label="6">CBCT检查</el-radio>
       </el-row>
+
       </div>
-            <div class="tips" v-if="radio === '6'">
+            <div class="tips" v-if="submittedFilm">
               CBCT示21牙根中三分之一处见一根折线，根尖区无低密度阴影，唇侧骨板完整无缺损，厚度约1.2mm
               <img src="./../assets/CBCT.jpg">
             </div>
+    <br>
+<br>
+<el-button @click="submitFilm" v-if="!submittedFilm">提交</el-button>
 
     </div>
 
@@ -99,6 +111,9 @@ export default {
 
   data () {
     return {
+      submittedFilm: false, 
+      normalCheckRes: false, 
+      submittedNormal: false, 
       radio: null,
       checked: [],
       titles: ['问诊检查', '一般检查', '既往病史', '影像学检查']
@@ -111,7 +126,24 @@ export default {
     },
     close: function () {
       this.$emit('next')
+    }, 
+    submitNormal(){
+      this.$data.submittedNormal = true;
+
+     
+      if(this.$data.checked.length < 3){
+        this.$data.normalCheckRes = false;
+        this.$data.checked = ['1', '2', '3']
+        return ;
+      }
+      this.$data.normalCheckRes = true;
+
+    },
+    submitFilm(){
+      this.$data.submittedFilm = true;
+
     }
+
 
   }
 }

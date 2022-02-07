@@ -12,29 +12,34 @@
     <el-col :span="6">
       <div class="left">
       <i class='el-icon-arrow-right' />术前的血液学检查应做哪些？(多选):
+       <i  v-if="radio.length === 4& submitted" class="el-icon-circle-check right" />
+        <i  v-if="radio.length != 4 && submitted" class="el-icon-circle-close wrong" />
       </div>
       <br>
-      <div class="left" v-if="radio !=='6'">
+      <div class="left">
       <el-row>
-        <el-checkbox v-model="radio" label="1">血常规</el-checkbox>
+        <el-checkbox v-model="radio" label="1" :disabled="submitted">血常规</el-checkbox>
       </el-row>
       <el-row>
-          <el-checkbox v-model="radio" label="2">血糖</el-checkbox>
+          <el-checkbox v-model="radio" label="2" :disabled="submitted">血糖</el-checkbox>
       </el-row>
       <el-row>
-           <el-checkbox v-model="radio" label="3">凝血四项</el-checkbox>
+           <el-checkbox v-model="radio" label="3" :disabled="submitted">凝血四项</el-checkbox>
       </el-row>
       <el-row>
-           <el-checkbox v-model="radio" label="4">传染病</el-checkbox>
+           <el-checkbox v-model="radio" label="4" :disabled="submitted">传染病</el-checkbox>
       </el-row>
       </div>
     </el-col>
     <el-col ;span="18>"
-            <div class="tips" v-if="radio.length === 4">
+            <div class="tips" v-if="submitted">
               <img src="./../assets/术前检查.jpg">
             </div>
 </el-col>
   </el-row>
+  <br>
+  <br>
+  <el-button @click="submit" v-if="!submitted">提交</el-button>
     </div>
 </div>
 
@@ -50,14 +55,16 @@ export default {
   data () {
     return {
       titles: ['美学评估', '方案选择', '术前检查'],
-      radio: []
+      radio: [], 
+      submitted: false
     }
   },
   methods: {
-    enter: function () {
-      console.log('to test')
-      this.$router.push('/test')
+    submit(){
+      this.$data.submitted = true;
     }
+  
+
 
   }
 }
