@@ -1,6 +1,5 @@
 <template>
   <div>
-    <br>
     <el-row>
       <el-col :span="16">
         <video id="video" src="../../assets/球钻定位.mp4" />

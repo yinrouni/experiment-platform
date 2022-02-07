@@ -1,6 +1,5 @@
 <template>
   <div>
-    <br>
     <el-row>
       <el-col :span="16">
         <video id="video" src="../../assets/2.8备洞.mp4" />

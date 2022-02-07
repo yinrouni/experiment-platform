@@ -222,7 +222,7 @@ export default {
         return
       }
 
-       if (this.$data.index === '7' && this.$data.subIndex < 11) {
+       if (this.$data.index === '7' && this.$data.subIndex < 10) {
         this.$data.subIndex++
         return
       }

@@ -3,9 +3,8 @@
      <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles"  :title="title" :key="title"></el-step>
 </el-steps>
-
+<br>
   <div class="questions" v-if="subIndex===0">
-    <br>
     <br>
     <el-row>
       <el-col :span="12">
@@ -54,6 +53,55 @@
     <Hole28 v-if="subIndex===4"/>
      <Hole36 v-if="subIndex===5"/>
      <Planting v-if="subIndex===6"/>
+     <div v-if="subIndex===7">
+       <el-row>
+         <el-col :span="4">
+          &emsp;
+         </el-col>
+          <el-col :span="16">
+           <video src="../assets/填充骨粉.mp4" autoplay=true />
+           <ul class="type">
+             <li> 旋上覆盖螺丝，于跳跃间隙填充骨粉。</li>
+           </ul>
+         </el-col>
+         <el-col :span="4">
+           &#13;
+         </el-col>
+       </el-row>
+     </div>
+     <div v-if="subIndex===8">
+       <el-row>
+         <el-col :span="4">
+          &emsp;
+         </el-col>
+          <el-col :span="16">
+           <video src="../assets/数字化取模型.mp4" autoplay=true />
+           <ul class="type">
+             <li> 将覆盖螺丝替换为扫描杆，使用口腔扫描仪于患者口中进行上颌、下颌、及咬合的模型扫描。</li>
+           </ul>
+         </el-col>
+         <el-col :span="4">
+           &#13;
+         </el-col>
+       </el-row>
+     </div>
+     <TempWear v-if="subIndex===9" />
+      <div v-if="subIndex===10">
+       <el-row>
+         <el-col :span="4">
+          &emsp;
+         </el-col>
+          <el-col :span="16">
+           <video src="../assets/调𬌗.mp4" autoplay=true />
+           <ul class="type">
+             <li> 检测其前伸𬌗、侧方𬌗、正中𬌗有无早接触。</li>
+           </ul>
+         </el-col>
+         <el-col :span="4">
+           &#13;
+         </el-col>
+       </el-row>
+     </div>
 
 </div>
 </template>
@@ -65,9 +113,10 @@ import Xianfeng from './plant/Xianfeng'
 import Hole28 from './plant/Hole28'
 import Hole36 from './plant/Hole36'
 import Planting from './plant/Planting'
+import TempWear from './plant/TempWear'
 export default {
   name: 'Plant',
-  components: {Qiuzuan, Xianfeng, DirectionCheck, Hole28, Hole36, Planting },
+  components: {Qiuzuan, Xianfeng, DirectionCheck, Hole28, Hole36, Planting, TempWear },
   props: {subIndex: Number},
   data () {
     return {
@@ -134,5 +183,8 @@ export default {
   img{
     margin-top: 100px;
     width: 300px;
+  }
+  video{
+    width: 100%;
   }
 </style>
