@@ -86,7 +86,7 @@
     </el-col>
 
     <el-col :span="12">
-      <img src="http://inews.gtimg.com/newsapp_bt/0/13088015023/641" />
+      <img src="https://p2.itc.cn/q_70/images03/20211230/dfd70c048dea44c096e168cfd7996e07.png" />
     </el-col>
   </el-row>
   <br>
