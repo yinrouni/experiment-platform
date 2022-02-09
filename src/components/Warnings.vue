@@ -115,7 +115,7 @@
       </div>
     </div>
       </div>
-      <!-- <img src="https://p2.itc.cn/q_70/images03/20211230/dfd70c048dea44c096e168cfd7996e07.png" /> -->
+      <img src="./../assets/warnings.png" />
     </el-col>
   </el-row>
   <br>

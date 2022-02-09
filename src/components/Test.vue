@@ -220,7 +220,7 @@ export default {
         this.$data.subIndex++
         return
       }
-      if (this.$data.index === '3' && this.$data.subIndex < 3) {
+      if (this.$data.index === '3' && this.$data.subIndex < 2) {
         this.$data.subIndex++
         return
       }
