@@ -43,8 +43,6 @@
         <span slot="title">评分</span>
      </el-menu-item>
 
-
-
        <!-- <el-submenu index="1">
         <template slot="title"><i class="el-icon-message"></i>病例资料</template> -->
         <!-- <el-menu-item-group>
@@ -115,6 +113,7 @@
 <Remove v-if="index === '6'" :subIndex="subIndex"/>
 <Plant v-if="index === '7'" :subIndex="subIndex" />
 <Warnings v-if="index === '8'" :subIndex="subIndex" />
+<Result v-if="index === '9'" />
 
       <!-- <el-table :data="tableData">
         <el-table-column prop="date" label="日期" width="140">
@@ -153,12 +152,19 @@ import Preparation from './Preparation'
 import Remove from './Remove'
 import Plant from './Plant'
 import Warnings from './Warnings'
-
+import Result from './Result'
 
 export default {
   name: 'Test',
-  components: {Profile, Collect, Plan, Agreement, Preparation, Remove, Plant, 
-  Warnings},
+  components: {Profile,
+    Collect,
+    Plan,
+    Agreement,
+    Preparation,
+    Remove,
+    Plant,
+    Result,
+    Warnings},
   data () {
     return {
       index: '7',
@@ -205,10 +211,8 @@ export default {
     }
   },
   methods: {
-    back(){
-       this.$data.subIndex --;
-      
-
+    back () {
+      this.$data.subIndex--
     },
 
     next () {
@@ -216,20 +220,20 @@ export default {
         this.$data.subIndex++
         return
       }
-        if (this.$data.index === '3' && this.$data.subIndex < 3) {
+      if (this.$data.index === '3' && this.$data.subIndex < 3) {
         this.$data.subIndex++
         return
       }
-        if (this.$data.index === '6' && this.$data.subIndex < 5) {
+      if (this.$data.index === '6' && this.$data.subIndex < 5) {
         this.$data.subIndex++
         return
       }
 
-       if (this.$data.index === '7' && this.$data.subIndex < 10) {
+      if (this.$data.index === '7' && this.$data.subIndex < 10) {
         this.$data.subIndex++
         return
       }
-        if (this.$data.index === '8' && this.$data.subIndex < 1) {
+      if (this.$data.index === '8' && this.$data.subIndex < 1) {
         this.$data.subIndex++
         return
       }
