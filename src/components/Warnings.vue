@@ -46,8 +46,9 @@
       </div>
       <div>
         <el-radio-group v-model="keys[question.id]" :disabled="submitted">
+          <div  v-for="(option, indexA) in question.a" :label="indexA" :key="option">
 
-        <el-radio  v-for="(option, indexA) in question.a" :label="indexA" :key="option">
+        <el-radio>
           <span>{{option}}
             <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
@@ -55,12 +56,14 @@
 
           </span>
         </el-radio>
+          </div>
+
         </el-radio-group>
       </div>
     </div>
 </div>
 
-      <br>
+      <!-- <br>
       <div>
         <b>
         多选题
@@ -82,11 +85,35 @@
         </el-checkbox>
          </el-checkbox-group>
       </div>
-    </div>
+    </div> -->
     </el-col>
 
     <el-col :span="12">
-      <img src="https://p2.itc.cn/q_70/images03/20211230/dfd70c048dea44c096e168cfd7996e07.png" />
+      <div class="type">
+            <div>
+        <b>
+        多选题
+        </b>
+      </div>
+      <br>
+        <div>
+      <div>
+        {{questions[2].id + 1}}. {{questions[2].q}}
+          <i  v-if="selectRes.length === 4 && submitted" class="el-icon-circle-check right" />
+        <i  v-if="selectRes !== 4  && submitted"  class="el-icon-circle-close wrong" />
+      </div>
+      <div>
+         <el-checkbox-group v-model="keys[2]" :disabled="submitted">
+        <el-checkbox  v-for="(item, index) in questions[2].a" :label="index" :key="index" >
+          <span>
+            {{item}}
+          </span>
+        </el-checkbox>
+         </el-checkbox-group>
+      </div>
+    </div>
+      </div>
+      <!-- <img src="https://p2.itc.cn/q_70/images03/20211230/dfd70c048dea44c096e168cfd7996e07.png" /> -->
     </el-col>
   </el-row>
   <br>
@@ -195,7 +222,7 @@ export default {
     width: 300px;
   }
   .type{
-    padding: 0 200px;
+    padding: 0 100px;
   }
   /* .txt{
     margin-bottom: 1.5%;
