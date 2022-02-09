@@ -76,8 +76,8 @@ export default {
       video.play()
     },
     isCorrect: function (rotationSpeed ,flowSpeed, torque, holeMakers, plant, fix, handler) {
-      const rotationSpeedGood = this.rotationSpeed >= this.keys.rotationSpeed.min && this.rotationSpeed <= this.keys.rotationSpeed.max
-      if (!rotationSpeedGood) this.tips.push('转速：备洞过程中的转速通常在800-1000rpm。')
+      // const rotationSpeedGood = this.rotationSpeed >= this.keys.rotationSpeed.min && this.rotationSpeed <= this.keys.rotationSpeed.max
+      // if (!rotationSpeedGood) this.tips.push('转速：备洞过程中的转速通常在800-1000rpm。')
 
       const holeMakersGood = holeMakers.length >= 1 && holeMakers.indexOf(this.keys.holeMakers[0]) > -1
       if (!holeMakersGood) this.tips.push('先锋钻：通常首先选择先锋钻进行备洞。')
@@ -85,13 +85,14 @@ export default {
       const handlerGood = handler.length >= 1 && handler.indexOf(this.keys.handler[0]) > -1
       if(!handlerGood) this.tips.push('手机：请选择手机。')
       
-      const flowSpeedGood = this.flowSpeed === this.keys.flowSpeed
-      if (!flowSpeedGood) this.tips.push('水流：为了避免备洞过程中的产热过多损伤健康组织，通常将水流开到最大。')
-      const torqueGood = this.torque === this.keys.torque
-      if (!torqueGood) this.tips.push('扭矩：备洞过程中的扭矩默认值即可，不需调动。     ')
+      // const flowSpeedGood = this.flowSpeed === this.keys.flowSpeed
+      // if (!flowSpeedGood) this.tips.push('水流：为了避免备洞过程中的产热过多损伤健康组织，通常将水流开到最大。')
+      // const torqueGood = this.torque === this.keys.torque
+      // if (!torqueGood) this.tips.push('扭矩：备洞过程中的扭矩默认值即可，不需调动。     ')
 
 
-      return rotationSpeedGood && holeMakersGood && handlerGood && flowSpeedGood && torqueGood
+      // return rotationSpeedGood && holeMakersGood && handlerGood && flowSpeedGood && torqueGood
+      return holeMakersGood && handlerGood
     }
 
   }
