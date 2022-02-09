@@ -8,7 +8,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             健康、免疫功能正常
             </el-checkbox>
           </el-col>
@@ -30,7 +30,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             不吸烟
             </el-checkbox>
           </el-col>
@@ -65,7 +65,7 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
               高
             </el-checkbox>
           </el-col>
@@ -91,7 +91,7 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
               高位
             </el-checkbox>
           </el-col>
@@ -107,7 +107,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             低弧线形，厚龈生物型
             </el-checkbox>
           </el-col>
@@ -133,7 +133,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             方圆形
             </el-checkbox>
           </el-col>
@@ -156,7 +156,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             无
             </el-checkbox>
           </el-col>
@@ -182,7 +182,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             到接触点≤5mm
             </el-checkbox>
           </el-col>
@@ -208,7 +208,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             无修复体
             </el-checkbox>
           </el-col>
@@ -231,7 +231,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             单颗牙（≥7mm）
             </el-checkbox>
           </el-col>
@@ -256,7 +256,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             软组织完整
             </el-checkbox>
           </el-col>
@@ -278,7 +278,7 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox v-model="filled">
             无骨缺损
             </el-checkbox>
           </el-col>
@@ -300,8 +300,17 @@
 
  <br>
 
-    <el-button type="primary" plain @click="fill">填写</el-button>
+    <el-button type="primary" plain @click="fill">一键填写</el-button>
 
+    <el-dialog
+  title="结论"
+  :visible.sync="filled"
+  width="30%">
+  <span>该患者美学风险为低风险。</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="next">确 定</el-button>
+  </span>
+</el-dialog>
 
   </div>
 
@@ -310,9 +319,17 @@
 <script>
 export default {
   name: 'BeautyAssessment',
+  data () {
+    return {filled: false}
+  },
+
   methods: {
     fill: function () {
-      console.log('to test')
+      this.filled = true
+    },
+    next () {
+      this.$emit('next')
+
     }
 
   }

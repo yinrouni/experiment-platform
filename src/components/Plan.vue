@@ -5,7 +5,7 @@
 </el-steps>
 <br>
 
-<BeautyAssessment v-if="subIndex===0"/>
+<BeautyAssessment v-if="subIndex===0" @next="$emit('next')"/>
 <PlanChoice v-if="subIndex===1"/>
 <div v-if="subIndex === 2">
   <el-row>

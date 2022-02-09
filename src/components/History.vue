@@ -216,7 +216,7 @@
 
 <el-row>
   <el-col :span="24" style="text-align: center;">
-  <el-button type="primary" plain @click="fill">填写</el-button>
+  <el-button type="primary" plain @click="fill">一键填写</el-button>
   </el-col>
 </el-row>
 </div>
