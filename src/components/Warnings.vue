@@ -4,11 +4,12 @@
   <el-step v-for="title in titles"  :title="title" :key="title"></el-step>
 </el-steps>
 <div v-if="subIndex === 0">
+  <br>
   <div class="type">
-    <el-row v-for="(tip, index) in warnings" :key="index">
+    <el-row v-for="(tip, index) in warnings" :key="index" type="flex" align="middle">
       <el-col :span="3">
         <el-badge is-dot class="item" :hidden="tipsClickStatus[index]">
-          <el-button type="text" @click="clickTip(index)">{{tip.title}}</el-button>
+          <el-button type="text" @click="clickTip(index)" :size="'medium'">{{tip.title}}</el-button>
         </el-badge>
       </el-col>
         <el-col :span="1">
@@ -17,15 +18,16 @@
       <el-col :span="20">
         <div class="cover" v-if="!tipsClickStatus[index]">
         <el-skeleton-item v-for="(row, index) in tip.rows" variant="p" :style="'width:' + 100/index+'%'" :key="'r' + index" />
-        <el-skeleton-item  variant="p" :style="'width:' + '50%'" />
+        <!-- <el-skeleton-item  variant="p" :style="'width:' + '50%'" /> -->
         </div>
         <div class="txt" v-else>
           {{tip.desc}}
           <div>
-            <br> </div>
+           </div>
         </div>
       </el-col>
     </el-row>
+    <br>
     如果您还有任何疑问或不确定的地方，请打电话给医生。
   </div>
 </div>
@@ -179,9 +181,6 @@ export default {
           rows: 1},
         {title: '口腔卫生',
           desc: '除术区外，口腔其他区域常规清洁，从手术当天开始，每天用漱口液漱口2次。 ',
-          rows: 1},
-        {title: '活动义齿',
-          desc: '务必在医生指导下使用修复义齿，通常情况下，义齿需要修改。',
           rows: 1},
         {title: '活动义齿',
           desc: '务必在医生指导下使用修复义齿，通常情况下，义齿需要修改。',
