@@ -1,13 +1,45 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="12">
-        <el-table>
-        </el-table>
+      <el-col :span="15">
+        <div class="table">
+        <el-table
+    :data="tableData"
+    :header-cell-style="setHeaderStyle"
+    border
+        stripe
+    style="width: 100%">
+    <el-table-column
+      prop="category"
+      label="分类"
+      width="80">
+    </el-table-column>
+    <el-table-column
+    class-name="desc"
 
+      label="知识点"
+      width="550">
+
+          <template slot-scope="scope">
+
+        <span style="white-space: pre-line">{{ scope.row.desc}}</span>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="total"
+      label="满分">
+    </el-table-column>
+  </el-table>
+        </div>
       </el-col>
 
-      <el-col :span="12">
+      <el-col :span="9">
+        <div class="img">
+        <el-progress type="circle" :percentage="0"
+        stroke-width=15
+        width=200
+        ></el-progress>
+        </div>
 
       </el-col>
     </el-row>
@@ -18,6 +50,14 @@
 <script>
 export default {
   name: 'Result',
+  computed: {
+    tableData: function () {
+      return this.content.map((i) => {
+        return {category: i.category, total: i.total, desc: i.desc.join('\n')}
+      })
+    }
+  },
+
   data () {
     return {
       content: [{
@@ -60,7 +100,9 @@ export default {
     }
   },
   methods: {
-
+    setHeaderStyle: function () {
+      return {'text-align': 'center'}
+    }
   }
 }
 </script>
@@ -73,5 +115,10 @@ export default {
     top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  .img{
+    position: fixed;
+    margin-left: 10%;
+
   }
 </style>
