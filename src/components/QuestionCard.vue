@@ -6,7 +6,6 @@
     <br>
     <div v-for="(option, index) in questions[currentIndex].a" class="options" :key="option">
       <el-radio :disabled="submitted" v-model="choices[currentIndex]" :label="index" @change="clickOption">
-        
         <span>
         {{option}}
         <i  v-if="index === questions[currentIndex].k && submitted" class="el-icon-circle-check right" />
@@ -38,7 +37,7 @@ export default {
   name: 'QuestionCard',
   data () {
     return {
-      submitted: false, 
+      submitted: false,
       currentIndex: 0,
       choices: [],
       questions: [
@@ -76,17 +75,23 @@ export default {
     }
   },
   methods: {
-    nextQuestion(){
-      this.$data.currentIndex ++;
+    nextQuestion () {
+      this.$data.currentIndex++
     },
-    prevQuestion(){
-      this.$data.currentIndex --;
-    }, 
-    submit(){
+    prevQuestion () {
+      this.$data.currentIndex--
+    },
+    submit () {
       this.$data.submitted = true
-
-    }, 
-    clickOption: function(label){
+      let score = 0
+      this.choices.forEach((choice, index) => {
+        if (choice === this.questions[index].k) {
+          score += 1.5
+        }
+      })
+      this.$store.commit('addScore', {partName: 'planDiscuss', score})
+    },
+    clickOption: function (label) {
 
       // setTimeout(()=>{
       //   this.$data.choice = undefined
@@ -114,10 +119,9 @@ export default {
   span{
     white-space: normal;
   }
-  
+
   .page{
     white-space: pre;
   }
-
 
 </style>

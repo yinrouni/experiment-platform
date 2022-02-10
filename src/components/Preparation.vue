@@ -60,14 +60,13 @@
          </el-checkbox-group>
          <br>
          <div>
-           <img src="./../assets/tools.jpg" /> 
+           <img src="./../assets/tools.jpg" />
          </div>
       </div>
     </div>
     </div>
 
   </el-col>
-
 
 </el-row>
 
@@ -84,7 +83,7 @@ export default {
   name: 'Preparation',
   data () {
     return {
-      selectToolsRes: false, 
+      selectToolsRes: false,
       oneChoice: [],
       tools: '一次性器械盒 金属注射器 牙龈分离器 牙钳 微创拔牙手术盒 种植体 种植工具盒 扫描杆 临时修复基台',
       keys: {
@@ -93,7 +92,7 @@ export default {
         three: undefined
       },
       four: [],
-      submitted: false, 
+      submitted: false,
       questions: [
         {
           id: 'one',
@@ -118,15 +117,27 @@ export default {
     }
   },
   methods: {
-    submit: function(){
-      this.$data.submitted = true;
-      if (this.$data.four.length < this.$data.tools.split(" ").length){
-        this.$data.four = this.$data.tools.split(" ")
+    submit: function () {
+      this.$data.submitted = true
+      let score = 0
+
+      // 单选
+      this.questions.forEach((question) => {
+        if (question.k === this.keys[question.id]) {
+          score += 1.5
+        }
+      })
+
+      if (this.$data.four.length < this.$data.tools.split(' ').length) {
+        this.$data.four = this.$data.tools.split(' ')
         this.$data.selectToolsRes = false
-      }
-      else {
+      } else {
+        // 多选
         this.$data.selectToolsRes = true
+        score += 3
       }
+
+      this.$store.commit('addScore', {partName: 'preparation', score})
     }
 
   }

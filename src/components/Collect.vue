@@ -111,12 +111,23 @@ export default {
 
   data () {
     return {
-      submittedFilm: false, 
-      normalCheckRes: false, 
-      submittedNormal: false, 
+      submittedFilm: false,
+      normalCheckRes: false,
+      submittedNormal: false,
+      filmRes: undefined,
       radio: null,
       checked: [],
       titles: ['问诊检查', '一般检查', '既往病史', '影像学检查']
+    }
+  },
+  watch: {
+    normalCheckRes: function () {
+      this.$store.commit('addScore', {partName: 'historyCollect', score: 3})
+    },
+    filmRes: function (val) {
+      if (val === '6') {
+        this.$store.commit('addScore', {partName: 'historyCollect', score: 1.5})
+      }
     }
   },
   methods: {
@@ -126,24 +137,21 @@ export default {
     },
     close: function () {
       this.$emit('next')
-    }, 
-    submitNormal(){
-      this.$data.submittedNormal = true;
-
-     
-      if(this.$data.checked.length < 3){
-        this.$data.normalCheckRes = false;
-        this.$data.checked = ['1', '2', '3']
-        return ;
-      }
-      this.$data.normalCheckRes = true;
-
     },
-    submitFilm(){
-      this.$data.submittedFilm = true;
+    submitNormal () {
+      this.$data.submittedNormal = true
 
+      if (this.$data.checked.length < 3) {
+        this.$data.normalCheckRes = false
+        this.$data.checked = ['1', '2', '3']
+        return
+      }
+      this.$data.normalCheckRes = true
+    },
+    submitFilm () {
+      this.$data.submittedFilm = true
+      this.filmRes = this.radio
     }
-
 
   }
 }

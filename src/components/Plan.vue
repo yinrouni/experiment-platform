@@ -55,16 +55,19 @@ export default {
   data () {
     return {
       titles: ['美学评估', '方案选择', '术前检查'],
-      radio: [], 
+      radio: [],
       submitted: false
     }
   },
   methods: {
-    submit(){
-      this.$data.submitted = true;
+    submit () {
+      this.$data.submitted = true
+      if (this.radio.length < 4) {
+        this.radio = ['1', '2', '3', '4']
+      } else {
+        this.$store.commit('addScore', {partName: 'planDiscuss', score: 3})
+      }
     }
-  
-
 
   }
 }

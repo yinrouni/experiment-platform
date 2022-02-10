@@ -6,7 +6,7 @@
 <br>
 <br>
 <div>
-  <div class="questions" v-if="subIndex===0">
+  <div class="questions" v-show="subIndex===0">
     <el-row>
       <el-col :span="12">
            <div class="type">
@@ -55,15 +55,14 @@
     <video src="./../assets/铺巾.mp4" autoplay=true />
   </div>
    <div class="video" v-if="subIndex===3">
-    <video src="./../assets/口内消毒.mp4" autoplay=true />
+    <video src="./../assets/口内消毒.mp4" autoplay=true  preload="meta" />
   </div>
    <div class="video" v-if="subIndex===4">
-    <video src="./../assets/局部麻醉.mp4" autoplay=true />
+    <video src="./../assets/局部麻醉.mp4" autoplay=true preload="auto"/>
   </div>
   <div class="video" v-if="subIndex===5">
     <video src="./../assets/微创拔牙.mp4" autoplay=true />
   </div>
- 
 
 </div>
   </div>
@@ -74,17 +73,18 @@
 export default {
   name: 'Remove',
   props: {subIndex: Number},
-  computed:{
-    videoSrc: function(){
-      return this.titles.map((i)=>{
-        return './../assets/' + i+ '.mp4'
+  computed: {
+    videoSrc: function () {
+      return this.titles.map((i) => {
+        return './../assets/' + i + '.mp4'
       })
     }
   },
+
   data () {
     return {
-      keys: [], 
-      submitted: false, 
+      keys: [],
+      submitted: false,
       titles: ['测试', '口外消毒', '铺巾', '口内消毒', '局部麻醉', '微创拔牙'],
       questions: [
         {id: 0,
@@ -104,11 +104,11 @@ export default {
         },
         {
           id: 2,
-          q: '对21实施浸润麻醉应选择的麻醉位点（ )',
+          q: '对21实施浸润麻醉应选择的麻醉位点（ ）',
           a: ['A．根尖部',
             'B．根中部',
             'C．牙颈部',
-            'D．龈沟处'], 
+            'D．龈沟处'],
           k: 0
         }
 
@@ -118,7 +118,13 @@ export default {
   methods: {
     submit: function () {
       this.$data.submitted = true
-      
+      let score = 0
+      this.questions.forEach((question) => {
+        if (question.k === this.keys[question.id]) {
+          score += 1.5
+        }
+      })
+      this.$store.commit('addScore', {partName: 'remove', score})
     }
 
   }

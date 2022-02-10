@@ -116,7 +116,7 @@ import Planting from './plant/Planting'
 import TempWear from './plant/TempWear'
 export default {
   name: 'Plant',
-  components: {Qiuzuan, Xianfeng, DirectionCheck, Hole28, Hole36, Planting, TempWear },
+  components: { Qiuzuan, Xianfeng, DirectionCheck, Hole28, Hole36, Planting, TempWear },
   props: {subIndex: Number},
   data () {
     return {
@@ -165,6 +165,11 @@ export default {
   methods: {
     submit: function () {
       this.$data.submitted = true
+      let score = 0
+      this.questions.forEach((question) => {
+        if (question.k === this.keys[question.id]) score += 1.5
+      })
+      this.$store.commit('addScore', {partName: 'plantTest', score})
     }
 
   }

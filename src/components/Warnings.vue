@@ -47,10 +47,10 @@
         {{index +1}}. {{question.q}}
       </div>
       <div>
-        <el-radio-group v-model="keys[question.id]" :disabled="submitted">
-          <div  v-for="(option, indexA) in question.a" :label="indexA" :key="option">
+        <el-radio-group v-model="keys[question.id]" :disabled="submitted" >
+          <div  v-for="(option, indexA) in question.a" :key="option">
 
-        <el-radio>
+        <el-radio :label="indexA" >
           <span>{{option}}
             <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
@@ -102,7 +102,7 @@
       <div>
         {{questions[2].id + 1}}. {{questions[2].q}}
           <i  v-if="selectRes.length === 4 && submitted" class="el-icon-circle-check right" />
-        <i  v-if="selectRes !== 4  && submitted"  class="el-icon-circle-close wrong" />
+        <i  v-if="selectRes.length !== 4  && submitted"  class="el-icon-circle-close wrong" />
       </div>
       <div>
          <el-checkbox-group v-model="keys[2]" :disabled="submitted">
@@ -138,7 +138,7 @@ export default {
       keys: [null, null, []],
       submitted: false,
       selectRes: [],
-      questions: [
+      questions:[
         {
           id: 0,
           q: '种植义齿的术后初期维护下列哪种方法不能采用：',
@@ -198,10 +198,22 @@ export default {
     },
     submit: function () {
       this.submitted = true
+      let score = 0
+      const that = this;
 
+      // 单选
+      this.questions.slice(0, 2).map((question) => {
+        console.log(question, that.keys)
+        if (question.k === that.keys[question.id]) {
+          score += 1.5
+        }
+      })
       // 多选题
       this.selectRes = this.keys[2]
+      this.selectRes.length === this.questions[2].k.length ? score += 3 : score += 0
       this.keys[2] = this.questions[2].k
+
+      this.$store.commit('addScore', {partName: 'warnings', score})
     }
 
   }

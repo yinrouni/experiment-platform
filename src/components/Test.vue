@@ -1,6 +1,6 @@
 <template>
   <el-container style="border: 1px solid #eee">
-  <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+  <el-aside width="200px">
      <el-menu :default-active="index" @select="select">
         <el-menu-item index=1>
         <i class="el-icon-message"></i>
