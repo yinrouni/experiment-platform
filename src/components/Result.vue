@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="15">
+      <el-col :span="18">
         <div class="table">
         <el-table
     :data="tableData"
@@ -33,7 +33,7 @@
         </div>
       </el-col>
 
-      <el-col :span="9">
+      <el-col :span="6">
         <div class="img">
         <el-progress type="circle" :percentage="0"
         :stroke-width="15"
@@ -130,7 +130,7 @@ export default {
   }
   .img{
     position: fixed;
-    margin-left: 10%;
+    margin-left: 5%;
 
   }
 </style>

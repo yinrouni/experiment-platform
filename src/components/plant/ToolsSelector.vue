@@ -55,7 +55,7 @@
       </el-checkbox>
       <el-checkbox :label="1">
         覆盖螺丝
-        <img class="vertical" src='../../assets/覆盖螺丝.png' />
+        <img class="vertical"  style="width:15px;" src='../../assets/覆盖螺丝.png' />
       </el-checkbox>
         <el-checkbox :label="2">
         种植夹持器
