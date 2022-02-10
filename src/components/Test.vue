@@ -2,7 +2,7 @@
   <el-container style="border: 1px solid #eee">
   <el-aside width="200px">
      <el-menu :default-active="index" @select="select">
-        <el-menu-item index=1>
+        <el-menu-item index="1">
         <i class="el-icon-message"></i>
         <span slot="title">病例资料</span>
      </el-menu-item>
@@ -167,7 +167,7 @@ export default {
     Warnings},
   data () {
     return {
-      index: '7',
+      index: '1',
       subIndex: 0,
       data: [{
         label: '病例资料'
