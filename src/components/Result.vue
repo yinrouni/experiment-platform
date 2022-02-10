@@ -10,15 +10,17 @@
         stripe
     style="width: 100%">
     <el-table-column
-      prop="category"
       label="分类"
-      width="80">
+      width="150">
+        <template slot-scope="scope">
+        <div class="center">{{ scope.row.category}}</div>
+      </template>
     </el-table-column>
     <el-table-column
     class-name="desc"
 
       label="知识点"
-      width="550">
+      width="560">
 
           <template slot-scope="scope">
 
@@ -26,8 +28,10 @@
       </template>
     </el-table-column>
     <el-table-column
-      prop="total"
-      label="满分">
+      label="得分">
+        <template slot-scope="scope">
+        <div class="center">{{ scope.row.total}}</div>
+      </template>
     </el-table-column>
   </el-table>
         </div>
@@ -45,8 +49,6 @@
           {{text}}
         </div>
         </div>
-
-  
 
       </el-col>
     </el-row>
@@ -68,19 +70,18 @@ export default {
       })
     },
     total: function () {
-      const names = Object.keys(this.$store.state.scores);
-      let res = 0;
-      names.forEach((n)=>{
-        res += this.$store.state.scores[n];
+      const names = Object.keys(this.$store.state.scores)
+      let res = 0
+      names.forEach((n) => {
+        res += this.$store.state.scores[n]
       })
       return res
-
     }
   },
 
   data () {
     return {
-      text: "你真棒！",
+      text: '你真棒！',
       names:
   ['historyCollect',
     'planDiscuss',
@@ -92,7 +93,7 @@ export default {
       content: [{
         category: '病史采集',
         desc: [ '1. 在一般检查中,我们对本例种植患者通常采用口腔、颌面部、颞下颌检查即可。', '2. CBCT技术能实现种植牙前对牙槽骨的高度、宽度、神经管的位置、植入种植体的长度等准确诊断,更重要的是可以在电脑上进行模拟种植。' ],
-        total: 4.5,
+        total: 4.5
       },
       {
         category: '方案商议',
