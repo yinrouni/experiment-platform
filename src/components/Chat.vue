@@ -9,12 +9,13 @@
         </div>
         <div class="title">患者</div>
     </div>
-    <ul class="messages scrolling_container">
+    <div class="messages scrolling_container">
+    <ul>
       <div v-for="chat in chatViewList" :key="chat.id">
         <!-- {% for chat in chat_view_list %} -->
             <li class="message right appeared">
                 <div class="avatar">
-                  <el-avatar src="https://hbimg.huabanimg.com/50dd12a6043cf796b637b9393255642ebdefcca01fab-DEOKZ3_fw658/format/webp" :size="60"></el-avatar>
+                  <el-avatar src="https://bpic.51yuansu.com/pic2/cover/00/28/91/5806b6cbaa3d6_610.jpg" :size="60"></el-avatar>
 
                 </div>
                 <div class="text_wrapper">
@@ -31,6 +32,7 @@
             </li>
             </div>
     </ul>
+    </div>
     <div class="bottom_wrapper clearfix">
         <form >
             <!-- {% csrf_token %} -->
@@ -122,6 +124,8 @@ export default {
       }
       this.$data.chatViewList.push(this.$data.chat[0])
       this.$data.chat.shift()
+      const container = document.querySelectorAll('.scrolling_container')
+      container[0].scrollTop = container[0].scrollHeight;
       console.log(this.$data.chatViewList)
     }
 
