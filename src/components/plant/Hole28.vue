@@ -13,7 +13,7 @@
       </el-col>
       <el-col :span="8">
 
-<ToolsSelector @popRes="popRes" :desc="desc" :rotationSpeed="rotationSpeed" :flowSpeed="flowSpeed" :torque="torque" :numInputDisbled="true"/>
+<ToolsSelector @popRes="popRes" :desc="desc" :rotationSpeed="rotationSpeed" :flowSpeed="flowSpeed" :torque="torque" :numInputDisbled="true" :maxOptions="maxOptions"/>
       </el-col>
     </el-row>
 
@@ -44,10 +44,16 @@ export default {
   },
   data () {
     return {
+      maxOptions: {
+        holeMakers: 1,
+        plant: 0,
+        fix: 0,
+        handler: 1
+      },
       rotationSpeed: {default: 1000, max: 1200, min: 20, step: 200},
       flowSpeed: {default: 5, max: 5, min: 0, step: 1},
       torque: {default: 25, max: 45, min: 15, step: 5},
-      desc:'请选择合适的扩孔钻逐级备洞',
+      desc: '请选择合适的扩孔钻逐级备洞',
       activeName: '',
       keys: {rotationSpeed: {max: 1000, min: 800},
         flowSpeed: 5,
@@ -55,20 +61,20 @@ export default {
         holeMakers: [2],
         plant: [],
         fix: [],
-        handler: [0],
+        handler: [0]
       },
-      activeIndex: '1', 
-      showDialog:false,
-      tips:[], 
+      activeIndex: '1',
+      showDialog: false,
+      tips: [],
       submitted: false
     }
   },
   watch: {
   },
   methods: {
-    popRes: function (rotationSpeed ,flowSpeed, torque,holeMakers, plant, fix, handler) {
-      this.tips = [];
-      if (this.isCorrect(rotationSpeed ,flowSpeed, torque, holeMakers, plant, fix, handler)) return this.playVideo()
+    popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
+      this.tips = []
+      if (this.isCorrect(rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler)) return this.playVideo()
 
       this.showDialog = true
     },
@@ -76,7 +82,7 @@ export default {
       const video = document.getElementById('video')
       video.play()
     },
-    isCorrect: function (rotationSpeed ,flowSpeed, torque, holeMakers, plant, fix, handler) {
+    isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       let score = 0
       // const rotationSpeedGood = this.rotationSpeed >= this.keys.rotationSpeed.min && this.rotationSpeed <= this.keys.rotationSpeed.max
       // if (!rotationSpeedGood) this.tips.push('转速：备洞过程中的转速通常在800-1000rpm。')
@@ -85,19 +91,18 @@ export default {
       !holeMakersGood ? this.tips.push('钻：应先选择直径小的钻进行备洞。') : score += 4
 
       const handlerGood = handler.length >= 1 && handler.indexOf(this.keys.handler[0]) > -1
-      if(!handlerGood) this.tips.push('手机：请选择手机。')
-      
+      if (!handlerGood) this.tips.push('手机：请选择手机。')
+
       // const flowSpeedGood = this.flowSpeed === this.keys.flowSpeed
       // if (!flowSpeedGood) this.tips.push('水流：为了避免备洞过程中的产热过多损伤健康组织，通常将水流开到最大。')
       // const torqueGood = this.torque === this.keys.torque
       // if (!torqueGood) this.tips.push('扭矩：备洞过程中的扭矩默认值即可，不需调动。     ')
-        if (!this.submitted) {
+      if (!this.submitted) {
         this.submitted = true
         this.$store.commit('addScore', {partName: 'plantExp', score})
       }
 
-
-      return  holeMakersGood && handlerGood
+      return holeMakersGood && handlerGood
       // && rotationSpeedGood && handlerGood && flowSpeedGood && torqueGood
     }
 

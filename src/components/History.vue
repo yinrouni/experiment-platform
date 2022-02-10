@@ -21,7 +21,7 @@
          <el-col :span="6">
     <el-checkbox label="无"  v-model="filled"></el-checkbox>
          </el-col>
-       
+
     </el-row>
   </el-col>
 </el-row>
@@ -40,9 +40,9 @@
            <el-col :span="6">
     <el-checkbox label="无" v-model="filled"></el-checkbox>
       </el-col>
-       
+
     </el-row>
-    
+
   </el-col>
 </el-row>
   <el-row>
@@ -63,7 +63,7 @@
          <el-col :span="6">
     <el-checkbox label="无" v-model="filled"></el-checkbox>
          </el-col>
-       
+
     </el-row>
   </el-col>
 </el-row>
@@ -85,7 +85,7 @@
          <el-col :span="6">
     <el-checkbox label="无" v-model="filled"></el-checkbox>
          </el-col>
-       
+
     </el-row>
   </el-col>
 </el-row>
@@ -122,7 +122,7 @@
          </el-col>
            <el-col :span="6">
     <el-checkbox label="妊娠期"></el-checkbox>
-      </el-col>  
+      </el-col>
     </el-row>
   </el-col>
 </el-row>
@@ -145,7 +145,7 @@
          <el-col :span="6">
     <el-checkbox label="3年以上"></el-checkbox>
          </el-col>
-       
+
     </el-row>
   </el-col>
 </el-row>
@@ -181,7 +181,7 @@
     <el-checkbox label="其他过敏:____________" ></el-checkbox>
          </el-col>
     </el-row>
-    
+
   </el-col>
 </el-row>
 
@@ -203,7 +203,7 @@
          <el-col :span="6">
     <el-checkbox label="无"  v-model="filled"></el-checkbox>
          </el-col>
-       
+
     </el-row>
   </el-col>
 </el-row>
@@ -226,13 +226,13 @@
 <script>
 export default {
   name: 'History',
-  data(){
+  data () {
     return {
       filled: false
     }
   },
   methods: {
-    fill: function(){
+    fill: function () {
       this.$data.filled = true
     }
   }

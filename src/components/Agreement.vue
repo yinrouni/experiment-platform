@@ -12,15 +12,14 @@
 <script>
 export default {
   name: 'Agreement',
-  data(){
+  data () {
     return {
       signed: false
     }
   },
   methods: {
-    sign: function(){
+    sign: function () {
       this.$data.signed = true
-
     }
 
   }

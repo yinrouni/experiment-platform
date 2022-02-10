@@ -24,7 +24,7 @@
 
 <el-collapse v-model="activeName" accordion>
   <el-collapse-item title="备洞" name="1">
-    <el-checkbox-group v-model="holeMakers" >
+    <el-checkbox-group v-model="holeMakers" :max="maxOptions.holeMakers" :disabled="maxOptions.holeMakers===0">
         <el-checkbox :label="0">
         球钻
         <img src='../../assets/球钻.png' />
@@ -48,7 +48,7 @@
     </el-checkbox-group>
   </el-collapse-item>
   <el-collapse-item title="植入" name="2">
-    <el-checkbox-group v-model="plant" >
+    <el-checkbox-group v-model="plant" :max="maxOptions.plant" :disabled="maxOptions.plant===0">
         <el-checkbox :label="0">
         种植体
         <img class="vertical" src='../../assets/种植体.png' />
@@ -65,7 +65,7 @@
 
   </el-collapse-item>
   <el-collapse-item title="修复" name="3">
-   <el-checkbox-group v-model="fix" >
+   <el-checkbox-group v-model="fix" :max="maxOptions.fix" :disabled="maxOptions.fix===0">
         <el-checkbox :label="0">
         临时修复基台（含中央螺丝）
         <img class="vertical" src='../../assets/临时修复基台.png' />
@@ -82,8 +82,8 @@
 
   </el-collapse-item>
   <el-collapse-item title="手持器械" name="4">
-   </el-checkbox-group>
-        <el-checkbox-group v-model="handler" >
+  </el-checkbox-group>
+        <el-checkbox-group v-model="handler" :max="maxOptions.handler" :disabled="maxOptions.handler===0"  >
         <el-checkbox :label="0">
         手机
         <img src='../../assets/手机.png' />
@@ -108,28 +108,27 @@
 <script>
 export default {
   name: 'ToolsSelector',
-  props:{desc: String, rotationSpeed:Object,flowSpeed:Object,torque:Object, numInputDisbled: {type: Boolean, default: false}},
+  props: {desc: String, rotationSpeed: Object, flowSpeed: Object, torque: Object, numInputDisbled: {type: Boolean, default: false}, maxOptions: Object},
   data () {
     return {
       rotationSpeedData: this.rotationSpeed.default,
-      flowSpeedData: this.flowSpeed.default, 
-      torqueData: this.torque.default, 
+      flowSpeedData: this.flowSpeed.default,
+      torqueData: this.torque.default,
       activeName: '',
       holeMakers: [],
       plant: [],
       fix: [],
-      handler: [],
+      handler: []
     }
   },
   methods: {
-    submit: function(){
-      this.$emit("popRes", this.rotationSpeedData, this.flowSpeedData, this.torqueData,this.holeMakers, this.plant, this.fix, this.handler)
-      
+    submit: function () {
+      this.$emit('popRes', this.rotationSpeedData, this.flowSpeedData, this.torqueData, this.holeMakers, this.plant, this.fix, this.handler)
+
       // this.$emit("popRes", {rotationSpeed:this.rotationSpeed, flowSpeed: this.flowSpeed, torque: this.torque, holeMakers:this.holeMakers,plant: this.plant,
       // fix: this.fix, hanlder: this.handler
       // });
     }
- 
 
   }
 }

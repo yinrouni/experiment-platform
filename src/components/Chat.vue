@@ -48,14 +48,13 @@
     <div class="message_template">
     </div>
 
-
 </div>
 
 <el-dialog
   title="主诉"
   :visible.sync="result"
   width="30%"
- 
+
   >
   <span>一月前外伤致21牙松动</span>
   <span slot="footer" class="dialog-footer">
@@ -105,8 +104,8 @@ export default {
         id: 6,
         ask: '您有在外院治疗过吗？',
         reply: '没有。'
-      }, 
-        {
+      },
+      {
         id: 7,
         ask: '',
         reply: ''
@@ -118,14 +117,14 @@ export default {
   },
   methods: {
     send: function () {
-      if (this.$data.chat.length === 1){
+      if (this.$data.chat.length === 1) {
         this.$data.result = true
-        return 
+        return
       }
       this.$data.chatViewList.push(this.$data.chat[0])
       this.$data.chat.shift()
       const container = document.querySelectorAll('.scrolling_container')
-      container[0].scrollTop = container[0].scrollHeight;
+      container[0].scrollTop = container[0].scrollHeight
       console.log(this.$data.chatViewList)
     }
 

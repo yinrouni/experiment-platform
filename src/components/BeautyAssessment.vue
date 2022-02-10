@@ -329,7 +329,6 @@ export default {
     },
     next () {
       this.$emit('next')
-
     }
 
   }

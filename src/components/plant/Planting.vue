@@ -7,7 +7,7 @@
       </el-col>
       <el-col :span="8">
 
-<ToolsSelector @popRes="popRes" :desc="desc" :rotationSpeed="rotationSpeed" :flowSpeed="flowSpeed" :torque="torque"/>
+<ToolsSelector @popRes="popRes" :desc="desc" :rotationSpeed="rotationSpeed" :flowSpeed="flowSpeed" :torque="torque" :maxOptions="maxOptions"/>
       </el-col>
     </el-row>
 
@@ -38,6 +38,12 @@ export default {
   },
   data () {
     return {
+      maxOptions: {
+        holeMakers: 0,
+        plant: 2,
+        fix: 0,
+        handler: 2
+      },
       rotationSpeed: {default: 0, max: 30, min: 0, step: 10},
       flowSpeed: {default: 0, max: 5, min: 0, step: 1},
       torque: {default: 15, max: 45, min: 15, step: 5},

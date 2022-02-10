@@ -138,7 +138,7 @@ export default {
       keys: [null, null, []],
       submitted: false,
       selectRes: [],
-      questions:[
+      questions: [
         {
           id: 0,
           q: '种植义齿的术后初期维护下列哪种方法不能采用：',
@@ -199,7 +199,7 @@ export default {
     submit: function () {
       this.submitted = true
       let score = 0
-      const that = this;
+      const that = this
 
       // 单选
       this.questions.slice(0, 2).map((question) => {

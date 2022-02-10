@@ -10,7 +10,7 @@
       </el-col>
       <el-col :span="8">
 
-<ToolsSelector @popRes="popRes" :desc="desc" :rotationSpeed="rotationSpeed" :flowSpeed="flowSpeed" :torque="torque" :numInputDisbled="true"/>
+<ToolsSelector @popRes="popRes" :desc="desc" :rotationSpeed="rotationSpeed" :flowSpeed="flowSpeed" :torque="torque" :numInputDisbled="true" :maxOptions="maxOptions"/>
       </el-col>
     </el-row>
 
@@ -41,10 +41,16 @@ export default {
   },
   data () {
     return {
+      maxOptions: {
+        holeMakers: 0,
+        plant: 0,
+        fix: 2,
+        handler: 2
+      },
       rotationSpeed: {default: 0, max: 1200, min: 20, step: 200},
       flowSpeed: {default: 0, max: 5, min: 0, step: 1},
       torque: {default: 15, max: 45, min: 15, step: 5},
-      desc:'请选择一个器械检测修复体的稳定性',
+      desc: '请选择一个器械检测修复体的稳定性',
       activeName: '',
       keys: {rotationSpeed: {max: 1000, min: 800},
         flowSpeed: 5,
@@ -52,20 +58,20 @@ export default {
         holeMakers: [],
         plant: [],
         fix: [0, 1],
-        handler: [1, 2],
+        handler: [1, 2]
       },
-      activeIndex: '1', 
-      showDialog:false,
-      tips:[], 
+      activeIndex: '1',
+      showDialog: false,
+      tips: [],
       submitted: false
     }
   },
   watch: {
   },
   methods: {
-    popRes: function (rotationSpeed ,flowSpeed, torque,holeMakers, plant, fix, handler) {
-      this.tips = [];
-      if (this.isCorrect(rotationSpeed ,flowSpeed, torque, holeMakers, plant, fix, handler)) return this.playVideo()
+    popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
+      this.tips = []
+      if (this.isCorrect(rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler)) return this.playVideo()
 
       this.showDialog = true
     },
@@ -73,25 +79,24 @@ export default {
       const video = document.getElementById('video')
       video.play()
     },
-    isCorrect: function (rotationSpeed ,flowSpeed, torque, holeMakers, plant, fix, handler) {
+    isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       let score = 0
       // const rotationSpeedGood = this.rotationSpeed >= this.keys.rotationSpeed.min && this.rotationSpeed <= this.keys.rotationSpeed.max
       // if (!rotationSpeedGood) this.tips.push('转速：备洞过程中的转速通常在800-1000rpm。')
 
       // const holeMakersGood = holeMakers.length >= 1 && holeMakers.indexOf(this.keys.holeMakers[0]) > -1
       // if (!holeMakersGood) this.tips.push('先锋钻：通常首先选择先锋钻进行备洞。')
-       const fixGood = fix.length >= 2 && this.keys.fix.every(i =>{return fix.includes(i)})
-       if (fix.includes(0)) score ++;
-       if (fix.includes(1)) score ++;
+      const fixGood = fix.length >= 2 && this.keys.fix.every(i => { return fix.includes(i) })
+      if (fix.includes(0)) score++
+      if (fix.includes(1)) score++
 
-       
-      const handlerGood = handler.length >= 2 && this.keys.handler.every(i =>{return handler.includes(i)})
-      if (handler.includes(1)) score +=2;
-      if (handler.includes(2)) score ++;
+      const handlerGood = handler.length >= 2 && this.keys.handler.every(i => { return handler.includes(i) })
+      if (handler.includes(1)) score += 2
+      if (handler.includes(2)) score++
 
-      if (!fixGood || !handlerGood){
-        if (handler.indexOf(1) < 0){
-          this.tips.push('扭力扳手：通常选择扭力扳手来检测稳定性。');
+      if (!fixGood || !handlerGood) {
+        if (handler.indexOf(1) < 0) {
+          this.tips.push('扭力扳手：通常选择扭力扳手来检测稳定性。')
         }
         if (handler.indexOf(2) < 0 || !fixGood) {
           this.tips.push('请选择临时修复体、临时修复基台和螺丝刀。')
@@ -102,16 +107,13 @@ export default {
         this.submitted = true
         this.$store.commit('addScore', {partName: 'plantExp', score})
       }
-      
-      
-      
+
       // const flowSpeedGood = this.flowSpeed === this.keys.flowSpeed
       // if (!flowSpeedGood) this.tips.push('水流：为了避免备洞过程中的产热过多损伤健康组织，通常将水流开到最大。')
       // const torqueGood = this.torque === this.keys.torque
       // if (!torqueGood) this.tips.push('扭矩：备洞过程中的扭矩默认值即可，不需调动。     ')
 
-      
-      return fixGood && handlerGood 
+      return fixGood && handlerGood
     }
 
   }
