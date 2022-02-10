@@ -123,9 +123,10 @@ export default {
       }
       this.$data.chatViewList.push(this.$data.chat[0])
       this.$data.chat.shift()
-      const container = document.querySelectorAll('.scrolling_container')
-      container[0].scrollTop = container[0].scrollHeight
-      console.log(this.$data.chatViewList)
+      this.$nextTick(function () {
+        const container = document.querySelectorAll('.messages')
+        container[0].scrollTop = container[0].scrollHeight
+      })
     }
 
   }
