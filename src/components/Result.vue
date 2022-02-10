@@ -7,6 +7,7 @@
     :data="tableData"
     :header-cell-style="setHeaderStyle"
     border
+      height="485"
         stripe
     style="width: 100%">
     <el-table-column
@@ -146,9 +147,9 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  .img{
+  /* .img{
     position: fixed;
     margin-left: 5%;
 
-  }
+  } */
 </style>
