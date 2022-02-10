@@ -41,7 +41,7 @@ export default {
       rotationSpeed: {default: 0, max: 30, min: 0, step: 10},
       flowSpeed: {default: 0, max: 5, min: 0, step: 1},
       torque: {default: 15, max: 45, min: 15, step: 5},
-      desc:'请使用种植体夹持器取出种植体，并调试种植机的转速、水流、扭矩',
+      desc: '请使用种植体夹持器取出种植体，并调试种植机的转速、水流、扭矩',
       activeName: '',
       keys: {rotationSpeed: 20,
         flowSpeed: 0,
@@ -49,18 +49,19 @@ export default {
         holeMakers: [],
         plant: [0, 2],
         fix: [],
-        handler: [1],
+        handler: [1]
       },
-      activeIndex: '1', 
-      showDialog:false,
-      tips:[]
+      activeIndex: '1',
+      showDialog: false,
+      tips: [],
+      submitted: false
     }
   },
   watch: {
   },
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
-      this.tips = [];
+      this.tips = []
       if (this.isCorrect(rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler)) return this.playVideo()
 
       this.showDialog = true
@@ -70,21 +71,30 @@ export default {
       video.play()
     },
     isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
+      let score = 0
       const rotationSpeedGood = rotationSpeed === this.keys.rotationSpeed
       // const rotationSpeedGood = rotationSpeed >= this.keys.rotationSpeed.min && rotationSpeed <= this.keys.rotationSpeed.max
-      if (!rotationSpeedGood) this.tips.push('转速：种植体植入时，通常转速调至15-25rpm')
+      !rotationSpeedGood ? this.tips.push('转速：种植体植入时，通常转速调至15-25rpm') : score += 4
 
-      const plantGood = plant.length >= 2 && this.keys.plant.every(i =>{return plant.includes(i)})
-      console.log(this.keys.plant, plant, this.keys.plant.every(i =>{return plant.includes(i)}))
+      const plantGood = plant.length >= 2 && this.keys.plant.every(i => {
+        const res = plant.includes(i)
+        if (res) score += 4
+        return res
+      })
       // if (!holeMakersGood) this.tips.push('球钻：一般选择球钻或者精准钻进行种植位点的定位。')
 
       const handlerGood = handler.length >= 1 && handler.indexOf(this.keys.handler[0]) > -1
-      if(!handlerGood) this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。')
-      
+      !handlerGood ? this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。') : score += 4
+
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
-      if (!flowSpeedGood) this.tips.push('水流：水流关闭，种植时不需要出水')
+      !flowSpeedGood ? this.tips.push('水流：水流关闭，种植时不需要出水') : score += 4
       const torqueGood = torque >= this.keys.torque.min && torque <= this.keys.torque.max
-      if (!torqueGood) this.tips.push('扭矩：植入种植体时一般扭矩在35~45Ncm')
+      !torqueGood ? this.tips.push('扭矩：植入种植体时一般扭矩在35~45Ncm') : score += 4
+
+      if (!this.submitted) {
+        this.submitted = true
+        this.$store.commit('addScore', {partName: 'plantExp', score})
+      }
 
       return rotationSpeedGood && plantGood && handlerGood && flowSpeedGood && torqueGood
     }

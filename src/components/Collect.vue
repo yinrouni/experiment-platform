@@ -62,13 +62,10 @@
            <el-radio v-model="radio" label="3">颞下颌关节侧位片</el-radio>
       </el-row>
       <el-row>
-           <el-radio v-model="radio" label="4">颞下颌关节侧位片</el-radio>
+           <el-radio v-model="radio" label="4">唾液腺造影</el-radio>
       </el-row>
       <el-row>
-           <el-radio v-model="radio" label="5">唾液腺造影</el-radio>
-      </el-row>
-      <el-row>
-             <el-radio v-model="radio" label="6">CBCT检查</el-radio>
+             <el-radio v-model="radio" label="5">CBCT检查</el-radio>
       </el-row>
 
       </div>
@@ -125,7 +122,7 @@ export default {
       this.$store.commit('addScore', {partName: 'historyCollect', score: 3})
     },
     filmRes: function (val) {
-      if (val === '6') {
+      if (val === '5') {
         this.$store.commit('addScore', {partName: 'historyCollect', score: 1.5})
       }
     }

@@ -56,7 +56,8 @@ export default {
       },
       activeIndex: '1', 
       showDialog:false,
-      tips:[]
+      tips:[], 
+      submitted: false
     }
   },
   watch: {
@@ -73,15 +74,20 @@ export default {
       video.play()
     },
     isCorrect: function (rotationSpeed ,flowSpeed, torque, holeMakers, plant, fix, handler) {
+      let score = 0
       // const rotationSpeedGood = this.rotationSpeed >= this.keys.rotationSpeed.min && this.rotationSpeed <= this.keys.rotationSpeed.max
       // if (!rotationSpeedGood) this.tips.push('转速：备洞过程中的转速通常在800-1000rpm。')
 
       // const holeMakersGood = holeMakers.length >= 1 && holeMakers.indexOf(this.keys.holeMakers[0]) > -1
       // if (!holeMakersGood) this.tips.push('先锋钻：通常首先选择先锋钻进行备洞。')
        const fixGood = fix.length >= 2 && this.keys.fix.every(i =>{return fix.includes(i)})
-      console.log(this.keys.plant, plant, this.keys.plant.every(i =>{return plant.includes(i)}))
+       if (fix.includes(0)) score ++;
+       if (fix.includes(1)) score ++;
 
+       
       const handlerGood = handler.length >= 2 && this.keys.handler.every(i =>{return handler.includes(i)})
+      if (handler.includes(1)) score +=2;
+      if (handler.includes(2)) score ++;
 
       if (!fixGood || !handlerGood){
         if (handler.indexOf(1) < 0){
@@ -91,6 +97,11 @@ export default {
           this.tips.push('请选择临时修复体、临时修复基台和螺丝刀。')
         }
       }
+
+      if (!this.submitted) {
+        this.submitted = true
+        this.$store.commit('addScore', {partName: 'plantExp', score})
+      }
       
       
       
@@ -99,7 +110,7 @@ export default {
       // const torqueGood = this.torque === this.keys.torque
       // if (!torqueGood) this.tips.push('扭矩：备洞过程中的扭矩默认值即可，不需调动。     ')
 
-
+      
       return fixGood && handlerGood 
     }
 

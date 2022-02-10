@@ -59,7 +59,8 @@ export default {
       },
       activeIndex: '1', 
       showDialog:false,
-      tips:[]
+      tips:[], 
+      submitted: false
     }
   },
   watch: {
@@ -78,9 +79,9 @@ export default {
     isCorrect: function (rotationSpeed ,flowSpeed, torque, holeMakers, plant, fix, handler) {
       // const rotationSpeedGood = this.rotationSpeed >= this.keys.rotationSpeed.min && this.rotationSpeed <= this.keys.rotationSpeed.max
       // if (!rotationSpeedGood) this.tips.push('转速：备洞过程中的转速通常在800-1000rpm。')
-
+      let score = 0
       const holeMakersGood = holeMakers.length >= 1 && holeMakers.indexOf(this.keys.holeMakers[0]) > -1
-      if (!holeMakersGood) this.tips.push('先锋钻：通常首先选择先锋钻进行备洞。')
+      !holeMakersGood ? this.tips.push('先锋钻：通常首先选择先锋钻进行备洞。') : score += 4
 
       const handlerGood = handler.length >= 1 && handler.indexOf(this.keys.handler[0]) > -1
       if(!handlerGood) this.tips.push('手机：请选择手机。')
@@ -92,6 +93,10 @@ export default {
 
 
       // return rotationSpeedGood && holeMakersGood && handlerGood && flowSpeedGood && torqueGood
+    if (!this.submitted) {
+        this.submitted = true
+        this.$store.commit('addScore', {partName: 'plantExp', score})
+      }
       return holeMakersGood && handlerGood
     }
 

@@ -14,6 +14,10 @@ const state = {
   }
 }
 
+const getters = {
+  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
+}
+
 const mutations = {
   // payload: {partName, score}
   addScore: (state, payload) => {

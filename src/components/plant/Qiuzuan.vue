@@ -46,7 +46,7 @@ export default {
       rotationSpeed: {default: 800, max: 1200, min: 20, step: 200},
       flowSpeed: {default: 5, max: 5, min: 0, step: 1},
       torque: {default: 25, max: 45, min: 15, step: 5},
-      desc:'请选择合适的定位钻，调试种植机的转速、水流',
+      desc: '请选择合适的定位钻，调试种植机的转速、水流',
       activeName: '',
       keys: {rotationSpeed: {max: 1000, min: 800},
         flowSpeed: 5,
@@ -54,18 +54,19 @@ export default {
         holeMakers: [0],
         plant: [],
         fix: [],
-        handler: [0],
+        handler: [0]
       },
-      activeIndex: '1', 
-      showDialog:false,
-      tips:[]
+      activeIndex: '1',
+      showDialog: false,
+      tips: [],
+      submitted: false
     }
   },
   watch: {
   },
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
-      this.tips = [];
+      this.tips = []
       if (this.isCorrect(rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler)) return this.playVideo()
 
       this.showDialog = true
@@ -75,19 +76,25 @@ export default {
       video.play()
     },
     isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
+      let score = 0
       const rotationSpeedGood = rotationSpeed >= this.keys.rotationSpeed.min && rotationSpeed <= this.keys.rotationSpeed.max
-      if (!rotationSpeedGood) this.tips.push('转速：备洞过程中中的转速通常在800-1000rpm。')
+      !rotationSpeedGood ? this.tips.push('转速：备洞过程中中的转速通常在800-1000rpm。') : score += 4
 
       const holeMakersGood = holeMakers.length >= 1 && holeMakers.indexOf(this.keys.holeMakers[0]) > -1
-      if (!holeMakersGood) this.tips.push('球钻：一般选择球钻或者精准钻进行种植位点的定位。')
+      !holeMakersGood ? this.tips.push('球钻：一般选择球钻或者精准钻进行种植位点的定位。') : score += 4
 
       const handlerGood = handler.length >= 1 && handler.indexOf(this.keys.handler[0]) > -1
-      if(!handlerGood) this.tips.push('手机：请选择手机。')
-      
+      if (!handlerGood) this.tips.push('手机：请选择手机。')
+
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
-      if (!flowSpeedGood) this.tips.push('水流：为了避免备洞过程中的产热过多损伤健康组织，通常将水流开到最大。')
+      !flowSpeedGood ? this.tips.push('水流：为了避免备洞过程中的产热过多损伤健康组织，通常将水流开到最大。') : score += 4
       const torqueGood = torque === this.keys.torque
-      if (!torqueGood) this.tips.push('扭矩：备洞过程中的扭矩默认值即可，不需调动。     ')
+      !torqueGood ? this.tips.push('扭矩：备洞过程中的扭矩默认值即可，不需调动。     ') : score += 4
+
+      if (!this.submitted) {
+        this.submitted = true
+        this.$store.commit('addScore', {partName: 'plantExp', score})
+      }
 
       return rotationSpeedGood && holeMakersGood && handlerGood && flowSpeedGood && torqueGood
     }

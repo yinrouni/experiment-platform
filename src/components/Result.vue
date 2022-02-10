@@ -36,8 +36,8 @@
       <el-col :span="9">
         <div class="img">
         <el-progress type="circle" :percentage="0"
-        stroke-width=15
-        width=200
+        :stroke-width="15"
+        :width="200"
         ></el-progress>
         </div>
 
@@ -50,20 +50,32 @@
 <script>
 export default {
   name: 'Result',
+
   computed: {
     tableData: function () {
-      return this.content.map((i) => {
-        return {category: i.category, total: i.total, desc: i.desc.join('\n')}
+      return this.content.map((i, index) => {
+        const key = this.names[index];
+        const score = this.$store.state.scores[key];
+        const data = '' + score + '/' + i.total
+        return {category: i.category, total: data, desc: i.desc.join('\n')}
       })
     }
   },
 
   data () {
     return {
+      names:
+  ['historyCollect',
+    'planDiscuss',
+    'preparation',
+    'remove',
+    'plantTest',
+    'plantExp',
+    'warnings'],
       content: [{
         category: '病史采集',
         desc: [ '1. 在一般检查中,我们对本例种植患者通常采用口腔、颌面部、颞下颌检查即可。', '2. CBCT技术能实现种植牙前对牙槽骨的高度、宽度、神经管的位置、植入种植体的长度等准确诊断,更重要的是可以在电脑上进行模拟种植。' ],
-        total: 4.5
+        total: 4.5, 
       },
       {
         category: '方案商议',
