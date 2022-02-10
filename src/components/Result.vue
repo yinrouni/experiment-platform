@@ -35,11 +35,18 @@
 
       <el-col :span="6">
         <div class="img">
-        <el-progress type="circle" :percentage="0"
+        <el-progress type="circle"  :percentage="total"
         :stroke-width="15"
         :width="200"
         ></el-progress>
+         <br>
+        <br>
+        <div>
+          {{text}}
         </div>
+        </div>
+
+  
 
       </el-col>
     </el-row>
@@ -59,11 +66,21 @@ export default {
         const data = '' + score + '/' + i.total
         return {category: i.category, total: data, desc: i.desc.join('\n')}
       })
+    },
+    total: function () {
+      const names = Object.keys(this.$store.state.scores);
+      let res = 0;
+      names.forEach((n)=>{
+        res += this.$store.state.scores[n];
+      })
+      return res
+
     }
   },
 
   data () {
     return {
+      text: "你真棒！",
       names:
   ['historyCollect',
     'planDiscuss',
