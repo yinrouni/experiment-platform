@@ -16,7 +16,7 @@ const state = {
 
 const mutations = {
   // payload: {partName, score}
-  add: (state, payload) => {
+  addScore: (state, payload) => {
     state.scores[payload.partName] += payload.score
   }
 }
