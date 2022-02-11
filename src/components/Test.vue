@@ -29,8 +29,8 @@
      </el-menu-item>
 
         <el-menu-item index="7">
-        <i class=" el-icon-coordinate"></i>
-        <span slot="title">即刻种植手术</span>
+        <i class="el-icon-coordinate"></i>
+        <span slot="title" >即刻种植</span>
      </el-menu-item>
 
         <el-menu-item index="8">

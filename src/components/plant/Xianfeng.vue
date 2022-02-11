@@ -50,8 +50,8 @@ export default {
         fix: 0,
         handler: 1
       },
-      rotationSpeed: {default: 1000, max: 1200, min: 20, step: 200},
-      flowSpeed: {default: 5, max: 5, min: 0, step: 1},
+      rotationSpeed: {default: 600, max: 1200, min: 20, step: 200},
+      flowSpeed: {default: 0, max: 5, min: 0, step: 1},
       torque: {default: 25, max: 45, min: 15, step: 5},
       desc: '请选择合适的钻',
       activeName: '',

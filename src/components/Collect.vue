@@ -47,8 +47,8 @@
     <div v-if="subIndex === 3">
       <div class="left">
       <i class='el-icon-arrow-right' />为进一步了解进一步了解术区可用骨高度和宽度、唇侧骨板有无缺损及骨质情况等最好选用(单选):
-      <i  v-if="radio === '6' && submittedFilm" class="el-icon-circle-check right" />
-        <i  v-if="radio !== '6' && submittedFilm" class="el-icon-circle-close wrong" />
+      <i  v-if="radio === '5' && submittedFilm" class="el-icon-circle-check right" />
+        <i  v-if="radio !== '5' && submittedFilm" class="el-icon-circle-close wrong" />
       </div>
       <br>
       <div class="left" v-if="!submittedFilm">

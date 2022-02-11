@@ -6,20 +6,25 @@
     </b>
   </div>
 
-<el-card class="speed-card">
+<el-card>
+  <div class="speed-card">
   <el-row>
 
   转速：
   <el-input-number v-model="rotationSpeedData" :step="rotationSpeed.step" :min="rotationSpeed.min" :max="rotationSpeed.max" size="small" :disabled="numInputDisbled" ></el-input-number>
+   rpm 
   </el-row>
   <el-row>
     水流：
   <el-input-number v-model="flowSpeedData" :step="flowSpeed.step" :min="flowSpeed.min" :max="flowSpeed.max"  size="small" :disabled="numInputDisbled" ></el-input-number>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </el-row>
   <el-row>
      扭矩：
   <el-input-number v-model="torqueData" :step="torque.step" :min="torque.min" :max="torque.max" size="small" :disabled="numInputDisbled" ></el-input-number>
+  Ncm
   </el-row>
+  </div>
 </el-card>
 
 <el-collapse v-model="activeName" accordion>
@@ -141,9 +146,11 @@ export default {
   }
   .speed-card{
     font-size: small;
+    padding-left: 5%;
+ 
   }
   .el-card__body{
-    padding: 5px!;
+    padding: 5px;
   }
   .desc{
     text-align: left;

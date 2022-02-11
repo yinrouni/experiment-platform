@@ -11,7 +11,9 @@
       <el-col :span="12">
            <div class="type">
     <span>
+      <b>
       单选题
+      </b>
     </span>
 <br>
 <div v-for="(question, index) in questions" :key="index">
@@ -141,6 +143,6 @@ export default {
     transform: translate(-50%, -50%);
   }
   video{
-    width: 100%
+    width: 75%
   }
 </style>

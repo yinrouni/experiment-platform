@@ -7,9 +7,11 @@
   </div>
 <el-row>
   <el-col :span="12">
-    <div class="type">
+    <div class="type singles">
     <span>
+      <b>
       单选题
+      </b>
     </span>
 <br>
 <div v-for="(question, index) in questions" :key="index">
@@ -18,10 +20,11 @@
       <div>
         {{index +1}}.{{question.q}}
       </div>
-      <div>
-        <el-radio-group v-model="keys[question.id]" :disabled="submitted">
-
-        <el-radio  v-for="(option, indexA) in question.a" :label="indexA" :key="option">
+      <div style="text-align: start; display:block;">
+        <el-radio-group v-model="keys[question.id]" :disabled="submitted" class='radioDiv'>
+<div v-for="(option, indexA) in question.a"  :key="option">
+        <el-radio :label="indexA">
+        
           <span>{{option}}
             <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
@@ -29,6 +32,7 @@
 
           </span>
         </el-radio>
+</div>
         </el-radio-group>
       </div>
     </div>
@@ -40,7 +44,9 @@
   <el-col :span="12">
     <div class="type">
     <span >
+      <b>
       多选题
+      </b>
       </span>
       <br>
     <br>
@@ -149,5 +155,18 @@ export default {
   img{
     width: 500px;
   }
+
+   .radioDiv {
+   margin: 0;
+   width: auto;
+   text-align: left;
+   display: table;
+}
+
+.singles{
+  margin-left: 10%;
+}
+
+
 
 </style>

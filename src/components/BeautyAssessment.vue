@@ -304,7 +304,7 @@
 
     <el-dialog
   title="结论"
-  :visible.sync="filled"
+  :visible.sync="showDialog"
   width="30%">
   <span>该患者美学风险为低风险。</span>
   <span slot="footer" class="dialog-footer">
@@ -320,12 +320,19 @@
 export default {
   name: 'BeautyAssessment',
   data () {
-    return {filled: false}
+    return {
+      filled: false, 
+      showDialog:false
+    }
   },
 
   methods: {
     fill: function () {
       this.filled = true
+      setTimeout(()=>{
+        this.showDialog = true;
+      }, 2000)
+
     },
     next () {
       this.$emit('next')
