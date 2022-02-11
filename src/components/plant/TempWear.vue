@@ -28,6 +28,20 @@
   </span>
 </el-dialog>
 
+<el-dialog
+  title="提示"
+  :visible.sync="showCorrectDialog"
+  width="30%">
+  <div><i class="el-icon-circle-check" style="color:#67C23A" />
+  回答正确
+  </div>
+  <br>
+  <div> 请观看视频</div>
+  <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="showCorrectDialog = false">确 定</el-button>
+  </span>
+</el-dialog>
+
   </div>
 
 </template>
@@ -44,6 +58,7 @@ export default {
   },
   data () {
     return {
+      showCorrectDialog: false, 
       maxOptions: {
         holeMakers: 0,
         plant: 0,
@@ -112,7 +127,7 @@ export default {
       // if (!flowSpeedGood) this.tips.push('水流：为了避免备洞过程中的产热过多损伤健康组织，通常将水流开到最大。')
       // const torqueGood = this.torque === this.keys.torque
       // if (!torqueGood) this.tips.push('扭矩：备洞过程中的扭矩默认值即可，不需调动。     ')
-
+      this.showCorrectDialog = fixGood && handlerGood
       return fixGood && handlerGood
     }
 

@@ -25,6 +25,20 @@
   </span>
 </el-dialog>
 
+<el-dialog
+  title="提示"
+  :visible.sync="showCorrectDialog"
+  width="30%">
+  <div><i class="el-icon-circle-check" style="color:#67C23A" />
+  回答正确
+  </div>
+  <br>
+  <div> 请观看视频</div>
+  <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="showCorrectDialog = false">确 定</el-button>
+  </span>
+</el-dialog>
+
   </div>
 
 </template>
@@ -38,6 +52,7 @@ export default {
   },
   data () {
     return {
+      showCorrectDialog: false,
       maxOptions: {
         holeMakers: 0,
         plant: 2,
@@ -94,7 +109,7 @@ export default {
       const handlerGood = handler.length >= 2 && handler.indexOf(this.keys.handler[0]) > -1 
       && handler.indexOf(this.keys.handler[1]) > -1 
       !handler.includes(1) ? this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。') : score += 4
-      if(!handler.includes(0)) this.tips.push('其他：需要选择手机')
+      if (!handler.includes(0)) this.tips.push('其他：需要选择手机')
 
 
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
@@ -106,6 +121,7 @@ export default {
         this.submitted = true
         this.$store.commit('addScore', {partName: 'plantExp', score})
       }
+      this.showCorrectDialog = rotationSpeedGood && plantGood && handlerGood && flowSpeedGood && torqueGood
 
       return rotationSpeedGood && plantGood && handlerGood && flowSpeedGood && torqueGood
     }

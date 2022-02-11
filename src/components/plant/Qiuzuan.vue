@@ -29,6 +29,19 @@
     <el-button type="primary" @click="showDialog = false">确 定</el-button>
   </span>
 </el-dialog>
+<el-dialog
+  title="提示"
+  :visible.sync="showCorrectDialog"
+  width="30%">
+  <div><i class="el-icon-circle-check" style="color:#67C23A" />
+  回答正确
+  </div>
+  <br>
+  <div> 请观看视频</div>
+  <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="showCorrectDialog = false">确 定</el-button>
+  </span>
+</el-dialog>
 
   </div>
 
@@ -43,6 +56,7 @@ export default {
   },
   data () {
     return {
+      showCorrectDialog: false, 
       maxOptions: {
         holeMakers: 1,
         plant: 0,
@@ -101,7 +115,7 @@ export default {
         this.submitted = true
         this.$store.commit('addScore', {partName: 'plantExp', score})
       }
-
+      this.showCorrectDialog = rotationSpeedGood && holeMakersGood && handlerGood && flowSpeedGood && torqueGood
       return rotationSpeedGood && holeMakersGood && handlerGood && flowSpeedGood && torqueGood
     }
 

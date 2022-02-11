@@ -31,6 +31,20 @@
   </span>
 </el-dialog>
 
+<el-dialog
+  title="提示"
+  :visible.sync="showCorrectDialog"
+  width="30%">
+  <div><i class="el-icon-circle-check" style="color:#67C23A" />
+  回答正确
+  </div>
+  <br>
+  <div> 请观看视频</div>
+  <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="showCorrectDialog = false">确 定</el-button>
+  </span>
+</el-dialog>
+
   </div>
 
 </template>
@@ -43,10 +57,11 @@ export default {
   computed: {
     rotationSpeed: function () { return {default: this.$store.state.plantMachine.rotationSpeed, max: 1200, min: 20, step: 200} },
     flowSpeed: function () { return {default: this.$store.state.plantMachine.flowSpeed, max: 5, min: 0, step: 1} },
-    torque: function () { return {default: this.$store.state.plantMachine.torque, max: 45, min: 15, step: 5} }
+    torque: function () { return {default: this.$store.state.plantMachine.torque, max: 45, min: 15, step: 5} }, 
   },
   data () {
     return {
+      showCorrectDialog: false,
       maxOptions: {
         holeMakers: 1,
         plant: 0,
@@ -102,6 +117,7 @@ export default {
         this.submitted = true
         this.$store.commit('addScore', {partName: 'plantExp', score})
       }
+      this.showCorrectDialog = holeMakersGood && handlerGood
       return holeMakersGood && handlerGood
     }
 
