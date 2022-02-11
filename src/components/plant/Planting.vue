@@ -55,7 +55,7 @@ export default {
         holeMakers: [],
         plant: [0, 2],
         fix: [],
-        handler: [1]
+        handler: [0, 1]
       },
       activeIndex: '1',
       showDialog: false,
@@ -83,14 +83,19 @@ export default {
       !rotationSpeedGood ? this.tips.push('转速：种植体植入时，通常转速调至15-25rpm') : score += 4
 
       const plantGood = plant.length >= 2 && this.keys.plant.every(i => {
-        const res = plant.includes(i)
-        if (res) score += 4
-        return res
+        return plant.includes(i)
       })
+      plant.includes(2) ? score += 4 : this.tips.push('种植体夹持器：植入过程中，种植体需要由种植体夹持器夹持')
+      plant.includes(0) ? score += 4 : this.tips.push('种植体：植入过程中，需要种植体')
+
+
       // if (!holeMakersGood) this.tips.push('球钻：一般选择球钻或者精准钻进行种植位点的定位。')
 
-      const handlerGood = handler.length >= 1 && handler.indexOf(this.keys.handler[0]) > -1
-      !handlerGood ? this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。') : score += 4
+      const handlerGood = handler.length >= 2 && handler.indexOf(this.keys.handler[0]) > -1 
+      && handler.indexOf(this.keys.handler[1]) > -1 
+      !handler.includes(1) ? this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。') : score += 4
+      if(!handler.includes(0)) this.tips.push('其他：需要选择手机')
+
 
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
       !flowSpeedGood ? this.tips.push('水流：水流关闭，种植时不需要出水') : score += 4
