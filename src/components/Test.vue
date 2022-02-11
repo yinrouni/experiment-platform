@@ -133,7 +133,7 @@
             </el-col>
              <el-col :span="12" style="text-align: right;">
                 <el-button @click="next">
-            下一步
+            {{nextStep}}
           </el-button>
             </el-col>
           </el-row>
@@ -165,49 +165,18 @@ export default {
     Plant,
     Result,
     Warnings},
+  watch: {
+    index: function (val) {
+      if (val === '9') {
+        this.nextStep = '重新测试'
+      }
+    }
+  },
   data () {
     return {
       index: '1',
       subIndex: 0,
-      data: [{
-        label: '病例资料'
-        // children: [{
-        //   label: '二级 1-1',
-        //   children: [{
-        //     label: '三级 1-1-1'
-        //   }]
-        // }]
-      }, {
-        label: '一级 2',
-        children: [{
-          label: '二级 2-1',
-          children: [{
-            label: '三级 2-1-1'
-          }]
-        }, {
-          label: '二级 2-2',
-          children: [{
-            label: '三级 2-2-1'
-          }]
-        }]
-      }, {
-        label: '一级 3',
-        children: [{
-          label: '二级 3-1',
-          children: [{
-            label: '三级 3-1-1'
-          }]
-        }, {
-          label: '二级 3-2',
-          children: [{
-            label: '三级 3-2-1'
-          }]
-        }]
-      }],
-      defaultProps: {
-        children: 'children',
-        label: 'label'
-      }
+      nextStep: '下一步'
     }
   },
   methods: {
@@ -235,6 +204,11 @@ export default {
       }
       if (this.$data.index === '8' && this.$data.subIndex < 1) {
         this.$data.subIndex++
+        return
+      }
+      if (this.$data.index === '9') {
+        this.$router.push('/')
+        this.$store.commit('reset')
         return
       }
       this.$data.subIndex = 0
