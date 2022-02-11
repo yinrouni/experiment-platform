@@ -90,6 +90,7 @@ export default {
         }
       })
       this.$store.commit('addScore', {partName: 'planDiscuss', score})
+      this.$emit('popRes', this.choices.map((choice, index) => { return choice === this.questions[index].k }))
     },
     clickOption: function (label) {
 
