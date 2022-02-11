@@ -104,6 +104,7 @@
     </el-header> -->
 
     <el-main>
+      <keep-alive>
 
 <Profile v-if="index === '1'"/>
 <Collect :subIndex="subIndex" v-if="index === '2'" @next="next"/>
@@ -114,7 +115,7 @@
 <Plant v-if="index === '7'" :subIndex="subIndex" />
 <Warnings v-if="index === '8'" :subIndex="subIndex" />
 <Result v-if="index === '9'" />
-
+      </keep-alive>
       <!-- <el-table :data="tableData">
         <el-table-column prop="date" label="日期" width="140">
         </el-table-column>
@@ -127,9 +128,10 @@
         <el-footer>
           <el-row>
             <el-col :span="12" style="text-align: left;">
-               <el-button @click="back">
-            返回
+               <el-button @click="back" v-if="['1', '4', '5'].indexOf(index) < 0 && subIndex !==0">
+            上一步
           </el-button>
+          <span v-else>&nbsp; </span>
             </el-col>
              <el-col :span="12" style="text-align: right;">
                 <el-button @click="next">
@@ -169,6 +171,9 @@ export default {
     index: function (val) {
       if (val === '9') {
         this.nextStep = '重新测试'
+      }
+      else{
+        this.nextStep = '下一步'
       }
     }
   },
