@@ -51,7 +51,7 @@
   </div>
 
   <div class="video" v-if="subIndex===1">
-    <video src="./../assets/口外消毒.mp4" autoplay=true />
+    <video src="./../assets/口外消毒.mp4" autoplay=true  controls="controls" />
   </div>
    <div class="video" v-if="subIndex===2">
     <video src="./../assets/铺巾.mp4" autoplay=true />

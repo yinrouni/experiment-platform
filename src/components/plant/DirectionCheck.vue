@@ -41,6 +41,9 @@ export default {
   name: 'DirectionCheck',
   components: {ToolsSelector},
   computed: {
+    rotationSpeed: function () { return {default: this.$store.state.plantMachine.rotationSpeed, max: 1200, min: 20, step: 200} },
+    flowSpeed: function () { return {default: this.$store.state.plantMachine.flowSpeed, max: 5, min: 0, step: 1} },
+    torque: function () { return {default: this.$store.state.plantMachine.torque, max: 45, min: 15, step: 5} }
   },
   data () {
     return {
@@ -50,9 +53,6 @@ export default {
         fix: 0,
         handler: 0
       },
-      rotationSpeed: {default: 1000, max: 1200, min: 20, step: 200},
-      flowSpeed: {default: 5, max: 5, min: 0, step: 1},
-      torque: {default: 25, max: 45, min: 15, step: 5},
       desc: '请选择合适的器械判断方向',
       activeName: '',
       keys: {rotationSpeed: {max: 1000, min: 800},

@@ -38,6 +38,9 @@ export default {
   name: 'TempWear',
   components: {ToolsSelector},
   computed: {
+    rotationSpeed: function () { return {default: this.$store.state.plantMachine.rotationSpeed, max: 1200, min: 20, step: 200} },
+    flowSpeed: function () { return {default: this.$store.state.plantMachine.flowSpeed, max: 5, min: 0, step: 1} },
+    torque: function () { return {default: this.$store.state.plantMachine.torque, max: 45, min: 15, step: 5} }
   },
   data () {
     return {
@@ -47,9 +50,6 @@ export default {
         fix: 2,
         handler: 2
       },
-      rotationSpeed: {default: 0, max: 1200, min: 20, step: 200},
-      flowSpeed: {default: 0, max: 5, min: 0, step: 1},
-      torque: {default: 15, max: 45, min: 15, step: 5},
       desc: '请选择一个器械检测修复体的稳定性',
       activeName: '',
       keys: {rotationSpeed: {max: 1000, min: 800},

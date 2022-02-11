@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <video :src="url" id="mp4" autoplay=true>
+  <div id="mp4">
+    <video :src="url" @canplay="play">
   </div>
 </template>
 
@@ -13,9 +13,14 @@ export default {
       return this.getUrl(this.fileName)
     }
   },
+  data () {
+    return {
+      loader: null
+    }
+  },
 
   mounted () {
-    const target = document.getElementById('mp4')
+    const target = document.getElementById('#mp4')
     const loading = this.$loading({
       target,
       fullscreen: false,
@@ -23,13 +28,24 @@ export default {
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
     })
-    setTimeout(() => {
-      loading.close()
-    }, 2000)
+    // setTimeout(() => {
+    //   loading.close()
+    // }, 2000)
+
+    this.loader = loading
   },
   methods: {
     getUrl (fileName) {
       return require('./../assets/' + fileName)
+    },
+    play () {
+      const v = document.getElementsByTagName('video')[0]
+
+      if (v.readyState >= 3) {
+        this.loader.close()
+        console.log('video can play')
+        v.play()
+      }
     }
 
   }

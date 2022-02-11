@@ -11,11 +11,12 @@ const state = {
     plantTest: 0,
     plantExp: 0,
     warnings: 0
+  },
+  plantMachine: {
+    rotationSpeed: 0,
+    flowSpeed: 0,
+    torque: 0
   }
-}
-
-const getters = {
-  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
 }
 
 const mutations = {
@@ -23,6 +24,9 @@ const mutations = {
   addScore: (state, payload) => {
     console.log(payload)
     state.scores[payload.partName] += payload.score
+  },
+  changePlantMachine: (state, payload) => {
+    state.plantMachine = payload
   }
 }
 export default new Vuex.Store({

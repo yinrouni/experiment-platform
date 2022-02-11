@@ -128,6 +128,9 @@ export default {
   },
   methods: {
     submit: function () {
+      this.$store.commit('changePlantMachine', {rotationSpeed: this.rotationSpeedData,
+    flowSpeed: this.flowSpeedData,
+    torque: this.torqueData})
       this.$emit('popRes', this.rotationSpeedData, this.flowSpeedData, this.torqueData, this.holeMakers, this.plant, this.fix, this.handler)
 
       // this.$emit("popRes", {rotationSpeed:this.rotationSpeed, flowSpeed: this.flowSpeed, torque: this.torque, holeMakers:this.holeMakers,plant: this.plant,
