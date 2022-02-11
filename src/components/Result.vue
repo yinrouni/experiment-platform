@@ -43,11 +43,12 @@
         <el-progress type="circle"  :percentage="total"
         :stroke-width="15"
         :width="200"
+        :color="text.color"
         ></el-progress>
          <br>
         <br>
         <div>
-          {{text}}
+          {{text.txt}}
         </div>
         </div>
 
@@ -77,12 +78,45 @@ export default {
         res += this.$store.state.scores[n]
       })
       return res
+    },
+    text: function () {
+      let res;
+      this.textData.forEach((i) => {
+        if (this.total >= i.min && this.total < i.max) {
+          res = i;
+        }
+      })
+      return res;
     }
   },
 
   data () {
     return {
-      text: '你真棒！',
+      textData: [{
+        txt: ' 还要继续努力哦~',
+        min: 0,
+        max: 60,
+        color: '#E6A23C'
+      },
+      {
+        txt: ' 掌握的不错哟~再接再厉',
+        min: 60,
+        max: 85,
+        color: '#409EFF'
+      }, {
+        txt: ' 掌握的不错哟~再接再厉',
+        min: 85,
+        max: 100,
+        color: '#67C23A'
+      },
+      {
+        txt: ' 百里挑一的高手！',
+        min: 100,
+        max: 101,
+        color: '#F56C6C'
+      }
+
+      ],
       names:
   ['historyCollect',
     'planDiscuss',
