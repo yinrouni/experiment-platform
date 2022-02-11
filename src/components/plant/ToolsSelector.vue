@@ -12,12 +12,12 @@
 
   转速：
   <el-input-number v-model="rotationSpeedData" :step="rotationSpeed.step" :min="rotationSpeed.min" :max="rotationSpeed.max" size="small" :disabled="numInputDisbled" ></el-input-number>
-   rpm 
+   rpm&nbsp;
   </el-row>
   <el-row>
     水流：
   <el-input-number v-model="flowSpeedData" :step="flowSpeed.step" :min="flowSpeed.min" :max="flowSpeed.max"  size="small" :disabled="numInputDisbled" ></el-input-number>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </el-row>
   <el-row>
      扭矩：
