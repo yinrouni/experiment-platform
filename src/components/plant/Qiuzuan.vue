@@ -63,8 +63,8 @@ export default {
         fix: 0,
         handler: 1
       },
-      rotationSpeed: {default: 800, max: 1200, min: 20, step: 200},
-      flowSpeed: {default: 5, max: 5, min: 0, step: 1},
+      rotationSpeed: {default: 600, max: 1200, min: 20, step: 200},
+      flowSpeed: {default: 0, max: 5, min: 0, step: 1},
       torque: {default: 25, max: 45, min: 15, step: 5},
       desc: '请选择合适的定位钻，调试种植机的转速、水流',
       activeName: '',
