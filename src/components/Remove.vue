@@ -1,5 +1,6 @@
 <template>
-  <div>
+<el-container>
+  <el-main>
   <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles" :title="title" :key="title"></el-step>
 </el-steps>
@@ -50,43 +51,46 @@
   <el-button @click="submit" v-if="!submitted">提交</el-button>
   </div>
 
-  <div class="video" v-if="subIndex===1">
-    <video src="./../assets/口外消毒.mp4" autoplay=true  controls="controls" />
-  </div>
-   <div class="video" v-if="subIndex===2">
-    <video src="./../assets/铺巾.mp4" autoplay=true />
-  </div>
-   <div class="video" v-if="subIndex===3">
-    <video src="./../assets/口内消毒.mp4" autoplay=true  preload="meta" />
-  </div>
-   <div class="video" v-if="subIndex===4">
-    <video src="./../assets/局部麻醉.mp4" autoplay=true preload="auto"/>
-  </div>
-  <div class="video" v-if="subIndex===5">
-    <video src="./../assets/微创拔牙.mp4" autoplay=true />
+  <div class="video" v-if="subIndex>0">
+    <video :src="videoSrc" autoplay=true  controls="controls" />
   </div>
 
 </div>
-  </div>
+  </el-main>
+  <el-footer>
+    <Footer :subIndex="subIndex" :maxSubIndex="5" :nextEnabled="nextEnabled" @goNextSubIndex="goNext"  @goPrevSubIndex="goPrev"/>
+
+  </el-footer>
+
+</el-container>
 
 </template>
 
 <script>
+import Footer from './Footer'
 export default {
   name: 'Remove',
-  props: {subIndex: Number},
+  components: {Footer},
+
   computed: {
     videoSrc: function () {
-      return this.titles.map((i) => {
-        return './../assets/' + i + '.mp4'
-      })
+      const i = this.titles[this.subIndex]
+      return require('./../assets/' + i + '.mp4')
     }
+  },
+
+  deactivated () {
+    clearTimeout(this.timeoutID)
   },
 
   data () {
     return {
+      timeoutID: undefined,
+      watched: [],
+      subIndex: 0,
       keys: [],
       submitted: false,
+      nextEnabled: false,
       titles: ['测试', '口外消毒', '铺巾', '口内消毒', '局部麻醉', '微创拔牙'],
       questions: [
         {id: 0,
@@ -119,7 +123,8 @@ export default {
   },
   methods: {
     submit: function () {
-      this.$data.submitted = true
+      this.submitted = true
+      this.nextEnabled = true
       let score = 0
       this.questions.forEach((question) => {
         if (question.k === this.keys[question.id]) {
@@ -127,6 +132,23 @@ export default {
         }
       })
       this.$store.commit('addScore', {partName: 'remove', score})
+    },
+    goNext () {
+      this.nextEnabled = false
+      this.subIndex++
+
+      if (this.watched.includes(this.subIndex)) {
+        this.nextEnabled = true
+      } else {
+        this.watched.push(this.subIndex)
+        this.timeoutID = setTimeout(() => {
+          this.nextEnabled = true
+        }, 2000)
+      }
+    },
+
+    goPrev () {
+      this.subIndex--
     }
 
   }

@@ -13,7 +13,7 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             免疫功能低下
             </el-checkbox>
           </el-col>
@@ -35,12 +35,12 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             少量吸烟（<10支/天）
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
               大量吸烟（>10支/天）
             </el-checkbox>
           </el-col>
@@ -55,12 +55,12 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             低
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             中
             </el-checkbox>
           </el-col>
@@ -81,12 +81,12 @@
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             低位
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             中位
             </el-checkbox>
           </el-col>
@@ -112,12 +112,12 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             中弧线形，中厚龈生物型
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
               高弧线型，薄龈生物型
             </el-checkbox>
           </el-col>
@@ -138,7 +138,7 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             尖圆形
             </el-checkbox>
           </el-col>
@@ -161,12 +161,12 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             慢性
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
               急性
             </el-checkbox>
           </el-col>
@@ -187,12 +187,12 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             到接触点5.5~6.5mm
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
               到接触点≥7mm
             </el-checkbox>
           </el-col>
@@ -213,7 +213,7 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             有修复体
             </el-checkbox>
           </el-col>
@@ -236,12 +236,12 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             单颗牙（<7mm）
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
               两颗牙或两颗牙以上
             </el-checkbox>
           </el-col>
@@ -261,7 +261,7 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             软组织缺损
             </el-checkbox>
           </el-col>
@@ -283,12 +283,12 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
             水平向骨缺损
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox>
+            <el-checkbox :disabled="true" class="form">
               垂直向骨缺损
             </el-checkbox>
           </el-col>
@@ -300,15 +300,16 @@
 
  <br>
 
-    <el-button type="primary" plain @click="fill">一键填写</el-button>
+    <el-button type="primary" plain @click="fill" v-if="!filled">一键填写</el-button>
 
     <el-dialog
+  :show-close="false"
   title="结论"
-  :visible.sync="showDialog"
+  :visible="popBeautyAssessment"
   width="30%">
   <span>该患者美学风险为低风险。</span>
   <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="next">确 定</el-button>
+    <el-button type="primary" @click="close">确 定</el-button>
   </span>
 </el-dialog>
 
@@ -319,39 +320,51 @@
 <script>
 export default {
   name: 'BeautyAssessment',
-  data () {
-    return {
-      filled: false, 
-      showDialog:false
+  props: {popBeautyAssessment: Boolean},
+  watch: {
+    filled: function () {
+      this.$emit('enableNext')
     }
   },
 
+  data () {
+    return {
+      filled: false,
+      showDialog: false
+    }
+  },
   methods: {
     fill: function () {
       this.filled = true
-      setTimeout(()=>{
-        this.showDialog = true;
-      }, 2000)
-
     },
     next () {
       this.$emit('next')
+    },
+    close () {
+      this.$emit('close')
     }
 
   }
 }
 </script>
 
-<style scoped>
+<style>
   @import "../assets/style.css";
   .left{
     text-align: left;
   }
-  .name{
-    color: white;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.form .el-checkbox__input.is-disabled .el-checkbox__inner{
+  background-color: #FFFF;
+}
+.form .el-checkbox__input.is-disabled+span.el-checkbox__label {
+  color: #606266
+}
+.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
+  background-color: #409EFF;
+  border-color: #409EFF;
+}
+
+.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
+  border-color: white
+}
 </style>

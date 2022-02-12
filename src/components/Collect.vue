@@ -1,10 +1,14 @@
 <template>
   <div>
+    <el-container>
+      <el-main>
 <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles" :title="title" :key="title"></el-step>
 </el-steps>
 <br>
-    <Chat v-if="subIndex === 0"/>
+<keep-alive>
+    <Chat v-if="subIndex === 0" @enableNext="enableNext"/>
+</keep-alive>
     <div v-if="subIndex === 1">
       <div class="left">
       <i class='el-icon-arrow-right' />请选择该患者需要做的检查项目（多选)：
@@ -43,7 +47,9 @@
 
       <el-button @click="submitNormal" v-if="!submittedNormal"> 提交</el-button>
     </div>
-    <History v-if="subIndex === 2"/>
+    <keep-alive>
+    <History v-if="subIndex === 2" @enableNext="fillForm"/>
+    </keep-alive>
     <div v-if="subIndex === 3">
       <div class="left">
       <i class='el-icon-arrow-right' />为进一步了解进一步了解术区可用骨高度和宽度、唇侧骨板有无缺损及骨质情况等最好选用(单选):
@@ -85,10 +91,15 @@
   width="30%">
   <span>21牙折（根中1/3）</span>
   <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="close">确 定</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
 </el-dialog>
+</el-main>
 
+    <el-footer>
+<Footer :subIndex="subIndex" :maxSubIndex="3" :nextEnabled="nextEnabled" @goNextSubIndex="goNext"  @goPrevSubIndex="goPrev"/>
+    </el-footer>
+    </el-container>
   </div>
 
 </template>
@@ -96,28 +107,38 @@
 <script>
 import Chat from './Chat'
 import History from './History'
+import Footer from './Footer'
 export default {
   name: 'Collect',
-  components: {Chat, History},
-  props: {subIndex: Number},
+  components: {Chat, History, Footer},
   computed: {
-    dialogVisible: function () {
-      return this.$props.subIndex === 4
+    index () {
+      return this.subIndex
     }
   },
 
   data () {
     return {
+      nextEnabled: false,
+      subIndex: 0,
       submittedFilm: false,
       normalCheckRes: false,
       submittedNormal: false,
       filmRes: undefined,
       radio: null,
       checked: [],
-      titles: ['问诊检查', '一般检查', '既往病史', '影像学检查']
+      titles: ['问诊检查', '一般检查', '既往病史', '影像学检查'],
+      dialogVisible: false,
+      filledForm: false
     }
   },
   watch: {
+    submittedNormal: function () {
+      this.nextEnabled = true
+    },
+    submittedFilm: function () {
+      this.nextEnabled = true
+    },
     normalCheckRes: function () {
       this.$store.commit('addScore', {partName: 'historyCollect', score: 3})
     },
@@ -128,6 +149,29 @@ export default {
     }
   },
   methods: {
+    enableNext: function () {
+      this.nextEnabled = true
+    },
+    goPrev: function () {
+      this.subIndex--
+      this.nextEnabled = true
+    },
+    goNext: function () {
+      if (this.subIndex === 3) {
+        this.dialogVisible = true
+      } else {
+        if (this.subIndex + 1 === 1 && !this.submittedNormal) {
+          this.nextEnabled = false
+        }
+        if (this.subIndex + 1 === 2 && !this.filledForm) {
+          this.nextEnabled = false
+        }
+        if (this.subIndex + 1 === 3 && !this.submittedFilm) {
+          this.nextEnabled = false
+        }
+        return this.subIndex++
+      } ;
+    },
     enter: function () {
       console.log('to test')
       this.$router.push('/test')
@@ -148,6 +192,10 @@ export default {
     submitFilm () {
       this.$data.submittedFilm = true
       this.filmRes = this.radio
+    },
+    fillForm () {
+      this.filledForm = true
+      this.nextEnabled = true
     }
 
   }
@@ -174,4 +222,5 @@ export default {
   img{
     width: 500px;
   }
+
 </style>

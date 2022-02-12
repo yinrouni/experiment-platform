@@ -10,13 +10,13 @@
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="心脏病"></el-checkbox>
+    <el-checkbox label="心脏病" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="血压（高、低）"></el-checkbox>
+    <el-checkbox label="血压（高、低）" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="血液疾病"></el-checkbox>
+    <el-checkbox label="血液疾病" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="无"  v-model="filled"></el-checkbox>
@@ -32,10 +32,10 @@
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="肝病"></el-checkbox>
+    <el-checkbox label="肝病" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="肾脏疾病"></el-checkbox>
+    <el-checkbox label="肾脏疾病" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="6">
     <el-checkbox label="无" v-model="filled"></el-checkbox>
@@ -52,13 +52,13 @@
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="甲状腺机能异常"></el-checkbox>
+    <el-checkbox label="甲状腺机能异常" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="肾上腺皮质功能异常"></el-checkbox>
+    <el-checkbox label="肾上腺皮质功能异常" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="糖尿病"></el-checkbox>
+    <el-checkbox label="糖尿病" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="无" v-model="filled"></el-checkbox>
@@ -74,13 +74,13 @@
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="炎症"></el-checkbox>
+    <el-checkbox label="炎症" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="肿瘤或囊肿"></el-checkbox>
+    <el-checkbox label="肿瘤或囊肿" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="骨质疏松"></el-checkbox>
+    <el-checkbox label="骨质疏松" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="无" v-model="filled"></el-checkbox>
@@ -99,10 +99,10 @@
     <el-checkbox label="无"  v-model="filled"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="TB"></el-checkbox>
+    <el-checkbox label="TB" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="AIDS"></el-checkbox>
+    <el-checkbox label="AIDS" :disabled="true" class="form"></el-checkbox>
       </el-col>
     </el-row>
   </el-col>
@@ -118,10 +118,10 @@
     <el-checkbox label="否"  v-model="filled"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="月经期"></el-checkbox>
+    <el-checkbox label="月经期" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="妊娠期"></el-checkbox>
+    <el-checkbox label="妊娠期" :disabled="true" class="form"></el-checkbox>
       </el-col>
     </el-row>
   </el-col>
@@ -137,13 +137,13 @@
     <el-checkbox label="否"  v-model="filled"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="1年以内"></el-checkbox>
+    <el-checkbox label="1年以内" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="1~3年"></el-checkbox>
+    <el-checkbox label="1~3年" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="3年以上"></el-checkbox>
+    <el-checkbox label="3年以上" :disabled="true" class="form"></el-checkbox>
          </el-col>
 
     </el-row>
@@ -216,7 +216,10 @@
 
 <el-row>
   <el-col :span="24" style="text-align: center;">
-  <el-button type="primary" plain @click="fill">一键填写</el-button>
+  <el-button type="primary" plain @click="fill" v-if="!filled">一键填写</el-button>
+  <span v-else>
+    &nbsp;
+  </span>
   </el-col>
 </el-row>
 </div>
@@ -234,15 +237,29 @@ export default {
   methods: {
     fill: function () {
       this.$data.filled = true
+      this.$emit('enableNext')
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
   @import "../assets/style.css";
  .left{
    text-align: left;
  }
+.form .el-checkbox__input.is-disabled .el-checkbox__inner{
+  background-color: #FFFF;
+}
+.form .el-checkbox__input.is-disabled+span.el-checkbox__label {
+  color: #606266
+}
+.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
+  background-color: #409EFF;
+  border-color: #409EFF;
+}
 
+.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
+  border-color: white
+}
 </style>

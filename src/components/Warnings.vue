@@ -1,9 +1,10 @@
 <template>
- <div>
+<el-container>
+ <el-main>
   <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles"  :title="title" :key="title"></el-step>
 </el-steps>
-<div v-if="subIndex === 0">
+<div v-show="subIndex === 0">
   <br>
   <div class="type">
     <el-row v-for="(tip, index) in warnings" :key="index" type="flex" align="middle">
@@ -32,7 +33,7 @@
   </div>
 </div>
 
-<div v-if="subIndex === 1">
+<div v-show="subIndex === 1">
   <el-row>
     <el-col :span="12" class="type">
       <div>
@@ -64,30 +65,6 @@
       </div>
     </div>
 </div>
-
-      <!-- <br>
-      <div>
-        <b>
-        多选题
-        </b>
-      </div>
-      <br>
-        <div>
-      <div>
-        {{questions[2].id + 1}}. {{questions[2].q}}
-          <i  v-if="selectRes.length === 4 && submitted" class="el-icon-circle-check right" />
-        <i  v-if="selectRes !== 4  && submitted"  class="el-icon-circle-close wrong" />
-      </div>
-      <div>
-         <el-checkbox-group v-model="keys[2]" :disabled="submitted">
-        <el-checkbox  v-for="(item, index) in questions[2].a" :label="index" :key="index" >
-          <span>
-            {{item}}
-          </span>
-        </el-checkbox>
-         </el-checkbox-group>
-      </div>
-    </div> -->
     </el-col>
 
     <el-col :span="12">
@@ -122,17 +99,30 @@
   <br>
     <el-button @click="submit" v-if="!submitted">提交</el-button>
 </div>
- </div>
+ </el-main>
+ <el-footer>
+   <Footer :subIndex="subIndex" :maxSubIndex="1" :nextEnabled="nextEnabled" @goNextSubIndex="goNext"  @goPrevSubIndex="goPrev" />
 
+ </el-footer>
+ </el-container>
 </template>
 
 <script>
+import Footer from './Footer'
 export default {
   name: 'Warnings',
-  props: {subIndex: Number},
-
+  components: {Footer},
+  watch: {
+    tipsClickStatus: function (val) {
+      if (val.every((i) => { return i })) {
+        this.nextEnabled = true
+      }
+    }
+  },
   data () {
     return {
+      nextEnabled: false,
+      subIndex: 0,
       tipsClickStatus: Array(7).fill(false),
       titles: ['术后医嘱', '测试'],
       keys: [null, null, []],
@@ -196,8 +186,17 @@ export default {
     clickTip (index) {
       this.$set(this.tipsClickStatus, index, true)
     },
+    goNext () {
+      this.nextEnabled = false
+      this.subIndex++
+    },
+    goPrev () {
+      this.nextEnabled = true
+      this.subIndex--
+    },
     submit: function () {
       this.submitted = true
+      this.nextEnabled = true
       let score = 0
       const that = this
 

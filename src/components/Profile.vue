@@ -1,4 +1,6 @@
 <template>
+  <el-container>
+    <el-main>
 <el-row >
   <el-col :span="12">
      <el-descriptions class="margin-top" title="病例资料" :column="1" border>
@@ -46,12 +48,20 @@
 
   </el-col>
 </el-row>
+    </el-main>
+    <el-footer>
+<Footer />
+    </el-footer>
+
+  </el-container>
 
 </template>
 
 <script>
+import Footer from './Footer'
 export default {
   name: 'Profile',
+  components: {Footer},
   methods: {
 
   }

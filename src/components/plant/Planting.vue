@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="16">
-        <video id="video" src="../../assets/种植体植入.mp4" />
+        <video id="video" src="../../assets/种植体植入.mp4" controls="controls" />
         <br>
       </el-col>
       <el-col :span="8">
@@ -52,6 +52,7 @@ export default {
   },
   data () {
     return {
+      timeoutID: undefined, 
       showCorrectDialog: false,
       maxOptions: {
         holeMakers: 0,
@@ -80,6 +81,10 @@ export default {
   },
   watch: {
   },
+  deactivated() {
+    clearTimeout(this.timeoutID)
+  },
+  
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       this.tips = []
@@ -90,6 +95,9 @@ export default {
     playVideo: function () {
       const video = document.getElementById('video')
       video.play()
+      this.timeoutID = setTimeout(()=>{
+        this.$emit('enableNext')
+      }, 2000)
     },
     isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       let score = 0
@@ -102,16 +110,13 @@ export default {
       })
       plant.includes(2) ? score += 4 : this.tips.push('种植体夹持器：植入过程中，种植体需要由种植体夹持器夹持')
       plant.includes(0) ? score += 4 : this.tips.push('种植体：植入过程中，需要种植体')
-
-
       // if (!holeMakersGood) this.tips.push('球钻：一般选择球钻或者精准钻进行种植位点的定位。')
 
       const handlerGood = handler.length >= 2 && handler.indexOf(this.keys.handler[0]) > -1 
       && handler.indexOf(this.keys.handler[1]) > -1 
       !handler.includes(1) ? this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。') : score += 4
+      
       if (!handler.includes(0)) this.tips.push('其他：需要选择手机')
-
-
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
       !flowSpeedGood ? this.tips.push('水流：水流关闭，种植时不需要出水') : score += 4
       const torqueGood = torque >= this.keys.torque.min && torque <= this.keys.torque.max

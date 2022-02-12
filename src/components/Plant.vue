@@ -1,5 +1,6 @@
 <template>
-  <div>
+<el-container>
+  <el-main>
      <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles"  :title="title" :key="title"></el-step>
 </el-steps>
@@ -47,20 +48,21 @@
 <br>
   <el-button @click="submit" v-if="!submitted">提交</el-button>
   </div>
-
-  <Qiuzuan  v-if="subIndex===1"/>
-    <Xianfeng  v-if="subIndex===2"/>
-    <DirectionCheck v-if="subIndex===3"/>
-    <Hole28 v-if="subIndex===4"/>
-     <Hole36 v-if="subIndex===5"/>
-     <Planting v-if="subIndex===6"/>
+<keep-alive>
+  <Qiuzuan  v-if="subIndex===1" @enableNext="enableNext"/>
+    <Xianfeng  v-if="subIndex===2" @enableNext="enableNext"/>
+    <DirectionCheck v-if="subIndex===3" @enableNext="enableNext"/>
+    <Hole28 v-if="subIndex===4" @enableNext="enableNext"/>
+     <Hole36 v-if="subIndex===5" @enableNext="enableNext"/>
+     <Planting v-if="subIndex===6" @enableNext="enableNext"/>
+</keep-alive>
      <div v-if="subIndex===7">
        <el-row>
          <el-col :span="4">
           &emsp;
          </el-col>
           <el-col :span="16">
-           <video src="../assets/填充骨粉.mp4" autoplay=true />
+           <video src="../assets/填充骨粉.mp4" autoplay=true controls="controls" />
            <ul class="type">
              <li> 旋上覆盖螺丝，于跳跃间隙填充骨粉。</li>
            </ul>
@@ -86,7 +88,9 @@
          </el-col>
        </el-row>
      </div>
-     <TempWear v-if="subIndex===9" />
+     <keep-alive>
+      <TempWear v-if="subIndex===9" @enableNext="enableNext"/>
+     </keep-alive>
       <div v-if="subIndex===10">
        <el-row>
          <el-col :span="4">
@@ -103,8 +107,12 @@
          </el-col>
        </el-row>
      </div>
+  </el-main>
 
-</div>
+  <el-footer>
+    <Footer :subIndex="subIndex" :maxSubIndex="10" :nextEnabled="nextEnabled" @goNextSubIndex="goNext"  @goPrevSubIndex="goPrev"/>
+  </el-footer>
+</el-container>
 </template>
 
 <script>
@@ -115,12 +123,15 @@ import Hole28 from './plant/Hole28'
 import Hole36 from './plant/Hole36'
 import Planting from './plant/Planting'
 import TempWear from './plant/TempWear'
+import Footer from './Footer'
 export default {
   name: 'Plant',
-  components: { Qiuzuan, Xianfeng, DirectionCheck, Hole28, Hole36, Planting, TempWear },
-  props: {subIndex: Number},
+  components: { Qiuzuan, Xianfeng, DirectionCheck, Hole28, Hole36, Planting, TempWear, Footer },
   data () {
     return {
+      watched: [],
+      nextEnabled: false,
+      subIndex: 0,
       submitted: false,
       keys: [],
       titles: ['测试', '球钻定位', '先锋钻备洞', '检查方向', '逐级备洞1', '逐级备洞2', '植入种植体', '填充骨粉', '数字化取模', '戴临时修复体', '调𬌗'],
@@ -137,7 +148,7 @@ export default {
           a: [
             'A．尽可能选用长植体            ',
             'B．间隙植入骨替代材料减少唇侧塌陷 ',
-            'C．利于牙龈塑形,软组织美学', 'D．采取翻瓣术式，有利于提高修复满意度',],
+            'C．利于牙龈塑形,软组织美学', 'D．采取翻瓣术式，有利于提高修复满意度' ],
           k: 3
         },
         {
@@ -147,7 +158,7 @@ export default {
             'B．拔牙位点软组织愈合',
             'C．拔牙位点软组织愈合,骨未愈合',
             'D．拔牙位点骨愈合'
-           ],
+          ],
           k: 0
         },
         {
@@ -164,13 +175,35 @@ export default {
     }
   },
   methods: {
+    enableNext: function () {
+      this.nextEnabled = true
+    },
     submit: function () {
       this.$data.submitted = true
+      this.nextEnabled = true
       let score = 0
       this.questions.forEach((question) => {
         if (question.k === this.keys[question.id]) score += 1.5
       })
       this.$store.commit('addScore', {partName: 'plantTest', score})
+    },
+    goNext () {
+      if (this.watched.includes(this.subIndex + 1)) {
+        this.nextEnabled = true
+      } else {
+        this.nextEnabled = false
+      }
+      this.subIndex++
+      if ([7, 8, 10].includes(this.subIndex)) {
+        setTimeout(() => {
+          this.nextEnabled = true
+        }, 2000)
+      }
+      this.watched.push(this.subIndex)
+    },
+    goPrev () {
+      this.subIndex--
+      this.nextEnabled = true
     }
 
   }

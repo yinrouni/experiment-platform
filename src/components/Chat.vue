@@ -58,7 +58,7 @@
   >
   <span>一月前外伤致21牙松动</span>
   <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="result = false">确 定</el-button>
+    <el-button type="primary" @click="closeDialog">确 定</el-button>
   </span>
 </el-dialog>
 </div>
@@ -67,6 +67,9 @@
 <script>
 export default {
   name: 'Chat',
+  created () {
+    this.$store.commit('changeNextStatus', false)
+  },
   data () {
     return {
       result: false,
@@ -123,10 +126,15 @@ export default {
       }
       this.$data.chatViewList.push(this.$data.chat[0])
       this.$data.chat.shift()
+      // scroll to bottom
       this.$nextTick(function () {
         const container = document.querySelectorAll('.messages')
         container[0].scrollTop = container[0].scrollHeight
       })
+    },
+    closeDialog () {
+      this.result = false
+      this.$emit('enableNext')
     }
 
   }

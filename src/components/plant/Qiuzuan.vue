@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="16">
-        <video id="video" src="../../assets/球钻定位.mp4" />
+        <video id="video" src="../../assets/球钻定位.mp4" controls="controls"/>
         <br>
         <ul class="type">
           <li>定位点：腭侧骨壁距离根尖1/3处定点</li>
@@ -56,7 +56,8 @@ export default {
   },
   data () {
     return {
-      showCorrectDialog: false, 
+      timeoutID: undefined,
+      showCorrectDialog: false,
       maxOptions: {
         holeMakers: 1,
         plant: 0,
@@ -84,6 +85,9 @@ export default {
   },
   watch: {
   },
+  deactivated () {
+    clearTimeout(this.timeoutID)
+  },
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       this.tips = []
@@ -94,6 +98,9 @@ export default {
     playVideo: function () {
       const video = document.getElementById('video')
       video.play()
+      this.timeoutID = setTimeout(() => {
+        this.$emit('enableNext')
+      }, 2000)
     },
     isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       let score = 0

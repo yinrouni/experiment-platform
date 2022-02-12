@@ -1,5 +1,6 @@
 <template>
-  <div>
+<el-container>
+  <el-main>
     <el-row>
       <el-col :span="18">
         <div class="table">
@@ -43,7 +44,7 @@
         <el-progress type="circle"  :percentage="total"
         :stroke-width="15"
         :width="200"
-        :color="text.color"
+        :color="textData.color"
         ></el-progress>
          <br>
         <br>
@@ -55,13 +56,39 @@
       </el-col>
     </el-row>
 
-  </div>
+<el-dialog
+  :visible.sync="dialogVisible"
+  width="30%"
+  :close="false"
+  :show-close="false"
+  >
+     <el-result icon="success" title="实验完成" subTitle="感谢体验">
+    </el-result>
+  <span slot="footer" class="dialog-footer">
+    <el-button type="primary" @click="finish">确 定</el-button>
+  </span>
+</el-dialog>
+
+  </el-main>
+
+  <el-footer>
+  </el-footer>
+  <el-row style="padding: 0 20px">
+    <el-col :span="12" class="left">
+      <el-button @click="backToIndex"> 返回首页</el-button>
+    </el-col>
+
+    <el-col :span="12" class="right">
+      <el-button @click="dialogVisible = true"> 完成 </el-button>
+    </el-col>
+  </el-row>
+
+  </el-container>
 </template>
 
 <script>
 export default {
   name: 'Result',
-
   computed: {
     tableData: function () {
       return this.content.map((i, index) => {
@@ -80,18 +107,19 @@ export default {
       return res
     },
     text: function () {
-      let res;
+      let res
       this.textData.forEach((i) => {
         if (this.total >= i.min && this.total < i.max) {
-          res = i;
+          res = i
         }
       })
-      return res;
+      return res
     }
   },
 
   data () {
     return {
+      dialogVisible: false,
       textData: [{
         txt: ' 还要继续努力哦~',
         min: 0,
@@ -165,8 +193,13 @@ export default {
     }
   },
   methods: {
-    setHeaderStyle: function () {
-      return {'text-align': 'center'}
+    backToIndex: function () {
+      this.$store.commit('reset')
+      this.$router.push('/')
+    },
+    finish: function () {
+      this.dialogVisible = false
+      this.backToIndex()
     }
   }
 }
@@ -181,9 +214,8 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  /* .img{
-    position: fixed;
-    margin-left: 5%;
+  .right{
+    text-align: end;
+  }
 
-  } */
 </style>

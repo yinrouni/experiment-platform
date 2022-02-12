@@ -1,5 +1,6 @@
 <template>
-<div>
+<el-container>
+<el-main>
   <div class="type">
 <h3>
   术前准备
@@ -24,7 +25,6 @@
         <el-radio-group v-model="keys[question.id]" :disabled="submitted" class='radioDiv'>
 <div v-for="(option, indexA) in question.a"  :key="option">
         <el-radio :label="indexA">
-        
           <span>{{option}}
             <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
@@ -78,15 +78,22 @@
 
 <br>
 <br>
-<el-button @click="submit">提交</el-button>
+<el-button @click="submit" v-if="!submitted">提交</el-button>
 
-</div>
+</el-main>
 
+<el-footer>
+  <Footer :nextEnabled="submitted"/>
+</el-footer>
+
+</el-container>
 </template>
 
 <script>
+import Footer from './Footer'
 export default {
   name: 'Preparation',
+  components: {Footer},
   data () {
     return {
       selectToolsRes: false,
@@ -166,7 +173,5 @@ export default {
 .singles{
   margin-left: 10%;
 }
-
-
 
 </style>

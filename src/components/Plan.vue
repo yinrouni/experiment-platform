@@ -1,12 +1,15 @@
 <template>
-<div>
+<el-container>
+  <el-main>
   <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles" :title="title" :key="title"></el-step>
 </el-steps>
 <br>
 
-<BeautyAssessment v-if="subIndex===0" @next="$emit('next')"/>
-<PlanChoice v-if="subIndex===1"/>
+<keep-alive>
+<BeautyAssessment v-if="subIndex===0" @enableNext="fillForm" :popBeautyAssessment = "popBeautyAssessment" @close="closeDialog"/>
+<PlanChoice v-if="subIndex===1" @enableNext="chosePlan" />
+</keep-alive>
 <div v-if="subIndex === 2">
   <el-row>
     <el-col :span="6">
@@ -41,32 +44,72 @@
   <br>
   <el-button @click="submit" v-if="!submitted">提交</el-button>
     </div>
-</div>
+  </el-main>
+  <el-footer>
+    <Footer :subIndex="subIndex" :maxSubIndex="2" :nextEnabled="nextEnabled" @goNextSubIndex="goNext"  @goPrevSubIndex="goPrev"/>
+  </el-footer>
+</el-container>
 
 </template>
 
 <script>
 import BeautyAssessment from './BeautyAssessment'
 import PlanChoice from './PlanChoice'
+import Footer from './Footer'
 export default {
   name: 'Plan',
-  components: {BeautyAssessment, PlanChoice},
-  props: {subIndex: Number},
+  components: {BeautyAssessment, PlanChoice, Footer},
   data () {
     return {
       titles: ['美学评估', '方案选择', '术前检查'],
       radio: [],
-      submitted: false
+      submitted: false,
+      subIndex: 0,
+      nextEnabled: false,
+      filledForm: false,
+      popBeautyAssessment: false,
+      chosePlanAlready: false
     }
   },
   methods: {
     submit () {
-      this.$data.submitted = true
+      this.submitted = true
+      this.nextEnabled = true
       if (this.radio.length < 4) {
         this.radio = ['1', '2', '3', '4']
       } else {
         this.$store.commit('addScore', {partName: 'planDiscuss', score: 3})
       }
+    },
+    goNext () {
+      if (this.subIndex === 0 && this.filledForm) {
+        this.popBeautyAssessment = true
+        return
+      }
+
+      if (this.subIndex + 1 === 2 && !this.submitted) {
+        this.nextEnabled = false
+      }
+      this.subIndex++
+    },
+    goPrev () {
+      this.subIndex--
+      this.nextEnabled = true
+    },
+    fillForm () {
+      this.filledForm = true
+      this.nextEnabled = true
+    },
+    closeDialog () {
+      this.popBeautyAssessment = false
+      this.$nextTick(() => {
+        if (!this.chosePlanAlready) this.nextEnabled = false
+        this.subIndex++
+      })
+    },
+    chosePlan () {
+      this.chosePlanAlready = true
+      this.nextEnabled = true
     }
 
   }

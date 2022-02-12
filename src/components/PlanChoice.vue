@@ -76,12 +76,9 @@ export default {
   },
 
   methods: {
-    enter: function () {
-      console.log('to test')
-      this.$router.push('/test')
-    },
     popRes: function (arg) {
-      this.res = arg.map((a, index)=>{return {index: index + 1, isCorrect: a}})
+      this.res = arg.map((a, index) => { return {index: index + 1, isCorrect: a} })
+      this.$emit('enableNext')
     }
 
   }

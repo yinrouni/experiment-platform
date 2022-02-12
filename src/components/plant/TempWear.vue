@@ -58,7 +58,8 @@ export default {
   },
   data () {
     return {
-      showCorrectDialog: false, 
+      timeoutID: undefined,
+      showCorrectDialog: false,
       maxOptions: {
         holeMakers: 0,
         plant: 0,
@@ -83,6 +84,9 @@ export default {
   },
   watch: {
   },
+  deactivated () {
+    clearTimeout(this.timeoutID)
+  },
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       this.tips = []
@@ -93,6 +97,9 @@ export default {
     playVideo: function () {
       const video = document.getElementById('video')
       video.play()
+      this.timeoutID = setTimeout(() => {
+        this.$emit('enableNext')
+      }, 2000)
     },
     isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       let score = 0

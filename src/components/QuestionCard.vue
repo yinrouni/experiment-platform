@@ -16,7 +16,7 @@
 
     <br>
   <div class="center">
-    <el-button v-if="currentIndex === questions.length -1" @click="submit"> 提交 </el-button>
+    <el-button v-if="currentIndex === questions.length -1 && !submitted" @click="submit"> 提交 </el-button>
   </div>
     <br>
     <br>

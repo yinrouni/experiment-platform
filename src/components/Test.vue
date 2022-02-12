@@ -42,90 +42,22 @@
         <i class="el-icon-circle-check"></i>
         <span slot="title">评分</span>
      </el-menu-item>
-
-       <!-- <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>病例资料</template> -->
-        <!-- <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-        </el-submenu> --->
-      <!-- </el-submenu> -->
-      <!-- <el-submenu index="2">
-        <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="3-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="3-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu> -->
     </el-menu>
   </el-aside>
   <el-container>
-    <!-- <el-header style="text-align: right; font-size: 12px">
-      <el-dropdown>
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>查看</el-dropdown-item>
-          <el-dropdown-item>新增</el-dropdown-item>
-          <el-dropdown-item>删除</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>王小虎</span>
-    </el-header> -->
-
     <el-main>
-      <keep-alive>
-
 <Profile v-if="index === '1'"/>
-<Collect :subIndex="subIndex" v-if="index === '2'" @next="next"/>
-<Plan :subIndex="subIndex" v-if="index === '3'" @next="next"/>
-<Agreement v-if="index === '4'"/>
-<Preparation v-if="index === '5'" />
-<Remove v-if="index === '6'" :subIndex="subIndex"/>
-<Plant v-if="index === '7'" :subIndex="subIndex" />
-<Warnings v-if="index === '8'" :subIndex="subIndex" />
-<Result v-if="index === '9'" />
-      </keep-alive>
-      <!-- <el-table :data="tableData">
-        <el-table-column prop="date" label="日期" width="140">
-        </el-table-column>
-        <el-table-column prop="name" label="姓名" width="120">
-        </el-table-column>
-        <el-table-column prop="address" label="地址">
-        </el-table-column>
-      </el-table> -->
+
+<Collect :subIndex="subIndex" v-show="index === '2'" @next="next"/>
+<Plan :subIndex="subIndex" v-show="index === '3'" @next="next"/>
+<Agreement v-show="index === '4'"/>
+<Preparation v-show="index === '5'" />
+<Remove v-show="index === '6'" :subIndex="subIndex"/>
+<Plant v-show="index === '7'" :subIndex="subIndex" />
+<Warnings v-show="index === '8'" :subIndex="subIndex" />
+<Result v-show="index === '9'" />
     </el-main>
-        <el-footer>
+        <!-- <el-footer>
           <el-row>
             <el-col :span="12" style="text-align: left;">
                <el-button @click="back" v-if="['1', '4', '5'].indexOf(index) < 0 && subIndex !==0">
@@ -134,13 +66,13 @@
           <span v-else>&nbsp; </span>
             </el-col>
              <el-col :span="12" style="text-align: right;">
-                <el-button @click="next">
+                <el-button @click="next" v-if="$store.state.nextEnabled">
             {{nextStep}}
           </el-button>
             </el-col>
           </el-row>
 
-    </el-footer>
+    </el-footer> -->
   </el-container>
 </el-container>
 </template>
@@ -171,57 +103,67 @@ export default {
     index: function (val) {
       if (val === '9') {
         this.nextStep = '重新测试'
-      }
-      else{
+      } else {
         this.nextStep = '下一步'
+      }
+    }
+  },
+  computed: {
+    index: {
+      get: function () {
+        return this.$store.state.currentIndex
+      },
+      set: function (val) {
+        this.$store.commit('goNext', val)
       }
     }
   },
   data () {
     return {
-      index: '1',
+      // index: '1',
       subIndex: 0,
       nextStep: '下一步'
     }
   },
   methods: {
     back () {
-      this.$data.subIndex--
+      this.subIndex--
     },
 
     next () {
-      if (this.$data.index === '2' && this.$data.subIndex < 4) {
-        this.$data.subIndex++
+      this.$store.commit('next')
+      if (this.index === '2' && this.subIndex < 4) {
+        this.subIndex++
         return
       }
-      if (this.$data.index === '3' && this.$data.subIndex < 2) {
-        this.$data.subIndex++
+      if (this.index === '3' && this.subIndex < 2) {
+        this.subIndex++
         return
       }
-      if (this.$data.index === '6' && this.$data.subIndex < 5) {
-        this.$data.subIndex++
+      if (this.index === '6' && this.subIndex < 5) {
+        this.subIndex++
         return
       }
 
-      if (this.$data.index === '7' && this.$data.subIndex < 10) {
-        this.$data.subIndex++
+      if (this.index === '7' && this.subIndex < 10) {
+        this.subIndex++
         return
       }
-      if (this.$data.index === '8' && this.$data.subIndex < 1) {
-        this.$data.subIndex++
+      if (this.index === '8' && this.subIndex < 1) {
+        this.subIndex++
         return
       }
-      if (this.$data.index === '9') {
+      if (this.index === '9') {
         this.$router.push('/')
         this.$store.commit('reset')
         return
       }
-      this.$data.subIndex = 0
-      this.$data.index = '' + (parseInt(this.$data.index) + 1)
+      this.subIndex = 0
+      this.index = '' + (parseInt(this.index) + 1)
     },
     select (data) {
-      this.$data.index = data
-      console.log(data, this.$data.index)
+      this.index = data
+      console.log(data, this.index)
     },
     handleNodeClick (data) {
       console.log(data)

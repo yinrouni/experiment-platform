@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="16">
-        <video id="video" src="../../assets/3.6备洞.mp4" />
+        <video id="video" src="../../assets/3.6备洞.mp4" controls="controls" />
         <br>
         <ul class="type">
           <li>1. 备洞时应注意反复上下提拉。</li>
@@ -61,6 +61,7 @@ export default {
   },
   data () {
     return {
+      timeoutID: undefined,
       showCorrectDialog: false,
       maxOptions: {
         holeMakers: 1,
@@ -86,6 +87,9 @@ export default {
   },
   watch: {
   },
+  deactivated () {
+    clearTimeout(this.timeoutID)
+  },
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       this.tips = []
@@ -96,6 +100,9 @@ export default {
     playVideo: function () {
       const video = document.getElementById('video')
       video.play()
+      this.timeoutID = setTimeout(() => {
+        this.$emit('enableNext')
+      }, 2000)
     },
     isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       let score = 0
