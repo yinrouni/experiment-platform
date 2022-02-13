@@ -193,6 +193,9 @@ export default {
     }
   },
   methods: {
+    setHeaderStyle: function () {
+      return {'text-align': 'center'}
+    },
     backToIndex: function () {
       this.$store.commit('reset')
       this.$router.push('/')

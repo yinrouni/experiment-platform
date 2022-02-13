@@ -1,10 +1,9 @@
 <template>
 <el-container>
-  <el-main>
-     <el-steps :active="subIndex" finish-status="success" align-center>
+       <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles"  :title="title" :key="title"></el-step>
 </el-steps>
-<br>
+  <el-main>
   <div class="questions" v-if="subIndex===0">
     <br>
     <el-row>
@@ -78,7 +77,7 @@
           &emsp;
          </el-col>
           <el-col :span="16">
-           <video src="../assets/数字化取模型.mp4" autoplay=true />
+           <video src="../assets/数字化取模型.mp4" autoplay=true controls="controls" />
            <ul class="type">
              <li> 将覆盖螺丝替换为扫描杆，使用口腔扫描仪于患者口中进行上颌、下颌、及咬合的模型扫描。</li>
            </ul>
@@ -97,7 +96,7 @@
           &emsp;
          </el-col>
           <el-col :span="16">
-           <video src="../assets/调𬌗.mp4" autoplay=true />
+           <video src="../assets/调𬌗.mp4" autoplay=true controls="controls" />
            <ul class="type">
              <li> 检测其前伸𬌗、侧方𬌗、正中𬌗有无早接触。</li>
            </ul>

@@ -35,7 +35,7 @@
   <br>
   <div> 请观看视频</div>
   <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="showCorrectDialog = false">确 定</el-button>
+    <el-button type="primary" @click="closeCorrectDialog">确 定</el-button>
   </span>
 </el-dialog>
 
@@ -88,9 +88,13 @@ export default {
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       this.tips = []
-      if (this.isCorrect(rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler)) return this.playVideo()
+      if (this.isCorrect(rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler)) return
 
       this.showDialog = true
+    },
+    closeCorrectDialog () {
+      this.showCorrectDialog = false
+      this.playVideo()
     },
     playVideo: function () {
       const video = document.getElementById('video')
@@ -115,7 +119,7 @@ export default {
       const handlerGood = handler.length >= 2 && handler.indexOf(this.keys.handler[0]) > -1 
       && handler.indexOf(this.keys.handler[1]) > -1 
       !handler.includes(1) ? this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。') : score += 4
-      
+
       if (!handler.includes(0)) this.tips.push('其他：需要选择手机')
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
       !flowSpeedGood ? this.tips.push('水流：水流关闭，种植时不需要出水') : score += 4

@@ -41,7 +41,7 @@
   <br>
   <div> 请观看视频</div>
   <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="showCorrectDialog = false">确 定</el-button>
+    <el-button type="primary" @click="closeCorrectDialog">确 定</el-button>
   </span>
 </el-dialog>
 
@@ -93,9 +93,13 @@ export default {
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       this.tips = []
-      if (this.isCorrect(rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler)) return this.playVideo()
+      if (this.isCorrect(rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler)) return 
 
       this.showDialog = true
+    },
+    closeCorrectDialog () {
+      this.showCorrectDialog = false
+      this.playVideo()
     },
     playVideo: function () {
       const video = document.getElementById('video')
