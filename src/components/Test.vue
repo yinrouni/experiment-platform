@@ -108,6 +108,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.index  = '1';
+  },
   computed: {
     index: {
       get: function () {
