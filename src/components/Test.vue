@@ -109,7 +109,8 @@ export default {
     }
   },
   mounted() {
-    this.index  = '1';
+    this.index  = '1'
+    this.$store.commit('reset')
   },
   computed: {
     index: {

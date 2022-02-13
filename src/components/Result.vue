@@ -13,7 +13,7 @@
     style="width: 100%">
     <el-table-column
       label="分类"
-      width="150">
+      width="135">
         <template slot-scope="scope">
         <div class="center">{{ scope.row.category}}</div>
       </template>
