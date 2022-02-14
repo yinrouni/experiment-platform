@@ -87,7 +87,6 @@
 
   </el-collapse-item>
   <el-collapse-item title="手持器械" name="4">
-  </el-checkbox-group>
         <el-checkbox-group v-model="handler" :max="maxOptions.handler" :disabled="maxOptions.handler===0"  >
         <el-checkbox :label="0">
         手机
@@ -129,13 +128,9 @@ export default {
   methods: {
     submit: function () {
       this.$store.commit('changePlantMachine', {rotationSpeed: this.rotationSpeedData,
-    flowSpeed: this.flowSpeedData,
-    torque: this.torqueData})
+        flowSpeed: this.flowSpeedData,
+        torque: this.torqueData})
       this.$emit('popRes', this.rotationSpeedData, this.flowSpeedData, this.torqueData, this.holeMakers, this.plant, this.fix, this.handler)
-
-      // this.$emit("popRes", {rotationSpeed:this.rotationSpeed, flowSpeed: this.flowSpeed, torque: this.torque, holeMakers:this.holeMakers,plant: this.plant,
-      // fix: this.fix, hanlder: this.handler
-      // });
     }
 
   }
@@ -150,7 +145,7 @@ export default {
   .speed-card{
     font-size: small;
     padding-left: 5%;
- 
+
   }
   .el-card__body{
     padding: 5px;

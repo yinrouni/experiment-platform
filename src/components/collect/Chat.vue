@@ -67,9 +67,6 @@
 <script>
 export default {
   name: 'Chat',
-  created () {
-    this.$store.commit('changeNextStatus', false)
-  },
   data () {
     return {
       result: false,
@@ -142,7 +139,7 @@ export default {
 </script>
 
 <style scoped>
-  @import "../assets/chat.css";
+  @import "../../assets/chat.css";
   .name{
     color: white;
     position: absolute;

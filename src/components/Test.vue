@@ -48,8 +48,8 @@
     <el-main>
 <Profile v-if="index === '1'"/>
 
-<Collect :subIndex="subIndex" v-show="index === '2'" @next="next"/>
-<Plan :subIndex="subIndex" v-show="index === '3'" @next="next"/>
+<Collect :subIndex="subIndex" v-show="index === '2'"/>
+<Plan :subIndex="subIndex" v-show="index === '3'"/>
 <Agreement v-show="index === '4'"/>
 <Preparation v-show="index === '5'" />
 <Remove v-show="index === '6'" :subIndex="subIndex"/>
@@ -57,22 +57,6 @@
 <Warnings v-show="index === '8'" :subIndex="subIndex" />
 <Result v-show="index === '9'" />
     </el-main>
-        <!-- <el-footer>
-          <el-row>
-            <el-col :span="12" style="text-align: left;">
-               <el-button @click="back" v-if="['1', '4', '5'].indexOf(index) < 0 && subIndex !==0">
-            上一步
-          </el-button>
-          <span v-else>&nbsp; </span>
-            </el-col>
-             <el-col :span="12" style="text-align: right;">
-                <el-button @click="next" v-if="$store.state.nextEnabled">
-            {{nextStep}}
-          </el-button>
-            </el-col>
-          </el-row>
-
-    </el-footer> -->
   </el-container>
 </el-container>
 </template>
@@ -99,32 +83,13 @@ export default {
     Plant,
     Result,
     Warnings},
-  watch: {
-    index: function (val) {
-      if (val === '9') {
-        this.nextStep = '重新测试'
-      } else {
-        this.nextStep = '下一步'
-      }
-    }
-  },
-  mounted() {
-    this.index  = '1'
+  mounted () {
+    this.index = '1'
     this.$store.commit('reset')
-  },
-  computed: {
-    index: {
-      get: function () {
-        return this.$store.state.currentIndex
-      },
-      set: function (val) {
-        this.$store.commit('goNext', val)
-      }
-    }
   },
   data () {
     return {
-      // index: '1',
+      index: '1',
       subIndex: 0,
       nextStep: '下一步'
     }
@@ -133,44 +98,8 @@ export default {
     back () {
       this.subIndex--
     },
-
-    next () {
-      this.$store.commit('next')
-      if (this.index === '2' && this.subIndex < 4) {
-        this.subIndex++
-        return
-      }
-      if (this.index === '3' && this.subIndex < 2) {
-        this.subIndex++
-        return
-      }
-      if (this.index === '6' && this.subIndex < 5) {
-        this.subIndex++
-        return
-      }
-
-      if (this.index === '7' && this.subIndex < 10) {
-        this.subIndex++
-        return
-      }
-      if (this.index === '8' && this.subIndex < 1) {
-        this.subIndex++
-        return
-      }
-      if (this.index === '9') {
-        this.$router.push('/')
-        this.$store.commit('reset')
-        return
-      }
-      this.subIndex = 0
-      this.index = '' + (parseInt(this.index) + 1)
-    },
     select (data) {
       this.index = data
-      console.log(data, this.index)
-    },
-    handleNodeClick (data) {
-      console.log(data)
     }
   }
 }

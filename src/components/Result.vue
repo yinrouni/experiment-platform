@@ -44,7 +44,7 @@
         <el-progress type="circle"  :percentage="total"
         :stroke-width="15"
         :width="200"
-        :color="textData.color"
+        :color="text.color"
         ></el-progress>
          <br>
         <br>
@@ -132,7 +132,7 @@ export default {
         max: 85,
         color: '#409EFF'
       }, {
-        txt: ' 掌握的不错哟~再接再厉',
+        txt: ' 非常优秀，就差一点点！',
         min: 85,
         max: 100,
         color: '#67C23A'

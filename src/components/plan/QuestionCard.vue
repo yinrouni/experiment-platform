@@ -106,7 +106,7 @@ export default {
 </script>
 
 <style scoped>
-  @import "../assets/style.css";
+  @import "../../assets/style.css";
   .question{
     margin-left: 50px;
     margin-right: 15px;

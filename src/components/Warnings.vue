@@ -202,7 +202,6 @@ export default {
 
       // 单选
       this.questions.slice(0, 2).map((question) => {
-        console.log(question, that.keys)
         if (question.k === that.keys[question.id]) {
           score += 1.5
         }

@@ -105,8 +105,8 @@
 </template>
 
 <script>
-import Chat from './Chat'
-import History from './History'
+import Chat from './collect/Chat'
+import History from './collect/History'
 import Footer from './Footer'
 export default {
   name: 'Collect',
@@ -173,11 +173,7 @@ export default {
       } ;
     },
     enter: function () {
-      console.log('to test')
       this.$router.push('/test')
-    },
-    close: function () {
-      this.$emit('next')
     },
     submitNormal () {
       this.$data.submittedNormal = true

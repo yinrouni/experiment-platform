@@ -53,12 +53,9 @@ export default {
     },
     getValues () {
       return this.headers.map(item => {
-        return this.res.reduce((pre, cur, index) => Object.assign(pre, {['value' + index]: cur[item.prop]}), {'title': item.label })
+        return this.res.reduce((pre, cur, index) => Object.assign(pre, {['value' + index]: cur[item.prop]}), { 'title': item.label })
       })
     }
-  // res(){
-
-  // }
   },
   data () {
     return {
@@ -86,7 +83,7 @@ export default {
 </script>
 
 <style scoped>
-  @import "../assets/style.css";
+  @import "../../assets/style.css";
 video{
   width: 100%;
 }

@@ -34,7 +34,7 @@
       </el-row>
       </div>
     </el-col>
-    <el-col ;span="18>"
+    <el-col :span="18">
             <div class="tips" v-if="submitted">
               <img src="./../assets/术前检查.jpg">
             </div>
@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import BeautyAssessment from './BeautyAssessment'
-import PlanChoice from './PlanChoice'
+import BeautyAssessment from './plan/BeautyAssessment'
+import PlanChoice from './plan/PlanChoice'
 import Footer from './Footer'
 export default {
   name: 'Plan',

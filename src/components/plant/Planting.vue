@@ -52,7 +52,7 @@ export default {
   },
   data () {
     return {
-      timeoutID: undefined, 
+      timeoutID: undefined,
       showCorrectDialog: false,
       maxOptions: {
         holeMakers: 0,
@@ -81,10 +81,10 @@ export default {
   },
   watch: {
   },
-  deactivated() {
+  deactivated () {
     clearTimeout(this.timeoutID)
   },
-  
+
   methods: {
     popRes: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       this.tips = []
@@ -99,7 +99,7 @@ export default {
     playVideo: function () {
       const video = document.getElementById('video')
       video.play()
-      this.timeoutID = setTimeout(()=>{
+      this.timeoutID = setTimeout(() => {
         this.$emit('enableNext')
       }, 2000)
     },
@@ -116,8 +116,8 @@ export default {
       plant.includes(0) ? score += 4 : this.tips.push('种植体：植入过程中，需要种植体')
       // if (!holeMakersGood) this.tips.push('球钻：一般选择球钻或者精准钻进行种植位点的定位。')
 
-      const handlerGood = handler.length >= 2 && handler.indexOf(this.keys.handler[0]) > -1 
-      && handler.indexOf(this.keys.handler[1]) > -1 
+      const handlerGood = handler.length >= 2 && handler.indexOf(this.keys.handler[0]) > -1 &&
+      handler.indexOf(this.keys.handler[1]) > -1
       !handler.includes(1) ? this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。') : score += 4
 
       if (!handler.includes(0)) this.tips.push('其他：需要选择手机')
