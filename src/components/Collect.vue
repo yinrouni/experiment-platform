@@ -111,12 +111,6 @@ import Footer from './Footer'
 export default {
   name: 'Collect',
   components: {Chat, History, Footer},
-  computed: {
-    index () {
-      return this.subIndex
-    }
-  },
-
   data () {
     return {
       nextEnabled: false,

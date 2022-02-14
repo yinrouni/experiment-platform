@@ -1,7 +1,7 @@
 <template>
   <el-container style="border: 1px solid #eee">
   <el-aside width="200px">
-     <el-menu :default-active="index">
+     <el-menu :default-active="index" @select="select">
         <el-menu-item index="1">
         <i class="el-icon-message"></i>
         <span slot="title">病例资料</span>
@@ -48,13 +48,13 @@
     <el-main>
 <Profile v-if="index === '1'"/>
 
-<Collect :subIndex="subIndex" v-show="index === '2'"/>
-<Plan :subIndex="subIndex" v-show="index === '3'"/>
+<Collect v-show="index === '2'" />
+<Plan v-show="index === '3'"/>
 <Agreement v-show="index === '4'"/>
 <Preparation v-show="index === '5'" />
-<Remove v-show="index === '6'" :subIndex="subIndex"/>
-<Plant v-show="index === '7'" :subIndex="subIndex" />
-<Warnings v-show="index === '8'" :subIndex="subIndex" />
+<Remove v-show="index === '6'" />
+<Plant v-show="index === '7'" />
+<Warnings v-show="index === '8'"  />
 <Result v-show="index === '9'" />
     </el-main>
   </el-container>
@@ -106,6 +106,9 @@ export default {
   methods: {
     back () {
       this.subIndex--
+    },
+    select (data) {
+      this.index = data
     }
   }
 }
