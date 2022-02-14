@@ -16,7 +16,8 @@ const state = {
     rotationSpeed: 0,
     flowSpeed: 0,
     torque: 0
-  }
+  },
+  currentIndex: '1'
 
 }
 
@@ -43,6 +44,13 @@ const mutations = {
       rotationSpeed: 0,
       flowSpeed: 0,
       torque: 0
+    }
+  },
+  goNext: (state, payload) => {
+    if (payload) {
+      state.currentIndex = payload
+    } else {
+      state.currentIndex = '' + (parseInt(state.currentIndex) + 1)
     }
   }
 
