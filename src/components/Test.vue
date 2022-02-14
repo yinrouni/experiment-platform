@@ -1,7 +1,7 @@
 <template>
   <el-container style="border: 1px solid #eee">
   <el-aside width="200px">
-     <el-menu :default-active="index" @select="select">
+     <el-menu :default-active="index">
         <el-menu-item index="1">
         <i class="el-icon-message"></i>
         <span slot="title">病例资料</span>
@@ -87,9 +87,18 @@ export default {
     this.index = '1'
     this.$store.commit('reset')
   },
+  computed: {
+    index: {
+      get: function () {
+        return this.$store.state.currentIndex
+      },
+      set: function (val) {
+        this.$store.commit('goNext', val)
+      }
+    }
+  },
   data () {
     return {
-      index: '1',
       subIndex: 0,
       nextStep: '下一步'
     }
@@ -97,9 +106,6 @@ export default {
   methods: {
     back () {
       this.subIndex--
-    },
-    select (data) {
-      this.index = data
     }
   }
 }
