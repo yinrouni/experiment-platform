@@ -20,7 +20,6 @@ export default {
   name: 'Intro',
   methods: {
     enter: function () {
-      console.log('to test')
       this.$router.push('/test')
     }
 

@@ -83,8 +83,10 @@ export default {
     Plant,
     Result,
     Warnings},
-  mounted () {
+  created () {
     this.index = '1'
+  },
+  mounted () {
     this.$store.commit('reset')
   },
   computed: {
