@@ -13,13 +13,14 @@
     style="width: 100%">
     <el-table-column
       label="分类"
+       class-name="text"
       width="135">
         <template slot-scope="scope">
-        <div class="center">{{ scope.row.category}}</div>
+        <div class="center text">{{ scope.row.category}}</div>
       </template>
     </el-table-column>
     <el-table-column
-    class-name="desc"
+    class-name="desc text"
 
       label="知识点"
       width="560">
@@ -30,7 +31,9 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="得分">
+      label="得分"
+       class-name="text">
+      
         <template slot-scope="scope">
         <div class="center">{{ scope.row.total}}</div>
       </template>
@@ -48,7 +51,7 @@
         ></el-progress>
          <br>
         <br>
-        <div>
+        <div class="resDesc">
           {{text.txt}}
         </div>
         </div>
@@ -75,11 +78,11 @@
   </el-footer>
   <el-row style="padding: 0 20px">
     <el-col :span="12" class="left">
-      <el-button @click="backToIndex"> 返回首页</el-button>
+      <el-button @click="backToIndex" plain type="primary"> 返回首页</el-button>
     </el-col>
 
     <el-col :span="12" class="right">
-      <el-button @click="dialogVisible = true"> 完成 </el-button>
+      <el-button @click="dialogVisible = true" type="primary"> 完成 </el-button>
     </el-col>
   </el-row>
 
@@ -219,6 +222,10 @@ export default {
   }
   .right{
     text-align: end;
+  }
+
+  .resDesc{
+    font-size: large;
   }
 
 </style>

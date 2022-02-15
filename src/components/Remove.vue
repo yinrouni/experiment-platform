@@ -1,6 +1,5 @@
 <template>
 <el-container>
-  <el-main>
   <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles" :title="title" :key="title"></el-step>
 </el-steps>
@@ -9,7 +8,7 @@
 <div>
   <div class="questions" v-show="subIndex===0">
     <el-row>
-      <el-col :span="12">
+      <el-col :span="13">
            <div class="type">
     <span>
       <b>
@@ -26,7 +25,8 @@
       <div>
         <el-radio-group v-model="keys[question.id]" :disabled="submitted">
 
-        <el-radio  v-for="(option, indexA) in question.a" :label="indexA" :key="option">
+<div class="options">
+        <el-radio  v-for="(option, indexA) in question.a" :label="indexA" :key="option" class="form">
           <span>{{option}}
             <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
@@ -34,6 +34,7 @@
 
           </span>
         </el-radio>
+</div>
         </el-radio-group>
       </div>
     </div>
@@ -42,13 +43,13 @@
     </div>
 
       </el-col>
-       <el-col :span="12">
+       <el-col :span="11">
          <img src='http://bpic.588ku.com/element_pic/17/06/27/6bdc36fe5f24ec3d28254c5c7cc1e896.jpg' />
       </el-col>
     </el-row>
 <br>
 <br>
-  <el-button @click="submit" v-if="!submitted">提交</el-button>
+  <el-button @click="submit" v-if="!submitted" type="primary">提交</el-button>
   </div>
 
   <div class="video" v-if="subIndex>0">
@@ -56,7 +57,6 @@
   </div>
 
 </div>
-  </el-main>
   <el-footer>
     <Footer :subIndex="subIndex" :maxSubIndex="5" :nextEnabled="nextEnabled" @goNextSubIndex="goNext"  @goPrevSubIndex="goPrev"/>
 

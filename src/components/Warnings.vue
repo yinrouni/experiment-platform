@@ -10,7 +10,9 @@
     <el-row v-for="(tip, index) in warnings" :key="index" type="flex" align="middle">
       <el-col :span="3">
         <el-badge is-dot class="item" :hidden="tipsClickStatus[index]">
-          <el-button type="text" @click="clickTip(index)" :size="'medium'">{{tip.title}}</el-button>
+          <el-button type="text" @click="clickTip(index)" class="warning">
+            <span class="text"> {{tip.title}} </span>
+            </el-button>
         </el-badge>
       </el-col>
         <el-col :span="1">
@@ -49,9 +51,9 @@
       </div>
       <div>
         <el-radio-group v-model="keys[question.id]" :disabled="submitted" >
-          <div  v-for="(option, indexA) in question.a" :key="option">
+          <div  v-for="(option, indexA) in question.a" :key="option" class="options">
 
-        <el-radio :label="indexA" >
+        <el-radio :label="indexA"  class="form">
           <span>{{option}}
             <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
@@ -83,11 +85,13 @@
       </div>
       <div>
          <el-checkbox-group v-model="keys[2]" :disabled="submitted">
-        <el-checkbox  v-for="(item, index) in questions[2].a" :label="index" :key="index" >
+           <div class="options" v-for="(item, index) in questions[2].a" :key="index" >
+        <el-checkbox  :label="index" class="form">
           <span>
             {{item}}
           </span>
         </el-checkbox>
+           </div>
          </el-checkbox-group>
       </div>
     </div>
@@ -97,7 +101,7 @@
   </el-row>
   <br>
   <br>
-    <el-button @click="submit" v-if="!submitted">提交</el-button>
+    <el-button @click="submit" v-if="!submitted" type="primary">提交</el-button>
 </div>
  </el-main>
  <el-footer>

@@ -48,6 +48,65 @@
 .dialogTitle{
   font-weight: 500;
   font-size: 18px;
+}
 
+
+.form-header{
+  font-weight: 450;
+}
+
+.row{
+  margin-bottom: 8px;
+}
+
+.form .el-checkbox__input.is-disabled .el-checkbox__inner{
+  background-color: #FFFF;
+}
+.form .el-checkbox__input.is-disabled+span.el-checkbox__label {
+  color: #606266;
+  font-size: medium;
+}
+.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
+  background-color: #409EFF;
+  border-color: #409EFF;
+}
+
+.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
+  border-color: white
+}
+
+.form .el-checkbox__input.is-checked+span.el-checkbox__label {
+
+  font-size: medium;
+}
+
+.form .el-checkbox__input+span.el-checkbox__label {
+  font-size: medium;
+}
+
+.form .el-radio__input+span.el-radio__label {
+  font-size: medium;
+}
+
+.form .el-radio__input.is-disabled+span.el-radio__label{
+  color: #606266;
 
 }
+
+.form .el-radio__input.is-disabled.is-checked .el-radio__inner {
+  background-color: #409EFF;
+  border-color: #409EFF;
+}
+.form .el-radio__input.is-disabled.is-checked .el-radio__inner::after {
+  background-color: white;
+}
+
+.questionBody{
+  margin-bottom: 4px;
+}
+
+
+.toolSelector .el-checkbox__label{
+  font-size: 15px;
+}
+

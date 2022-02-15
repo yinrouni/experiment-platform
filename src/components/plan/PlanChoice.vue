@@ -14,7 +14,7 @@
          <QuestionCard @popRes="popRes"/>
        </div>
        <br>
-       <div style="margin-left:30px" v-if="res.length > 0">
+       <div style="margin-left:30px" v-if="showTable">
     <el-table
       style="width: 95%"
       :data="getValues"
@@ -59,7 +59,9 @@ export default {
   },
   data () {
     return {
-      res: [],
+      showTable: false,
+      res: [{index: 1, isCorrect: false}, {index: 2, isCorrect: false}, {index: 3, isCorrect: false}
+      ,{index: 4, isCorrect: false}, {index: 5, isCorrect: false}],
       headers: [
         {
           prop: 'index',
@@ -74,7 +76,8 @@ export default {
 
   methods: {
     popRes: function (arg) {
-      this.res = arg.map((a, index) => { return {index: index + 1, isCorrect: a} })
+      arg.map((a, index) => { this.res[index] = {index: index + 1, isCorrect: a} })
+      this.showTable = true
       this.$emit('enableNext')
     }
 

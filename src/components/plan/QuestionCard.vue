@@ -3,9 +3,8 @@
   <div class="question">
     {{questions[currentIndex].id + 1}}. {{questions[currentIndex].q}}
     <br>
-    <br>
     <div v-for="(option, index) in questions[currentIndex].a" class="options" :key="option">
-      <el-radio :disabled="submitted" v-model="choices[currentIndex]" :label="index" @change="clickOption">
+      <el-radio :disabled="submitted" v-model="choices[currentIndex]" :label="index" @change="clickOption" class="form">
         <span>
         {{option}}
         <i  v-if="index === questions[currentIndex].k && submitted" class="el-icon-circle-check right" />
@@ -16,7 +15,7 @@
 
     <br>
   <div class="center">
-    <el-button v-if="currentIndex === questions.length -1 && !submitted" @click="submit"> 提交 </el-button>
+    <el-button v-if="currentIndex === questions.length -1 && !submitted" @click="submit" type="primary"> 提交 </el-button>
   </div>
     <br>
     <br>
@@ -55,7 +54,7 @@ export default {
         {
           id: 2,
           q: '即刻种植的优点不包括:',
-          a: ['A. 缩短治疗时间', 'B. 能获得满意的初期稳定性', 'C. 减少患者恐惧', 'D. 前牙区域即刻恢复美观'],
+          a: ['A. 缩短治疗时间', 'B. 容易获得满意的初期稳定性', 'C. 减少患者恐惧', 'D. 前牙区域即刻恢复美观'],
           k: 1
         },
         {
@@ -112,11 +111,12 @@ export default {
     margin-right: 15px;
     text-align: left;
   }
-  .options{
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
 
+.options{
+  font-size: large;
+  margin: 6px 0 ;
+
+}
   span{
     white-space: normal;
   }

@@ -19,7 +19,7 @@
       <div class="left options">
       <el-row>
         <div>
-      <el-checkbox v-model="checked" label="1" :disabled="submittedNormal">
+      <el-checkbox v-model="checked" label="1" :disabled="submittedNormal" class="form">
         口腔检查
       </el-checkbox>
       <div  class="tips" v-if="checked.indexOf('1') > -1">
@@ -28,7 +28,7 @@
         </div>
       </el-row>
       <el-row>
-  <el-checkbox v-model="checked" label="2" :disabled="submittedNormal">颌面部检查</el-checkbox>
+  <el-checkbox v-model="checked" label="2" :disabled="submittedNormal" class="form">颌面部检查</el-checkbox>
   <div  class="tips" v-if="checked.indexOf('2') > -1">
         颌面部基本对称，皮肤无红肿破溃。
       </div>
@@ -36,7 +36,7 @@
       </el-row>
 
 <el-row>
-    <el-checkbox v-model="checked" label="3" :disabled="submittedNormal">颞下颌检查</el-checkbox>
+    <el-checkbox v-model="checked" label="3" :disabled="submittedNormal" class="form">颞下颌检查</el-checkbox>
       <div  class="tips" v-if="checked.indexOf('3') > -1">
        无弹响，无压痛。开口度36mm，开口型“↓”。
       </div>
@@ -52,32 +52,32 @@
     </keep-alive>
     <div v-if="subIndex === 3">
       <div class="left">
-      <i class='el-icon-arrow-right' />为进一步了解进一步了解术区可用骨高度和宽度、唇侧骨板有无缺损及骨质情况等最好选用(单选):
+      <i class='el-icon-arrow-right' />为进一步了解术区可用骨高度和宽度、唇侧骨板有无缺损及骨质情况等最好选用(单选):
       <i  v-if="radio === '5' && submittedFilm" class="el-icon-circle-check right" />
         <i  v-if="radio !== '5' && submittedFilm" class="el-icon-circle-close wrong" />
       </div>
       <br>
       <div class="left" v-if="!submittedFilm">
-      <el-row>
-        <el-radio v-model="radio" label="1">根尖片</el-radio>
+      <el-row class="row">
+        <el-radio v-model="radio" label="1" class="form">根尖片</el-radio>
       </el-row>
-      <el-row>
-          <el-radio v-model="radio" label="2">全口曲面断层片</el-radio>
+      <el-row class="row">
+          <el-radio v-model="radio" label="2" class="form">全口曲面断层片</el-radio>
       </el-row>
-      <el-row>
-           <el-radio v-model="radio" label="3">颞下颌关节侧位片</el-radio>
+      <el-row class="row">
+           <el-radio v-model="radio" label="3" class="form">颞下颌关节侧位片</el-radio>
       </el-row>
-      <el-row>
-           <el-radio v-model="radio" label="4">唾液腺造影</el-radio>
+      <el-row class="row">
+           <el-radio v-model="radio" label="4" class="form">唾液腺造影</el-radio>
       </el-row>
-      <el-row>
-             <el-radio v-model="radio" label="5">CBCT检查</el-radio>
+      <el-row class="row">
+             <el-radio v-model="radio" label="5" class="form">CBCT检查</el-radio>
       </el-row>
 
       </div>
             <div class="tips" v-if="submittedFilm">
               CBCT示21牙根中三分之一处见一根折线，根尖区无低密度阴影，唇侧骨板完整无缺损，厚度约1.2mm
-              <img src="./../assets/CBCT.jpg">
+              <img id="img" src="./../assets/CBCT.jpg">
             </div>
     <br>
 <br>
@@ -193,13 +193,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   @import "../assets/style.css";
   span{
     word-break:break-all;
-  }
-  .el-checkbox__label{
-    font-size: medium;
   }
   .options{
     font-size: xx-large;
@@ -213,7 +210,7 @@ export default {
     margin-left: 25px;
   }
 
-  img{
+  #img{
     width: 500px;
   }
 

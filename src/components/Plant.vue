@@ -3,7 +3,6 @@
        <el-steps :active="subIndex" finish-status="success" align-center>
   <el-step v-for="title in titles"  :title="title" :key="title"></el-step>
 </el-steps>
-  <el-main>
   <div class="questions" v-if="subIndex===0">
     <br>
     <el-row>
@@ -15,8 +14,8 @@
       </b>
     </span>
 <br>
-<div v-for="(question, index) in questions" :key="index">
 <br>
+<div v-for="(question, index) in questions" :key="index">
     <div>
       <div class="question-body">
         {{index +1}}.{{question.q}}
@@ -24,7 +23,7 @@
       <div>
         <el-radio-group v-model="keys[question.id]" :disabled="submitted">
 
-        <el-radio  v-for="(option, indexA) in question.a" :label="indexA" :key="option">
+        <el-radio  v-for="(option, indexA) in question.a" :label="indexA" :key="option" class="form">
            <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
             <i  v-if="indexA !== question.k && indexA === keys[question.id] && submitted" class="el-icon-circle-close wrong" />
@@ -44,8 +43,7 @@
       </el-col>
     </el-row>
 <br>
-<br>
-  <el-button @click="submit" v-if="!submitted">提交</el-button>
+  <el-button @click="submit" v-if="!submitted" type="primary">提交</el-button>
   </div>
 <keep-alive>
   <Qiuzuan  v-if="subIndex===1" @enableNext="enableNext"/>
@@ -106,7 +104,6 @@
          </el-col>
        </el-row>
      </div>
-  </el-main>
 
   <el-footer>
     <Footer :subIndex="subIndex" :maxSubIndex="10" :nextEnabled="nextEnabled" @goNextSubIndex="goNext"  @goPrevSubIndex="goPrev"/>
@@ -165,7 +162,7 @@ export default {
           q: '种植体植入的外科手术操作,以下哪项错误（ ）',
           a: ['A．提拉式备洞方法             ',
             'B．先锋钻进行种植床制备转速800钻/分',
-            'C．冷却生理盐水温度为4℃',
+            'C．冷却生理盐水温度为4℃          ',
             'D．备洞的宽度大于种植体的宽度' ],
           k: 3
         }
@@ -226,6 +223,10 @@ export default {
     width: 100%;
   }
   .question-body{
-    padding-bottom: 7px;
+    padding-bottom: 10px;
+  }
+
+  .questions{
+    margin-left: 5%;
   }
 </style>

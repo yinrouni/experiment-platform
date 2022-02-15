@@ -15,22 +15,22 @@
     <el-col :span="6">
       <div class="left">
       <i class='el-icon-arrow-right' />术前的血液学检查应做哪些？(多选):
-       <i  v-if="radio.length === 4& submitted" class="el-icon-circle-check right" />
-        <i  v-if="radio.length != 4 && submitted" class="el-icon-circle-close wrong" />
+       <i  v-if="chosenPlanIsCorrect& submitted" class="el-icon-circle-check right" />
+        <i  v-if="!chosenPlanIsCorrect&& submitted" class="el-icon-circle-close wrong" />
       </div>
       <br>
-      <div class="left">
+      <div class="left options">
       <el-row>
-        <el-checkbox v-model="radio" label="1" :disabled="submitted">血常规</el-checkbox>
+        <el-checkbox v-model="radio" label="1" :disabled="submitted" class="form">血常规</el-checkbox>
       </el-row>
       <el-row>
-          <el-checkbox v-model="radio" label="2" :disabled="submitted">血糖</el-checkbox>
+          <el-checkbox v-model="radio" label="2" :disabled="submitted" class="form">血糖</el-checkbox>
       </el-row>
       <el-row>
-           <el-checkbox v-model="radio" label="3" :disabled="submitted">凝血四项</el-checkbox>
+           <el-checkbox v-model="radio" label="3" :disabled="submitted" class="form">凝血四项</el-checkbox>
       </el-row>
       <el-row>
-           <el-checkbox v-model="radio" label="4" :disabled="submitted">传染病</el-checkbox>
+           <el-checkbox v-model="radio" label="4" :disabled="submitted" class="form">传染病</el-checkbox>
       </el-row>
       </div>
     </el-col>
@@ -42,7 +42,7 @@
   </el-row>
   <br>
   <br>
-  <el-button @click="submit" v-if="!submitted">提交</el-button>
+  <el-button @click="submit" v-if="!submitted" type="primary">提交</el-button>
     </div>
   </el-main>
   <el-footer>
@@ -68,7 +68,9 @@ export default {
       nextEnabled: false,
       filledForm: false,
       popBeautyAssessment: false,
-      chosePlanAlready: false
+      chosePlanAlready: false,
+      chosenPlanIsCorrect: false
+
     }
   },
   methods: {
@@ -77,7 +79,9 @@ export default {
       this.nextEnabled = true
       if (this.radio.length < 4) {
         this.radio = ['1', '2', '3', '4']
+        this.chosenPlanIsCorrect = false
       } else {
+        this.chosenPlanIsCorrect = true
         this.$store.commit('addScore', {partName: 'planDiscuss', score: 3})
       }
     },

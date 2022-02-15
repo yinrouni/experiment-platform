@@ -1,9 +1,10 @@
 <template>
 <div class="left">
-  <el-row>
+  <el-row class="row form-header">
+   
   <el-col :span="24">全身情况（系统性疾病史及精神心理疾病）</el-col>
 </el-row>
-  <el-row>
+  <el-row class="row">
   <el-col :span="3">
     心血管：
   </el-col>
@@ -19,13 +20,13 @@
     <el-checkbox label="血液疾病" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="无"  v-model="filled"></el-checkbox>
+    <el-checkbox label="无"  v-model="filled" class="form"></el-checkbox>
          </el-col>
-
     </el-row>
   </el-col>
 </el-row>
-  <el-row>
+
+  <el-row class="row">
   <el-col :span="3">
     肝肾：
   </el-col>
@@ -38,14 +39,14 @@
     <el-checkbox label="肾脏疾病" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="无" v-model="filled"></el-checkbox>
+    <el-checkbox label="无" v-model="filled" class="form"></el-checkbox>
       </el-col>
 
     </el-row>
 
   </el-col>
 </el-row>
-  <el-row>
+  <el-row class="row">
   <el-col :span="3">
     内分泌：
   </el-col>
@@ -61,13 +62,13 @@
     <el-checkbox label="糖尿病" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="无" v-model="filled"></el-checkbox>
+    <el-checkbox label="无" v-model="filled" class="form"></el-checkbox>
          </el-col>
 
     </el-row>
   </el-col>
 </el-row>
-  <el-row>
+  <el-row class="row">
   <el-col :span="3">
     骨病：
   </el-col>
@@ -83,20 +84,20 @@
     <el-checkbox label="骨质疏松" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="无" v-model="filled"></el-checkbox>
+    <el-checkbox label="无" v-model="filled" class="form"></el-checkbox>
          </el-col>
 
     </el-row>
   </el-col>
 </el-row>
-  <el-row>
+  <el-row class="row">
   <el-col :span="3">
     传染病：
   </el-col>
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="无"  v-model="filled"></el-checkbox>
+    <el-checkbox label="无"  v-model="filled" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="TB" :disabled="true" class="form"></el-checkbox>
@@ -108,14 +109,14 @@
   </el-col>
 </el-row>
 
-  <el-row>
+  <el-row class="row">
   <el-col :span="3">
     特殊时期：
   </el-col>
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="否"  v-model="filled"></el-checkbox>
+    <el-checkbox label="否"  v-model="filled" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="月经期" :disabled="true" class="form"></el-checkbox>
@@ -127,14 +128,14 @@
   </el-col>
 </el-row>
 
-  <el-row>
+  <el-row class="row">
   <el-col :span="3">
     拔牙史：
   </el-col>
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="否"  v-model="filled"></el-checkbox>
+    <el-checkbox label="否"  v-model="filled" class="form"></el-checkbox>
       </el-col>
          <el-col :span="6">
     <el-checkbox label="1年以内" :disabled="true" class="form"></el-checkbox>
@@ -149,14 +150,14 @@
     </el-row>
   </el-col>
 </el-row>
-  <el-row>
+  <el-row class="row">
   <el-col :span="3">
     过敏史：
   </el-col>
   <el-col :span="21">
     <el-row>
       <el-col :span="8">
-    <el-checkbox label="无"  v-model="filled"></el-checkbox>
+    <el-checkbox label="无"  v-model="filled" class="form"></el-checkbox>
       </el-col>
          <el-col :span="8">
     <el-checkbox label="有" :disabled="true" class="form"></el-checkbox>
@@ -167,56 +168,56 @@
     </el-row>
        <el-row>
       <el-col :span="12">
-    <el-checkbox label="青霉素过敏（阿莫西林、头孢等）"></el-checkbox>
+    <el-checkbox label="青霉素过敏（阿莫西林、头孢等）" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="12">
-    <el-checkbox label="有麻醉药过敏:____________"></el-checkbox>
+    <el-checkbox label="有麻醉药过敏:____________" :disabled="true" class="form"></el-checkbox>
          </el-col>
     </el-row>
         <el-row>
       <el-col :span="12">
-    <el-checkbox label="食物过敏:___________"></el-checkbox>
+    <el-checkbox label="食物过敏:___________" :disabled="true" class="form"></el-checkbox>
       </el-col>
          <el-col :span="12">
-    <el-checkbox label="其他过敏:____________" ></el-checkbox>
+    <el-checkbox label="其他过敏:____________" :disabled="true" class="form"></el-checkbox>
          </el-col>
     </el-row>
 
   </el-col>
 </el-row>
 
-<el-row>
+<el-row class="row">
   <el-col :span="3">
     习惯：
   </el-col>
   <el-col :span="21">
     <el-row>
       <el-col :span="6">
-    <el-checkbox label="吸烟习惯"></el-checkbox>
+    <el-checkbox label="吸烟习惯" class="form" :disabled="true"> </el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="嗜酒习惯"></el-checkbox>
+    <el-checkbox label="嗜酒习惯" class="form" :disabled="true"></el-checkbox>
          </el-col>
            <el-col :span="6">
-    <el-checkbox label="夜磨牙"></el-checkbox>
+    <el-checkbox label="夜磨牙" class="form" :disabled="true"></el-checkbox>
       </el-col>
          <el-col :span="6">
-    <el-checkbox label="无"  v-model="filled"></el-checkbox>
+    <el-checkbox label="无"  v-model="filled" class="form"></el-checkbox>
          </el-col>
 
     </el-row>
   </el-col>
 </el-row>
-  <el-row>
+  <el-row class="row">
   <el-col :span="24">有无其他情况说明：
     <el-input/>
   </el-col>
 </el-row>
 <br>
 
-<el-row>
+<el-row class="row">
   <el-col :span="24" style="text-align: center;">
-  <el-button type="primary" plain @click="fill" v-if="!filled">一键填写</el-button>
+  <el-button type="primary" @click="fill" v-if="!filled">一键填写</el-button>
   <span v-else>
     &nbsp;
   </span>
@@ -243,23 +244,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   @import "../../assets/style.css";
  .left{
    text-align: left;
  }
-.form .el-checkbox__input.is-disabled .el-checkbox__inner{
-  background-color: #FFFF;
-}
-.form .el-checkbox__input.is-disabled+span.el-checkbox__label {
-  color: #606266
-}
-.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
-  background-color: #409EFF;
-  border-color: #409EFF;
-}
 
-.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
-  border-color: white
-}
 </style>

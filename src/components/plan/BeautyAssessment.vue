@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="left">
-    <el-row>
+    <el-row class="row">
       <el-col :span="4">
         健康状态
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             健康、免疫功能正常
             </el-checkbox>
           </el-col>
@@ -23,14 +23,14 @@
 
       </el-col>
     </el-row>
-      <el-row>
+      <el-row class="row">
       <el-col :span="4">
         吸烟习惯
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             不吸烟
             </el-checkbox>
           </el-col>
@@ -48,7 +48,7 @@
 
       </el-col>
     </el-row>
-         <el-row>
+         <el-row class="row">
       <el-col :span="4">
         患者的美学期望
       </el-col>
@@ -65,7 +65,7 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
               高
             </el-checkbox>
           </el-col>
@@ -74,7 +74,7 @@
       </el-col>
     </el-row>
 
-         <el-row>
+         <el-row class="row">
       <el-col :span="4">
         唇线
       </el-col>
@@ -91,7 +91,7 @@
             </el-checkbox>
           </el-col>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
               高位
             </el-checkbox>
           </el-col>
@@ -100,14 +100,14 @@
       </el-col>
     </el-row>
 
-         <el-row>
+         <el-row class="row">
       <el-col :span="4">
         牙龈生物型
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             低弧线形，厚龈生物型
             </el-checkbox>
           </el-col>
@@ -126,14 +126,14 @@
       </el-col>
     </el-row>
 
-         <el-row>
+         <el-row class="row">
       <el-col :span="4">
         牙冠形态
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             方圆形
             </el-checkbox>
           </el-col>
@@ -149,14 +149,14 @@
       </el-col>
     </el-row>
 
-         <el-row>
+         <el-row class="row">
       <el-col :span="4">
         位点的感染情况
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             无
             </el-checkbox>
           </el-col>
@@ -175,14 +175,14 @@
       </el-col>
     </el-row>
 
-         <el-row>
+         <el-row class="row" >
       <el-col :span="4">
         邻牙牙槽嵴高度
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             到接触点≤5mm
             </el-checkbox>
           </el-col>
@@ -201,14 +201,14 @@
       </el-col>
     </el-row>
 
-     <el-row>
+     <el-row class="row">
       <el-col :span="4">
         邻牙修复状态
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             无修复体
             </el-checkbox>
           </el-col>
@@ -225,13 +225,13 @@
     </el-row>
 
          <el-row>
-      <el-col :span="4">
+      <el-col :span="4" class="row">
         缺牙间隙的宽度
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             单颗牙（≥7mm）
             </el-checkbox>
           </el-col>
@@ -249,14 +249,14 @@
 
       </el-col>
     </el-row>
-      <el-row>
+      <el-row class="row">
       <el-col :span="4">
         软组织解剖
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             软组织完整
             </el-checkbox>
           </el-col>
@@ -271,14 +271,14 @@
 
       </el-col>
     </el-row>
-      <el-row>
+      <el-row class="row">
       <el-col :span="4">
         牙槽嵴解剖
       </el-col>
       <el-col :span="20">
         <el-row>
           <el-col :span="8">
-            <el-checkbox v-model="filled">
+            <el-checkbox v-model="filled" class="form">
             无骨缺损
             </el-checkbox>
           </el-col>
@@ -300,14 +300,14 @@
 
  <br>
 
-    <el-button type="primary" plain @click="fill" v-if="!filled">一键填写</el-button>
+    <el-button type="primary" @click="fill" v-if="!filled">一键填写</el-button>
 
     <el-dialog
   :show-close="false"
-  title="结论"
   :visible="popBeautyAssessment"
   width="30%">
-  <span>该患者美学风险为低风险。</span>
+  <span slot="title" class="dialogTitle"> 结论 </span>
+  <span class="text">该患者美学风险为低风险。</span>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="close">确 定</el-button>
   </span>
@@ -348,23 +348,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   @import "../../assets/style.css";
   .left{
     text-align: left;
   }
-.form .el-checkbox__input.is-disabled .el-checkbox__inner{
-  background-color: #FFFF;
-}
-.form .el-checkbox__input.is-disabled+span.el-checkbox__label {
-  color: #606266
-}
-.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
-  background-color: #409EFF;
-  border-color: #409EFF;
-}
 
-.form .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
-  border-color: white
-}
 </style>

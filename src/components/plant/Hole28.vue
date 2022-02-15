@@ -18,28 +18,28 @@
     </el-row>
 
     <el-dialog
-  title="提示"
   :visible.sync="showDialog"
   width="30%">
-  <div><i class="el-icon-circle-close" style="color:#F56C6C" />
+  <span class="dialogTitle" slot="title"> 提示 </span>
+  <div class="text"><i class="el-icon-circle-close" style="color:#F56C6C" />
   回答错误
   </div>
   <br>
-  <div class="type" v-for="(tip, index) in tips" :key="index">{{tip}}</div>
+  <div class="type text" v-for="(tip, index) in tips" :key="index">{{tip}}</div>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="showDialog = false">确 定</el-button>
   </span>
 </el-dialog>
 
 <el-dialog
-  title="提示"
   :visible.sync="showCorrectDialog"
   width="30%">
-  <div><i class="el-icon-circle-check" style="color:#67C23A" />
+    <span class="dialogTitle" slot="title"> 提示 </span>
+  <div class="text"><i class="el-icon-circle-check" style="color:#67C23A" />
   回答正确
   </div>
   <br>
-  <div> 请观看视频</div>
+  <div class="text"> 请观看视频</div>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="closeCorrectDialog">确 定</el-button>
   </span>

@@ -1,6 +1,5 @@
 <template>
 <el-container>
-<el-main>
   <div class="type">
 <h3>
   术前准备
@@ -18,13 +17,13 @@
 <div v-for="(question, index) in questions" :key="index">
 <br>
     <div>
-      <div>
+      <div class="questionBody">
         {{index +1}}.{{question.q}}
       </div>
       <div style="text-align: start; display:block;">
         <el-radio-group v-model="keys[question.id]" :disabled="submitted" class='radioDiv'>
-<div v-for="(option, indexA) in question.a"  :key="option">
-        <el-radio :label="indexA">
+<div v-for="(option, indexA) in question.a"  :key="option" class="options">
+        <el-radio :label="indexA" class="form">
           <span>{{option}}
             <i v-if="indexA === question.k && submitted"
             class="el-icon-circle-check right" />
@@ -51,18 +50,20 @@
       <br>
     <br>
      <div>
-      <div>
+      <div class="questionBody">
         4.请选择本方案所需全部器械：
           <i  v-if="selectToolsRes && submitted" class="el-icon-circle-check right" />
         <i  v-if="!selectToolsRes && submitted"  class="el-icon-circle-close wrong" />
       </div>
       <div>
          <el-checkbox-group v-model="four" :disabled="submitted">
-        <el-checkbox  v-for="(item, index) in tools.split(' ')" :label="item" :key="index" >
+           <div class="options">
+        <el-checkbox  v-for="(item, index) in tools.split(' ')" :label="item" :key="index" class="form">
           <span>
             {{item}}
           </span>
         </el-checkbox>
+           </div>
          </el-checkbox-group>
          <br>
          <div>
@@ -76,11 +77,11 @@
 
 </el-row>
 
-<br>
-<br>
-<el-button @click="submit" v-if="!submitted">提交</el-button>
 
-</el-main>
+<div>
+<el-button @click="submit" v-if="!submitted" type="primary">提交</el-button>
+</div>
+
 
 <el-footer>
   <Footer :nextEnabled="submitted"/>
@@ -172,6 +173,10 @@ export default {
 
 .singles{
   margin-left: 10%;
+}
+
+.questionBody{
+  margin-bottom: 4px;
 }
 
 </style>
