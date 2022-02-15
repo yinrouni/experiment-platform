@@ -45,6 +45,8 @@ const mutations = {
       flowSpeed: 0,
       torque: 0
     }
+
+    state.currentIndex = '1'
   },
   goNext: (state, payload) => {
     if (payload) {

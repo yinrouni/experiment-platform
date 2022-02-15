@@ -84,9 +84,6 @@ export default {
     Result,
     Warnings},
   created () {
-    this.index = '1'
-  },
-  mounted () {
     this.$store.commit('reset')
   },
   computed: {
