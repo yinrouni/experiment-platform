@@ -24,7 +24,10 @@
   回答错误
   </div>
   <br>
-  <div class="type" v-for="(tip, index) in tips" :key="index">{{tip}}</div>
+  <div class="type" v-for="(tip, index) in tips" :key="index">
+    <span>{{tip}}</span>
+    <br>
+    </div>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="showDialog = false">确 定</el-button>
   </span>
@@ -108,14 +111,17 @@ export default {
     },
     isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       let score = 0
-      const rotationSpeedGood = rotationSpeed >= this.keys.rotationSpeed.min && rotationSpeed <= this.keys.rotationSpeed.max
-      !rotationSpeedGood ? this.tips.push('转速：备洞过程中中的转速通常在800-1000rpm。') : score += 4
 
       const holeMakersGood = holeMakers.length >= 1 && holeMakers.indexOf(this.keys.holeMakers[0]) > -1
       !holeMakersGood ? this.tips.push('球钻：一般选择球钻或者精准钻进行种植位点的定位。') : score += 4
 
       const handlerGood = handler.length >= 1 && handler.indexOf(this.keys.handler[0]) > -1
       if (!handlerGood) this.tips.push('手机：请选择手机。')
+
+      if (this.tips.length > 0) this.tips.push(' ')
+
+      const rotationSpeedGood = rotationSpeed >= this.keys.rotationSpeed.min && rotationSpeed <= this.keys.rotationSpeed.max
+      !rotationSpeedGood ? this.tips.push('转速：备洞过程中中的转速通常在800-1000rpm。') : score += 4
 
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
       !flowSpeedGood ? this.tips.push('水流：为了避免备洞过程中的产热过多损伤健康组织，通常将水流开到最大。') : score += 4

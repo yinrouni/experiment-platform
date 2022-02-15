@@ -19,7 +19,10 @@
   回答错误
   </div>
   <br>
-  <div class="type" v-for="(tip, index) in tips" :key="index">{{tip}}</div>
+  <div class="type" v-for="(tip, index) in tips" :key="index">
+    <span>{{tip}}</span>
+    <br>
+    </div>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="showDialog = false">确 定</el-button>
   </span>
@@ -105,9 +108,6 @@ export default {
     },
     isCorrect: function (rotationSpeed, flowSpeed, torque, holeMakers, plant, fix, handler) {
       let score = 0
-      const rotationSpeedGood = rotationSpeed === this.keys.rotationSpeed
-      // const rotationSpeedGood = rotationSpeed >= this.keys.rotationSpeed.min && rotationSpeed <= this.keys.rotationSpeed.max
-      !rotationSpeedGood ? this.tips.push('转速：种植体植入时，通常转速调至15-25rpm') : score += 4
 
       const plantGood = plant.length >= 2 && this.keys.plant.every(i => {
         return plant.includes(i)
@@ -118,11 +118,17 @@ export default {
 
       const handlerGood = handler.length >= 2 && handler.indexOf(this.keys.handler[0]) > -1 &&
       handler.indexOf(this.keys.handler[1]) > -1
-      !handler.includes(1) ? this.tips.push('扭力扳手：需要使用扭力扳手安装种植体。') : score += 4
+      !handler.includes(1) ? this.tips.push('扭力扳手：需要使用扭力扳手确定稳定性') : score += 4
 
-      if (!handler.includes(0)) this.tips.push('其他：需要选择手机')
+      if (!handler.includes(0)) this.tips.push('手机：需要选择手机')
+
+      if (this.tips.length > 0) this.tips.push(' ')
+
+      const rotationSpeedGood = rotationSpeed === this.keys.rotationSpeed
+      // const rotationSpeedGood = rotationSpeed >= this.keys.rotationSpeed.min && rotationSpeed <= this.keys.rotationSpeed.max
+      !rotationSpeedGood ? this.tips.push('转速：种植体植入时，通常转速调至15-25rpm') : score += 4
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
-      !flowSpeedGood ? this.tips.push('水流：水流关闭，种植时不需要出水') : score += 4
+      !flowSpeedGood ? this.tips.push('水流：种植体植入时，不需要水流') : score += 4
       const torqueGood = torque >= this.keys.torque.min && torque <= this.keys.torque.max
       !torqueGood ? this.tips.push('扭矩：植入种植体时一般扭矩在35~45Ncm') : score += 4
 
