@@ -66,7 +66,7 @@ export default {
         fix: 2,
         handler: 2
       },
-      desc: '请选择一个器械检测修复体的稳定性',
+      desc: '请选择安装临时修复体及检测稳定性的器械',
       activeName: '',
       keys: {rotationSpeed: {max: 1000, min: 800},
         flowSpeed: 5,
