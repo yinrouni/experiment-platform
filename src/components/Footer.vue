@@ -2,13 +2,13 @@
   <div class='footer'>
     <el-row>
             <el-col :span="12" style="text-align: left;">
-               <el-button v-if="subIndex!== 0 && subIndex !== undefined" @click="goPrev">
+               <el-button v-if="subIndex!== 0 && subIndex !== undefined" @click="goPrev" type="primary" plain>
             上一步
           </el-button>
           <span v-else>&nbsp; </span>
             </el-col>
              <el-col :span="12" style="text-align: right;">
-                <el-button v-if="nextEnabled" @click="goNext">
+                <el-button v-if="nextEnabled" @click="goNext" type="primary" plain>
             {{nextStep}}
           </el-button>
             </el-col>
