@@ -51,12 +51,11 @@
 </div>
 
 <el-dialog
-  title="主诉"
   :visible.sync="result"
   width="30%"
-
   >
-  <span>一月前外伤致21牙松动</span>
+  <span class="dialogTitle" slot="title">主诉</span>
+  <span class="text">一月前外伤致21牙松动</span>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="closeDialog">确 定</el-button>
   </span>

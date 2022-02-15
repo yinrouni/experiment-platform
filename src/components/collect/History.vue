@@ -159,10 +159,10 @@
     <el-checkbox label="无"  v-model="filled"></el-checkbox>
       </el-col>
          <el-col :span="8">
-    <el-checkbox label="有"></el-checkbox>
+    <el-checkbox label="有" :disabled="true" class="form"></el-checkbox>
          </el-col>
            <el-col :span="8">
-    <el-checkbox label="如果有，请选择"></el-checkbox>
+    <el-checkbox label="如果有，请选择" :disabled="true" class="form"></el-checkbox>
       </el-col>
     </el-row>
        <el-row>

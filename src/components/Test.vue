@@ -134,7 +134,7 @@ export default {
 }
   .el-menu-item.is-active{
       border-right: #409EFF solid 4px;
-      	background: #ecf5ff !important;
+      background: #ecf5ff !important;
   }
 
 .el-aside{

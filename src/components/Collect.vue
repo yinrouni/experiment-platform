@@ -45,7 +45,7 @@
       <br>
       <br>
 
-      <el-button @click="submitNormal" v-if="!submittedNormal"> 提交</el-button>
+      <el-button @click="submitNormal" v-if="!submittedNormal" type="primary"> 提交</el-button>
     </div>
     <keep-alive>
     <History v-if="subIndex === 2" @enableNext="fillForm"/>
@@ -81,15 +81,16 @@
             </div>
     <br>
 <br>
-<el-button @click="submitFilm" v-if="!submittedFilm">提交</el-button>
+<el-button @click="submitFilm" v-if="!submittedFilm" type="primary">提交</el-button>
 
     </div>
 
       <el-dialog
-  title="诊断"
+      :title="'主诉'"
   :visible.sync="dialogVisible"
   width="30%">
-  <span>21牙折（根中1/3）</span>
+  <span slot="title" class="dialogTitle">诊断</span>
+  <div class="text">21牙折（根中1/3）</div>
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
@@ -196,6 +197,9 @@ export default {
   @import "../assets/style.css";
   span{
     word-break:break-all;
+  }
+  .el-checkbox__label{
+    font-size: medium;
   }
   .options{
     font-size: xx-large;
