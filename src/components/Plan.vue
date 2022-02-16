@@ -36,7 +36,7 @@
     </el-col>
     <el-col :span="18">
             <div class="tips" v-if="submitted">
-              <img src="./../assets/术前检查.jpg">
+              <img src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E6%9C%AF%E5%89%8D%E6%A3%80%E6%9F%A5.jpg">
             </div>
 </el-col>
   </el-row>
