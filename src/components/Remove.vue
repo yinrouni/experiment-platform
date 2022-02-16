@@ -74,8 +74,8 @@ export default {
 
   computed: {
     videoSrc: function () {
-      const i = this.titles[this.subIndex]
-      return require('./../assets/' + i + '.mp4')
+      
+      return this.urls[this.subIndex -1];
     }
   },
 
@@ -85,6 +85,9 @@ export default {
 
   data () {
     return {
+      urls:['https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E5%8F%A3%E5%A4%96%E6%B6%88%E6%AF%92.mp4',
+      'https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E9%93%BA%E5%B7%BE.mp4', 'https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E5%8F%A3%E5%86%85%E6%B6%88%E6%AF%92.mp4','https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E5%B1%80%E9%83%A8%E9%BA%BB%E9%86%89.mp4','https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E5%BE%AE%E5%88%9B%E6%8B%94%E7%89%99.mp4' 
+      ],
       timeoutID: undefined,
       watched: [],
       subIndex: 0,
