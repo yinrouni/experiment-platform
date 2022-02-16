@@ -67,7 +67,7 @@
          </el-checkbox-group>
          <br>
          <div>
-           <img src="./../assets/tools.jpg" />
+           <img src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/tools.JPG" />
          </div>
       </div>
     </div>

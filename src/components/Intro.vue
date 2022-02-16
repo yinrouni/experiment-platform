@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <img src="./../assets/IMG_5662.png" style="width: 100%; height: 100%"/>
+    <img src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/IMG_5662.png" style="width: 100%; height: 100%"/>
     <div class="name">
       <h1 style="font-size: 3em">
         前牙即刻种植修复虚拟仿真实验

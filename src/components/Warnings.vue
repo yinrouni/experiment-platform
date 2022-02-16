@@ -96,7 +96,7 @@
       </div>
     </div>
       </div>
-      <img src="./../assets/warnings.png" />
+      <img src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/warnings.png" />
     </el-col>
   </el-row>
   <br>

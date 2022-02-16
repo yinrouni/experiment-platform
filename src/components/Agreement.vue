@@ -2,8 +2,8 @@
 <el-container>
   <el-main>
   <div style="text-align:center">
-    <img v-if="!signed" src="./../assets/知情同意术书.jpg"/>
-     <img  v-else src="./../assets/签名知情同意术书.jpg"/>
+    <img v-if="!signed" src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E7%9F%A5%E6%83%85%E5%90%8C%E6%84%8F%E6%9C%AF%E4%B9%A6.jpg"/>
+     <img  v-else src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E7%AD%BE%E5%90%8D%E7%9F%A5%E6%83%85%E5%90%8C%E6%84%8F%E6%9C%AF%E4%B9%A6.jpg"/>
     <div class="center">
     <el-button v-if="!signed" @click="sign" type="primary">签名</el-button>
     </div>
