@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="16">
-        <video id="video" src="../../assets/种植体植入.mp4" controls="controls" />
+        <video id="video" src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E7%A7%8D%E6%A4%8D%E4%BD%93%E6%A4%8D%E5%85%A5.mp4" controls="controls" />
         <br>
       </el-col>
       <el-col :span="8">

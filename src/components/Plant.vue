@@ -59,7 +59,7 @@
           &emsp;
          </el-col>
           <el-col :span="16">
-           <video src="../assets/填充骨粉.mp4" autoplay=true controls="controls" />
+           <video src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E5%A1%AB%E5%85%85%E9%AA%A8%E7%B2%89.mp4" autoplay=true controls="controls" />
            <ul class="type">
              <li> 旋上覆盖螺丝，于跳跃间隙填充骨粉。</li>
            </ul>
@@ -75,7 +75,7 @@
           &emsp;
          </el-col>
           <el-col :span="16">
-           <video src="../assets/数字化取模型.mp4" autoplay=true controls="controls" />
+           <video src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E6%95%B0%E5%AD%97%E5%8C%96%E5%8F%96%E6%A8%A1%E5%9E%8B.mp4" autoplay=true controls="controls" />
            <ul class="type">
              <li> 将覆盖螺丝替换为扫描杆，使用口腔扫描仪于患者口中进行上颌、下颌、及咬合的模型扫描。</li>
            </ul>
@@ -94,7 +94,7 @@
           &emsp;
          </el-col>
           <el-col :span="16">
-           <video src="../assets/调𬌗.mp4" autoplay=true controls="controls" />
+           <video src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E8%B0%83%F0%AC%8C%97.mp4" autoplay=true controls="controls" />
            <ul class="type">
              <li> 检测其前伸𬌗、侧方𬌗、正中𬌗有无早接触。</li>
            </ul>

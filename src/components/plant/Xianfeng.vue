@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="16">
-        <video id="video" src="../../assets/先锋钻.mp4" controls="controls"/>
+        <video id="video" src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E5%85%88%E9%94%8B%E9%92%BB.mp4" controls="controls"/>
         <br>
         <ul class="type">
           <li>1. 备洞时应注意反复上下提拉。</li>

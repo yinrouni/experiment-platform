@@ -2,7 +2,7 @@
   <div>
     <el-row class="row">
       <el-col :span="16">
-        <video id="video" src="../../assets/戴临时修复体.mp4" controls="controls" />
+        <video id="video" src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E6%88%B4%E4%B8%B4%E6%97%B6%E4%BF%AE%E5%A4%8D%E4%BD%93.mp4" controls="controls" />
         <br>
         <ul class="type">
           <li>安装临时修复基台使用扭力扳手，扭矩在10~15Ncm，并安装临时修复体。</li>

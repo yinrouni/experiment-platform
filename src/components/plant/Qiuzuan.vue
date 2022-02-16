@@ -2,7 +2,7 @@
   <div>
     <el-row class="row">
       <el-col :span="16">
-        <video id="video" src="../../assets/球钻定位.mp4" controls="controls"/>
+        <video id="video" src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E7%90%83%E9%92%BB%E5%AE%9A%E4%BD%8D.mp4" controls="controls"/>
         <br>
         <ul class="type">
           <li>定位点：腭侧骨壁距离根尖1/3处定点</li>

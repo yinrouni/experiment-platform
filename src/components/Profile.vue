@@ -47,7 +47,7 @@
   </el-col>
   <el-col :span="12">
 
-    <img src="./../assets/image.jpeg" />
+    <img src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/image.jpeg" />
 
   </el-col>
 </el-row>

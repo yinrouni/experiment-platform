@@ -2,7 +2,7 @@
   <div>
     <el-row class="row">
       <el-col :span="16">
-        <video id="video" src="../../assets/检查方向.mp4" controls="controls" />
+        <video id="video" src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/%E6%A3%80%E6%9F%A5%E6%96%B9%E5%90%91.mp4" controls="controls" />
         <br>
         <ul class="type">
           <li>1. 备洞时应注意反复上下提拉。</li>

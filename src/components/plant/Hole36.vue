@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="16">
-        <video id="video" src="../../assets/3.6备洞.mp4" controls="controls" />
+        <video id="video" src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/3.6%E5%A4%87%E6%B4%9E.mp4" controls="controls" />
         <br>
         <ul class="type">
           <li>1. 备洞时应注意反复上下提拉。</li>
