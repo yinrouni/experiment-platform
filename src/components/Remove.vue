@@ -44,7 +44,7 @@
 
       </el-col>
        <el-col :span="11">
-         <img src='http://bpic.588ku.com/element_pic/17/06/27/6bdc36fe5f24ec3d28254c5c7cc1e896.jpg' />
+         <img src='https://imgs-videos.oss-cn-beijing.aliyuncs.com/remove-pic.jpg' />
       </el-col>
     </el-row>
 <br>

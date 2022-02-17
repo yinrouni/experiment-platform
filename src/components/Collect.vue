@@ -77,7 +77,7 @@
       </div>
             <div class="tips" v-if="submittedFilm">
               CBCT示21牙根中三分之一处见一根折线，根尖区无低密度阴影，唇侧骨板完整无缺损，厚度约1.2mm
-              <img id="img" src="./../assets/CBCT.jpg">
+              <img id="img" src="https://imgs-videos.oss-cn-beijing.aliyuncs.com/CBCT.jpg">
             </div>
     <br>
 <br>
