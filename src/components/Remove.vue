@@ -53,7 +53,7 @@
   </div>
 
   <div class="video" v-if="subIndex>0">
-    <video :src="videoSrc" autoplay=true  controls="controls" />
+    <video id="mp4" :src="videoSrc" autoplay=true  controls="controls" />
   </div>
 
 </div>
@@ -71,7 +71,6 @@ import Footer from './Footer'
 export default {
   name: 'Remove',
   components: {Footer},
-
   computed: {
     videoSrc: function () {
       
@@ -137,17 +136,23 @@ export default {
       this.$store.commit('addScore', {partName: 'remove', score})
     },
     goNext () {
-      this.nextEnabled = false
-      this.subIndex++
-
-      if (this.watched.includes(this.subIndex)) {
-        this.nextEnabled = true
-      } else {
-        this.watched.push(this.subIndex)
-        this.timeoutID = setTimeout(() => {
-          this.nextEnabled = true
-        }, 2000)
+      const mp4 = document.getElementById('mp4')
+      if (mp4) {
+        mp4.pause()
       }
+      this.$nextTick(() => {
+        this.nextEnabled = false
+        this.subIndex++
+
+        if (this.watched.includes(this.subIndex)) {
+          this.nextEnabled = true
+        } else {
+          this.watched.push(this.subIndex)
+          this.timeoutID = setTimeout(() => {
+            this.nextEnabled = true
+          }, 2000)
+        }
+      })
     },
 
     goPrev () {
