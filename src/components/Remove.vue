@@ -173,6 +173,7 @@ export default {
     transform: translate(-50%, -50%);
   }
   video{
-    width: 75%
+    width: 645px;
+    height: 368px;
   }
 </style>
