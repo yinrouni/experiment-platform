@@ -4,7 +4,6 @@
   <el-step v-for="title in titles" :title="title" :key="title"></el-step>
 </el-steps>
 <br>
-<br>
 <div>
   <div class="questions" v-show="subIndex===0">
     <el-row>
@@ -53,7 +52,18 @@
   </div>
 
   <div class="video" v-if="subIndex>0">
-    <video id="mp4" :src="videoSrc" autoplay=true  controls="controls" />
+    <el-row>
+       <el-col :span="4">
+          &emsp;
+         </el-col>
+         <el-col :span="16">
+           <video id="mp4" :src="videoSrc" autoplay=true  controls="controls" />
+         </el-col>
+
+          <el-col :span="4">
+          &emsp;
+         </el-col>
+    </el-row>
   </div>
 
 </div>
@@ -173,7 +183,6 @@ export default {
     transform: translate(-50%, -50%);
   }
   video{
-    width: 645px;
-    height: 368px;
+   width: 100%
   }
 </style>
