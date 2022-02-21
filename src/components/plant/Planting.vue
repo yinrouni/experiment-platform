@@ -68,7 +68,7 @@ export default {
       torque: {default: 15, max: 45, min: 15, step: 5},
       desc: '请使用种植体夹持器取出种植体，并调试种植机的转速、水流、扭矩',
       activeName: '',
-      keys: {rotationSpeed: 20,
+      keys: {rotationSpeed: {min: 15, max: 25},
         flowSpeed: 0,
         torque: {min: 35, max: 45},
         holeMakers: [],
@@ -124,7 +124,7 @@ export default {
 
       if (this.tips.length > 0) this.tips.push(' ')
 
-      const rotationSpeedGood = rotationSpeed === this.keys.rotationSpeed
+      const rotationSpeedGood = rotationSpeed >= this.keys.rotationSpeed.min && rotationSpeed <= this.keys.rotationSpeed.max
       // const rotationSpeedGood = rotationSpeed >= this.keys.rotationSpeed.min && rotationSpeed <= this.keys.rotationSpeed.max
       !rotationSpeedGood ? this.tips.push('转速：种植体植入时，通常转速调至15-25rpm') : score += 4
       const flowSpeedGood = flowSpeed === this.keys.flowSpeed
