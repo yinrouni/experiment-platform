@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <el-col :span="15">
-      <video src="https://gw.alipayobjects.com/v/rms_7c9e32/afts/video/A*ArmfSo692bgAAAAAAAAAAAAAARQnAQ/720P"  controls="controls" preload="auto"/>
+      <video src="https://gw.alipayobjects.com/v/rms_7c9e32/afts/video/A*ArmfSo692bgAAAAAAAAAAAAAARQnAQ/720P"  controls="controls" preload="auto" autoplay/>
 
     </el-col>
      <el-col :span="9">
