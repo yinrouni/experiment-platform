@@ -123,7 +123,6 @@ export default {
 <style scoped>
   @import "../assets/style.css";
   img{width: 750px;
-  margin-top: -30px;
   }
 
 </style>
