@@ -40,7 +40,8 @@ import {
   Descriptions, 
   DescriptionsItem,
   Avatar, 
-  SkeletonItem
+  SkeletonItem, 
+  Result,
 
 } from 'element-ui'
 
@@ -85,3 +86,4 @@ Vue.use(Descriptions)
 Vue.use(DescriptionsItem)
 Vue.use(Avatar)
 Vue.use(SkeletonItem)
+Vue.use(Result)
